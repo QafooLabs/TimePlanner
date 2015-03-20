@@ -1,3 +1,5 @@
 /vendor/
 /build/
 /composer.phar
+/app/cache/
+/app/logs/

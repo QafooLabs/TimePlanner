@@ -1,0 +1,3 @@
+parameters:
+    secret: "ChangeThis"
+    monolog_action_level: "debug"

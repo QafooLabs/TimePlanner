@@ -1,0 +1,22 @@
+{
+    "name": "qafoolabs/time-planner",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "qafoolabs/no-framework-bundle": "~2.2",
+        "symfony/framework-bundle": "~2.6",
+        "sensio/framework-extra-bundle": "~3.0"
+    },
+    "require-dev": {
+        "pdepend/pdepend": "@stable",
+        "phpmd/phpmd": "@stable",
+        "phpunit/phpunit": "@stable",
+        "sebastian/phpcpd": "@stable",
+        "squizlabs/php_codesniffer": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Qafoo": "src/"
+        }
+    }
+}

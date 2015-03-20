@@ -4,8 +4,8 @@
     "license": "MIT",
     "require": {
         "qafoolabs/no-framework-bundle": "~2.2",
-        "symfony/framework-bundle": "~2.6",
-        "sensio/framework-extra-bundle": "~3.0"
+        "symfony/symfony": "~2.6",
+        "symfony/monolog-bundle": "@stable"
     },
     "require-dev": {
         "pdepend/pdepend": "@stable",

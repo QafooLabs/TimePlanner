@@ -24,6 +24,20 @@
     <import optional="true" file="${basedir}/ant/modules/phpmd.xml" />
 
     <!--
+         Custom project tasks
+    -->
+    <target name="serve" depends="initialize">
+        <echo>Server starting on http://localhost:${webserver.port}/</echo>
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="-S" />                                              
+            <arg value="localhost:${webserver.port}" />                                              
+            <arg value="-t" />                                              
+            <arg value="web/" />                                              
+            <arg value="web/index.php" />
+        </exec>
+    </target>
+
+    <!--
         Task group, which installs the build-commons, if they do not exist yet.
     -->
     <target name="-install:check">

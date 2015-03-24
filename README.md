@@ -14,3 +14,11 @@ To run the project just execute the following command:
 The open the URL echoed on the command line, and you should be fine. All
 required project initializations should already be included.
 
+## Testing
+
+To run all tests and checks just run:
+
+    ant
+
+This initializes the project and runs all tests and verifications.
+

@@ -6,7 +6,10 @@
         "qafoolabs/no-framework-bundle": "~2.2",
         "symfony/symfony": "~2.6",
         "symfony/monolog-bundle": "@stable",
-        "kore/data-object": "~1.1"
+        "kore/data-object": "~1.1",
+        "friendsofsymfony/user-bundle": "~1.3",
+        "doctrine/couchdb-odm": "dev-master",
+        "doctrine/couchdb": "dev-master"
     },
     "require-dev": {
         "pdepend/pdepend": "@stable",

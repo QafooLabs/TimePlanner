@@ -22,3 +22,8 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
+
+fos_user:
+    db_driver: couchdb
+    firewall_name: main
+    user_class: Qafoo\UserBundle\Services\User

@@ -12,6 +12,9 @@ class AppKernel extends Kernel
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
 
+            new FOS\UserBundle\FOSUserBundle(),
+
+            new Qafoo\UserBundle\QafooUserBundle(),
             new Qafoo\TimePlannerBundle\QafooTimePlannerBundle(),
         );
 

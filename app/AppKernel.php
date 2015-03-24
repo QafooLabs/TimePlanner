@@ -11,6 +11,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
+
+            new Qafoo\TimePlannerBundle\QafooTimePlannerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -46,8 +48,8 @@ class AppKernel extends Kernel
 
         $baseDir = __DIR__ . '/../';
         foreach (array('build.properties', 'build.properties.local') as $file) {
-            if (file_exists($baseDir . $file)) {
-                $environemntVariables += parse_ini_file($baseDir . $file);
+            if (file_exists($fileName = $baseDir . $file)) {
+                $environemntVariables = array_merge($environemntVariables, parse_ini_file($fileName));
             }
         }
 

@@ -7,4 +7,4 @@ _profiler:
     prefix:   /_profiler
 
 _main:
-    resource: routing_prod.yml
+    resource: routing.yml

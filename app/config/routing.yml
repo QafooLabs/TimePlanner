@@ -1,0 +1,3 @@
+qafoo_time_planner:
+    resource: "@QafooTimePlannerBundle/Resources/config/routing.xml"
+    prefix:   /

@@ -5,6 +5,13 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 
 class AppKernel extends Kernel
 {
+    /**
+     * Configuration
+     *
+     * @var array
+     */
+    private static $configuration;
+
     public function registerBundles()
     {
         $bundles = array(
@@ -39,24 +46,55 @@ class AppKernel extends Kernel
     }
 
     /**
+     * Builds the service container.
+     *
+     * @return ContainerBuilder The compiled service container
+     *
+     * @throws \RuntimeException
+     */
+    protected function buildContainer()
+    {
+        $container = parent::buildContainer();
+
+        foreach (self::getConfiguration() as $key => $value) {
+            $container->setParameter($key, $value);
+        }
+
+        return $container;
+    }
+
+    /**
+     * Initialize configuration
+     *
+     * @return void
+     */
+    public static function getConfiguration()
+    {
+        if (self::$configuration) {
+            return self::$configuration;
+        }
+
+        self::$configuration = array(
+            'env' => 'prod',
+            'debug' => false,
+        );
+
+        $baseDir = __DIR__ . '/../';
+        foreach (array('build.properties', 'build.properties.local') as $file) {
+            if (file_exists($fileName = $baseDir . $file)) {
+                self::$configuration = array_merge(self::$configuration, parse_ini_file($fileName));
+            }
+        }
+    }
+
+    /**
      * Get environment
      *
      * @return string
      */
     public static function getEnvironmentFromConfiguration()
     {
-        $environemntVariables = array(
-            'env' => 'prod',
-        );
-
-        $baseDir = __DIR__ . '/../';
-        foreach (array('build.properties', 'build.properties.local') as $file) {
-            if (file_exists($fileName = $baseDir . $file)) {
-                $environemntVariables = array_merge($environemntVariables, parse_ini_file($fileName));
-            }
-        }
-
-        return $environemntVariables['env'];
+        return self::getConfiguration()['env'];
     }
 
     /**

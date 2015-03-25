@@ -28,4 +28,4 @@ monolog:
 fos_user:
     db_driver: couchdb
     firewall_name: main
-    user_class: Qafoo\UserBundle\Services\User
+    user_class: Qafoo\UserBundle\Domain\User

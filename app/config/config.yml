@@ -17,6 +17,7 @@ framework:
     profiler:
         enabled: %kernel.debug%
     session: ~
+    translator: ~
 
 monolog:
     handlers:

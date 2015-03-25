@@ -1,15 +1,15 @@
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix:   /user
+    prefix:   /
 fos_user_registration:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix:   /user
+    prefix:   /
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix:   /user
+    prefix:   /
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix:   /user
+    prefix:   /
 
 qafoo_time_planner:
     resource: "@QafooTimePlannerBundle/Resources/config/routing.xml"

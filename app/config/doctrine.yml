@@ -10,11 +10,11 @@ doctrine_couch_db:
         auto_mapping: true
         mappings:
             QafooUserBundle:
-                prefix: 'Qafoo\UserBundle\Model'
+                prefix: 'Qafoo\UserBundle\Domain'
             QafooTimePlannerBundle:
                 prefix: 'Qafoo\TimePlannerBundle\Domain'
 
 fos_user:
     db_driver: couchdb
     firewall_name: main
-    user_class: Qafoo\UserBundle\Model\User
+    user_class: Qafoo\UserBundle\Domain\FOSUserHelper

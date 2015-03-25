@@ -1,14 +1,14 @@
 <?php
 
-namespace Qafoo\UserBundle\Model;
+namespace Qafoo\UserBundle\Domain;
 
 use FOS\UserBundle\Model\UserInterface;
 
-use Qafoo\UserBundle\Domain\User as DomainUser;
+use Qafoo\UserBundle\Domain\User;
 use Qafoo\UserBundle\Domain\EMail;
 use Qafoo\UserBundle\Domain\User\Authentification;
 
-class User extends DomainUser implements UserInterface
+class FOSUserHelper extends User implements UserInterface
 {
     /**
      * Returns the username used to authenticate the user.

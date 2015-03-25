@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <document name="Qafoo\UserBundle\Domain\FOSUserHelper" indexed="true">
+        <id name="login" strategy="assigned"/>
+
+        <embed-one field="auth" target-document="Qafoo\UserBundle\Domain\User\Authentification"/>
+        <embed-one field="name" target-document="Qafoo\UserBundle\Domain\Name"/>
+        <embed-one field="email" target-document="Qafoo\UserBundle\Domain\EMail"/>
+    </document>
+</doctrine-mapping>

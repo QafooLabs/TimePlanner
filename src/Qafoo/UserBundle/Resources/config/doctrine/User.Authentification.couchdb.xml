@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embedded-document name="Qafoo\UserBundle\Domain\User\Authentification" indexed="true">
+        <field name="password" type="string" />
+        <field name="salt" type="string" />
+        <field name="confirmationToken" type="string" />
+    </embedded-document>
+</doctrine-mapping>

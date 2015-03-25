@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embedded-document name="Qafoo\UserBundle\Domain\Name" indexed="true">
+        <field name="firstName" type="string" />
+        <field name="intermediateNames" type="mixed" />
+        <field name="lastName" type="string" />
+    </embedded-document>
+</doctrine-mapping>

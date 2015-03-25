@@ -11,8 +11,12 @@ framework:
         strict_requirements: %kernel.debug%
     templating:
         engines: ['twig']
+    form:
+        csrf_protection:
+            enabled: true
     profiler:
         enabled: %kernel.debug%
+    session: ~
 
 monolog:
     handlers:
@@ -24,8 +28,3 @@ monolog:
             type:  stream
             path:  "%kernel.logs_dir%/%kernel.environment%.log"
             level: debug
-
-fos_user:
-    db_driver: couchdb
-    firewall_name: main
-    user_class: Qafoo\UserBundle\Domain\User

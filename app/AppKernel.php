@@ -88,6 +88,8 @@ class AppKernel extends Kernel
                 self::$configuration = array_merge(self::$configuration, parse_ini_file($fileName));
             }
         }
+
+        return self::$configuration;
     }
 
     /**

@@ -1,6 +1,8 @@
 # app/config/config.yml
 imports:
     - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: doctrine.yml }
 
 framework:
     secret: %secret%

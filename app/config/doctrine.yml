@@ -1,0 +1,5 @@
+doctrine_couch_db:
+    client:
+        dbname: %database.name%
+    odm:
+        auto_mapping: true

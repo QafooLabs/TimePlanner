@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <document name="Qafoo\UserBundle\Domain\User" indexed="true">
+        <id name="login" strategy="assigned"/>
+
+        <field name="password" type="string" index="false"/>
+        <field name="name" type="mixed"/>
+        <field name="email" type="mixed"/>
+    </document>
+</doctrine-mapping>

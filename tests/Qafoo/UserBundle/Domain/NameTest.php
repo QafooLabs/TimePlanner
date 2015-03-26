@@ -2,6 +2,9 @@
 
 namespace Qafoo\UserBundle\Domain;
 
+/**
+ * @covers Qafoo\UserBundle\Domain\Name
+ */
 class NameTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateFromCommonName()

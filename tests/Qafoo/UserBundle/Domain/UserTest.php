@@ -2,6 +2,9 @@
 
 namespace Qafoo\UserBundle\Domain;
 
+/**
+ * @covers Qafoo\UserBundle\Domain\User
+ */
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     public function testAuthNotEmpty()

@@ -105,7 +105,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function getEmailCanonical()
     {
-        return $this->email->getCanonical();
+        return $this->email->email;
     }
 
     /**

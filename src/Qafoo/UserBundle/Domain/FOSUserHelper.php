@@ -11,6 +11,16 @@ use Qafoo\UserBundle\Domain\User\Authentification;
 class FOSUserHelper extends User implements UserInterface
 {
     /**
+     * Plain text password
+     *
+     * This property is required by the FOSUserBundle to store the password
+     * temporarily.
+     *
+     * @var string
+     */
+    private $plainTextPassword;
+
+    /**
      * Returns the username used to authenticate the user.
      *
      * @return string The username
@@ -105,7 +115,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function getPlainPassword()
     {
-        // Ignore
+        return $this->plainTextPassword;
     }
 
     /**
@@ -117,7 +127,8 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function setPlainPassword($password)
     {
-        // Ignore
+        $this->plainTextPassword = $password;
+        return $this;
     }
 
     /**
@@ -372,7 +383,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function eraseCredentials()
     {
-        // Ignore
+        $this->plainTextPassword = null;
     }
 
     /**

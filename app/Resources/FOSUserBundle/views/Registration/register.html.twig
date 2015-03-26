@@ -1,4 +1,4 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends app.request.pathInfo == '/_fragment' ? "FOSUserBundle::plain.html.twig" : "FOSUserBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
@@ -32,6 +32,10 @@
     </div>
     {{ form_rest(form) }}
 
-    <button type="submit" class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="submit" class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+        </div>
+    </div>
 </form>
 {% endblock fos_user_content %}

@@ -1,0 +1,17 @@
+{% extends 'QafooUserBundle::layout.html.twig' %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <h2>Login</h2>
+        {{ render(controller('FOSUserBundle:Security:login')) }}
+    </div>
+    <div class="col-md-6">
+        <h2>Register</h2>
+        {{ render(controller('FOSUserBundle:Registration:register')) }}
+    </div>
+</div>
+{% endblock %}

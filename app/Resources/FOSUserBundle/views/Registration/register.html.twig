@@ -1,0 +1,37 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block navigation %}
+{% endblock %}
+
+{% block fos_user_content %}
+{% if error %}
+    <div class="alert alert-warning">{{ error|trans }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_registration_register") }}" method="post">
+    <div class="form-group">
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username, { 'attr': {'class': 'form-control' } }) }}
+        {{ form_errors(form.username) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email, { 'attr': {'class': 'form-control' } }) }}
+        {{ form_errors(form.email) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.plainPassword.first) }}
+        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control' } }) }}
+        {{ form_errors(form.plainPassword.first) }}
+
+        {{ form_label(form.plainPassword.second) }}
+        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control' } }) }}
+        {{ form_errors(form.plainPassword.second) }}
+    </div>
+    {{ form_rest(form) }}
+
+    <button type="submit" class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+</form>
+{% endblock fos_user_content %}

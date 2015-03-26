@@ -8,5 +8,9 @@
         <service id="qafoo_user.gateway.user" class="Qafoo\UserBundle\Gateway\User">
             <argument type="service" id="doctrine_couchdb.odm.document_manager" />
         </service>
+
+        <service id="qafoo.user_bundle.twig.sub_request_extension" class="Qafoo\UserBundle\Twig\SubRequestExtension">
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

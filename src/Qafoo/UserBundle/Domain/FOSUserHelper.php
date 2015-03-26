@@ -8,6 +8,15 @@ use Qafoo\UserBundle\Domain\User;
 use Qafoo\UserBundle\Domain\EMail;
 use Qafoo\UserBundle\Domain\User\Authentification;
 
+/**
+ * Class: FOSUserHelper
+ *
+ * Class to map the excessive number of methods from the UserInterface to our
+ * cleaner domain object. User as an adapter to enable the FOSUserBundle with
+ * our own "clean" objects.
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ */
 class FOSUserHelper extends User implements UserInterface
 {
     /**

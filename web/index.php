@@ -14,7 +14,15 @@ if (file_exists(__DIR__ . $_SERVER['REQUEST_URI']) &&
 
 try {
     if (AppKernel::getDebug()) {
-        fwrite(fopen('php://stderr', 'a'), sprintf("Symfony: %s %s\n", $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']));
+        fwrite(
+            fopen('php://stderr', 'a'),
+            sprintf(
+                "[%s] [Symfony]: %s %s\n",
+                date('D M d H:i:s Y'),
+                $_SERVER['REQUEST_METHOD'],
+                $_SERVER['REQUEST_URI']
+            )
+        );
     }
 
     $request = Request::createFromGlobals();

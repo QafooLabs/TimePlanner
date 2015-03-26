@@ -452,24 +452,26 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function serialize()
     {
-        return serialize($this);
+        return serialize(get_object_vars($this));
     }
 
     /**
      * Unserialize
      *
      * @param string $serialized
-     * @return void
+     * @return self
      */
     public function unserialize($serialized)
     {
         $data = unserialize($serialized);
         if (!$data) {
-            return;
+            return $this;
         }
 
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
+
+        return $this;
     }
 }

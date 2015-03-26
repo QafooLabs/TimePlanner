@@ -40,6 +40,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setUsername($username)
     {
         $this->login = $username;
+        return $this;
     }
 
     /**
@@ -62,6 +63,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setUsernameCanonical($usernameCanonical)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -84,6 +86,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setEmail($email)
     {
         $this->email = new EMail($email);
+        return $this;
     }
 
     /**
@@ -106,6 +109,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setEmailCanonical($emailCanonical)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -154,6 +158,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setPassword($password)
     {
         $this->auth->password = $password;
+        return $this;
     }
 
     /**
@@ -204,7 +209,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function isEnabled()
     {
-        return true;
+        return $this->auth->isEnabled;
     }
 
     /**
@@ -214,7 +219,23 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function setEnabled($boolean)
     {
-        return true;
+        $this->auth->isEnabled = (bool) $boolean;
+        return $this;
+    }
+
+    /**
+     * Checks whether the user is locked.
+     *
+     * Internally, if this method returns false, the authentication system
+     * will throw a LockedException and prevent login.
+     *
+     * @return bool true if the user is not locked, false otherwise
+     *
+     * @see LockedException
+     */
+    public function isAccountNonLocked()
+    {
+        return !$this->auth->isLocked;
     }
 
     /**
@@ -226,7 +247,8 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function setLocked($boolean)
     {
-        return false;
+        $this->auth->isLocked = (bool) $boolean;
+        return $this;
     }
 
     /**
@@ -239,6 +261,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setSuperAdmin($boolean)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -261,6 +284,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setConfirmationToken($confirmationToken)
     {
         $this->auth->confirmationToken = $confirmationToken;
+        return $this;
     }
 
     /**
@@ -273,6 +297,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setPasswordRequestedAt(\DateTime $date = null)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -296,7 +321,8 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function setLastLogin(\DateTime $time = null)
     {
-        // Ignore
+        $this->auth->lastLogin = $time;
+        return $this;
     }
 
     /**
@@ -328,6 +354,7 @@ class FOSUserHelper extends User implements UserInterface
     public function setRoles(array $roles)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -340,6 +367,7 @@ class FOSUserHelper extends User implements UserInterface
     public function addRole($role)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -352,6 +380,7 @@ class FOSUserHelper extends User implements UserInterface
     public function removeRole($role)
     {
         // Ignore
+        return $this;
     }
 
     /**
@@ -397,21 +426,6 @@ class FOSUserHelper extends User implements UserInterface
      * @see AccountExpiredException
      */
     public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * Checks whether the user is locked.
-     *
-     * Internally, if this method returns false, the authentication system
-     * will throw a LockedException and prevent login.
-     *
-     * @return bool true if the user is not locked, false otherwise
-     *
-     * @see LockedException
-     */
-    public function isAccountNonLocked()
     {
         return true;
     }

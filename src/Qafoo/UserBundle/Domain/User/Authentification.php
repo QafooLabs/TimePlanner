@@ -14,6 +14,13 @@ class Authentification extends DataObject
     public $password;
 
     /**
+     * Salt
+     *
+     * @var string
+     */
+    public $salt;
+
+    /**
      * Confirmation token
      *
      * @var string
@@ -21,11 +28,25 @@ class Authentification extends DataObject
     public $confirmationToken;
 
     /**
-     * Salt
+     * Is enabled
      *
-     * @var string
+     * @var bool
      */
-    public $salt;
+    public $isEnabled = true;
+
+    /**
+     * Is locked
+     *
+     * @var bool
+     */
+    public $isLocked = false;
+
+    /**
+     * Last login
+     *
+     * @var \DateTime
+     */
+    public $lastLogin;
 
     /**
      * @param array $values

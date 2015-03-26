@@ -4,5 +4,8 @@
         <field name="password" type="string" />
         <field name="salt" type="string" />
         <field name="confirmationToken" type="string" />
+        <field name="isEnabled" type="boolean" />
+        <field name="isLocked" type="boolean" />
+        <field name="lastLogin" type="datetime" />
     </embedded-document>
 </doctrine-mapping>

@@ -1,4 +1,4 @@
-{% extends app.request.pathInfo == '/_fragment' ? "FOSUserBundle::plain.html.twig" : "FOSUserBundle::layout.html.twig" %}
+{% extends is_subrequest(app.request) ? "FOSUserBundle::plain.html.twig" : "FOSUserBundle::layout.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 

@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle(),
+            new QafooLabs\Bundle\NoFrameworkBundle\QafooLabsNoFrameworkBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
 

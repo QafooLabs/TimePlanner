@@ -11,6 +11,10 @@ fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix:   /
 
+qafoo_user:
+    resource: "@QafooUserBundle/Resources/config/routing.xml"
+    prefix:   /
+
 qafoo_time_planner:
     resource: "@QafooTimePlannerBundle/Resources/config/routing.xml"
     prefix:   /

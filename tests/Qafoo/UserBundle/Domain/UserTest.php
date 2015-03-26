@@ -1,0 +1,51 @@
+<?php
+
+namespace Qafoo\UserBundle\Domain;
+
+class UserTest extends \PHPUnit_Framework_TestCase
+{
+    public function testAuthNotEmpty()
+    {
+        $user = new User();
+        $this->assertTrue($user->auth instanceof User\Authentification);
+    }
+
+    public function testSetAuth()
+    {
+        $user = new User(array(
+            'auth' => $expectation = new User\Authentification(),
+        ));
+
+        $this->assertSame($expectation, $user->auth);
+    }
+
+    public function testNameNotEmpty()
+    {
+        $user = new User();
+        $this->assertTrue($user->name instanceof Name);
+    }
+
+    public function testSetName()
+    {
+        $user = new User(array(
+            'name' => $expectation = new Name("Kore Nordmann"),
+        ));
+
+        $this->assertSame($expectation, $user->name);
+    }
+
+    public function testEMailNotEmpty()
+    {
+        $user = new User();
+        $this->assertTrue($user->email instanceof EMail);
+    }
+
+    public function testSetEMail()
+    {
+        $user = new User(array(
+            'email' => $expectation = new EMail("kore@example.com"),
+        ));
+
+        $this->assertSame($expectation, $user->email);
+    }
+}

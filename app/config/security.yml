@@ -6,14 +6,14 @@ security:
         ROLE_ADMIN:       ROLE_USER
 
     providers:
-        fos_userbundle:
-            id: fos_user.user_provider.username
+        qafoo_user:
+            id: qafoo_user.gateway.user
 
     firewalls:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: qafoo_user
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true

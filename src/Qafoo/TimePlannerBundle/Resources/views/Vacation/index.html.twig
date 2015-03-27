@@ -6,10 +6,10 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <h2>Next Vacations</h2>
+        <h2>Upcoming Vacations</h2>
         <ul class="vacations">
         {% for vacation in view.vacations %}
-            {% include "QafooTimePlannerBundle:Vacation:listItem.html.twig" with vacation %}
+            {% include "QafooTimePlannerBundle:Vacation:listItem.html.twig" with {vacation: vacation} %}
         {% endfor %}
         </ul>
     </div>

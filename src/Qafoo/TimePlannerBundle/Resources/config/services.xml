@@ -6,6 +6,10 @@
 
     <services>
         <service id="qafoo.time_planner.domain.vacation_service" class="Qafoo\TimePlannerBundle\Domain\VacationService">
+            <argument type="service" id="qafoo.time_planner.gateway.vacation" />
+        </service>
+
+        <service id="qafoo.time_planner.gateway.vacation" class="Qafoo\TimePlannerBundle\Gateway\Vacation">
             <argument type="service" id="qafoo.time_planner.repository.vacation" />
         </service>
 

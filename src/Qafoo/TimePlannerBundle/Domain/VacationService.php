@@ -2,22 +2,22 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
-use Doctrine\ODM\CouchDB\DocumentRepository;
-
 use Qafoo\UserBundle\Domain\User;
+use Qafoo\TimePlannerBundle\Gateway\Vacation as VacationGateway;
 
 class VacationService
 {
     /**
-     * Document repository
+     * Vacation gateway
      *
-     * @var DocumentRepository
+     * @var VacationGateway
      */
-    private $documentRepository;
+    private $vacationGateway;
 
-    public function __construct(DocumentRepository $documentRepository)
+    public function __construct(VacationGateway $vacationGateway)
     {
-        $this->documentRepository = $documentRepository;
+        $this->vacationGateway = $vacationGateway;
+
     }
 
     /**
@@ -39,7 +39,7 @@ class VacationService
      */
     public function getNextVacations($count = 10)
     {
-        return array();
+        return $this->vacationGateway->getNextVacations($count);
     }
 
     /**
@@ -50,10 +50,6 @@ class VacationService
      */
     public function store(Vacation $vacation)
     {
-        $documentManager = $this->documentRepository->getDocumentManager();
-        $documentManager->persist($vacation);
-        $documentManager->flush();
-
-        return $vacation;
+        return $this->vacationGateway->store($vacation);
     }
 }

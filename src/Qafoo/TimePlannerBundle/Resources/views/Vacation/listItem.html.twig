@@ -1,0 +1,6 @@
+<li>
+    <strong>{{vacation.start|date("d. F")}} to {{vacation.end|date("d. F")}}</strong> by {{vacation.user.username}}
+    {% if vacation.comment %}
+        <p class="comment">{{vacation.comment}}</p>
+    {% endif %}
+</li>

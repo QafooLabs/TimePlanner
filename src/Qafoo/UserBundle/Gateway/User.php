@@ -5,22 +5,20 @@ namespace Qafoo\UserBundle\Gateway;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Doctrine\ODM\CouchDB\DocumentManager;
+use Doctrine\ODM\CouchDB\DocumentRepository;
 
 class User implements UserProviderInterface
 {
-    const USER_CLASS = '\\Qafoo\\UserBundle\\Domain\\FOSUserHelper';
-
     /**
      * Document manager
      *
-     * @var DocumentManager
+     * @var DocumentRepository
      */
-    private $documentManager;
+    private $documentRepository;
 
-    public function __construct(DocumentManager $documentManager)
+    public function __construct(DocumentRepository $documentRepository)
     {
-        $this->documentManager = $documentManager;
+        $this->documentRepository = $documentRepository;
 
     }
 
@@ -40,13 +38,23 @@ class User implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        $user = $this->documentManager->find(self::USER_CLASS, $username);
+        $user = $this->documentRepository->find($username);
 
         if (!$user) {
             throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
         }
 
         return $user;
+    }
+
+    /**
+     * Get all users
+     *
+     * @return User[]
+     */
+    public function getAllUsers()
+    {
+        return $this->documentRepository->findAll();
     }
 
     /**
@@ -77,7 +85,7 @@ class User implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return self::USER_CLASS === $class ||
+        return '\\Qafoo\\UserBundle\\Domain\\FOSUserHelper' === $class ||
             is_subclass_of($class, self::USER_CLASS);
     }
 }

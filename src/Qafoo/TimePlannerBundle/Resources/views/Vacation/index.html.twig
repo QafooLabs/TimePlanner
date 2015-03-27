@@ -1,5 +1,21 @@
 {% extends 'QafooTimePlannerBundle::layout.html.twig' %}
 
 {% block content %}
-    Hello {{ user.login }}!
+<div class="well">
+    Hello {{view.user.login}}, you have {{view.remainingVacation}} days of vacation left this year.
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Next Vacations</h2>
+        <ul class="vacations">
+        {% for vacation in view.vacations %}
+            {% include "QafooTimePlannerBundle:Vacation:listItem.html.twig" with vacation %}
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Add vacation</h2>
+        {{render(controller('QafooTimePlannerBundle:Vacation:edit'))}}
+    </div>
+</div>
 {% endblock %}

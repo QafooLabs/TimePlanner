@@ -5,8 +5,19 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="qafoo_user.gateway.user" class="Qafoo\UserBundle\Gateway\User">
-            <argument type="service" id="doctrine_couchdb.odm.document_manager" />
+        <service id="qafoo.user.domain.user_service" class="Qafoo\UserBundle\Domain\UserService">
+            <argument type="service" id="qafoo.user.gateway.user" />
+        </service>
+
+        <service id="qafoo.user.gateway.user" class="Qafoo\UserBundle\Gateway\User">
+            <argument type="service" id="qafoo.user.repository.user" />
+        </service>
+
+        <service id="qafoo.user.repository.user"
+                 class="Doctrine\ODM\CouchDB\DocumentRepository"
+                 factory-service="doctrine_couchdb.odm.document_manager"
+                 factory-method="getRepository">
+            <argument>Qafoo\UserBundle\Domain\FOSUserHelper</argument>
         </service>
 
         <service id="qafoo.user_bundle.twig.sub_request_extension" class="Qafoo\UserBundle\Twig\SubRequestExtension">

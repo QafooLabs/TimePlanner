@@ -1,4 +1,4 @@
-{% extends '::layout.html.twig' %}
+{% extends is_subrequest(app.request) ? "::plain.html.twig" : "::layout.html.twig" %}
 
 {% block content %}
     {% block fos_user_content %}{% endblock %}

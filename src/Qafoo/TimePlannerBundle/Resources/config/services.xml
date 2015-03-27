@@ -6,6 +6,14 @@
 
     <services>
         <service id="qafoo.time_planner.domain.vacation_service" class="Qafoo\TimePlannerBundle\Domain\VacationService">
+            <argument type="service" id="qafoo.time_planner.repository.vacation" />
+        </service>
+
+        <service id="qafoo.time_planner.repository.vacation"
+                 class="Doctrine\ODM\CouchDB\DocumentRepository"
+                 factory-service="doctrine_couchdb.odm.document_manager"
+                 factory-method="getRepository">
+            <argument>Qafoo\TimePlannerBundle\Domain\Vacation</argument>
         </service>
     </services>
 </container>

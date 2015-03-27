@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <document name="Qafoo\TimePlannerBundle\Domain\Vacation" indexed="true">
+        <id name="vacationId" />
+
+        <field name="start" type="datetime" />
+        <field name="end" type="datetime" />
+        <reference-one field="user" target-document="Qafoo\UserBundle\Domain\FOSUserHelper" />
+        <field name="comment" type="string" />
+    </document>
+</doctrine-mapping>

@@ -27,4 +27,15 @@ class UserService
     {
         return $this->userGateway->getAllUsers();
     }
+
+    /**
+     * Get user by login
+     *
+     * @param string $login
+     * @return User
+     */
+    public function getUserByLogin($login)
+    {
+        return $this->userGateway->loadUserByUsername($login);
+    }
 }

@@ -7,7 +7,7 @@ security:
 
     providers:
         qafoo_user:
-            id: qafoo_user.gateway.user
+            id: qafoo.user.gateway.user
 
     firewalls:
         main:

@@ -23,6 +23,7 @@
     <import optional="true" file="${basedir}/ant/modules/phpcpd.xml" />
     <import optional="true" file="${basedir}/ant/modules/phpmd.xml" />
     <import optional="true" file="${basedir}/ant/modules/doctrine-couchdb.xml" />
+    <import optional="true" file="${basedir}/ant/modules/symfony2.xml" />
 
     <!--
          Custom project tasks

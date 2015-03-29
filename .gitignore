@@ -3,3 +3,4 @@
 /composer.phar
 /app/cache/
 /app/logs/
+/web/bundles

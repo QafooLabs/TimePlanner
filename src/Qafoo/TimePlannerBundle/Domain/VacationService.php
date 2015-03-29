@@ -24,11 +24,12 @@ class VacationService
      * Get remaining vacation days
      *
      * @param User $user
+     * @param int $year
      * @return int
      */
-    public function getRemainingVacationDays(User $user)
+    public function getRemainingVacationDays(User $user, $year)
     {
-        return 12;
+        return 30 - count($this->vacationGateway->getVacationDays($user->login, $year));
     }
 
     /**

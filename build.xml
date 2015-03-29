@@ -28,7 +28,7 @@
     <!--
          Custom project tasks
     -->
-    <target name="serve" depends="initialize">
+    <target name="serve" depends="prepare">
         <echo>Server starting on http://localhost:${webserver.port}/</echo>
         <exec executable="php" failonerror="true" dir="${basedir}">
             <arg value="-S" />                                              

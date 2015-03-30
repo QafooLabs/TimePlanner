@@ -18,7 +18,7 @@ class VacationController extends Controller
         $currentUser = $context->getCurrentUser();
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
 
-        return new View\Overview(
+        return new Vacation\Overview(
             array(
                 'user' => $currentUser,
                 'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, date('Y')),
@@ -32,7 +32,7 @@ class VacationController extends Controller
         $currentUser = $context->getCurrentUser();
         $userService = $this->get('qafoo.user.domain.user_service');
 
-        return new View\Edit(
+        return new Vacation\Edit(
             array(
                 'user' => $currentUser,
                 'users' => $userService->getAllUsers(),
@@ -55,6 +55,6 @@ class VacationController extends Controller
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
         $vacationService->store($vacation);
 
-        return new RedirectRouteResponse('qafoo.time_planner.homepage');
+        return new RedirectRouteResponse('qafoo.time_planner.vacation.overview');
     }
 }

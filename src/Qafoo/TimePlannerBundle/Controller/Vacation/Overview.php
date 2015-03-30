@@ -1,6 +1,6 @@
 <?php
 
-namespace Qafoo\TimePlannerBundle\Controller\View;
+namespace Qafoo\TimePlannerBundle\Controller\Vacation;
 
 use Kore\DataObject\DataObject;
 

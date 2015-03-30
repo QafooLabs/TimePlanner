@@ -18,7 +18,8 @@ class IcsImportCommand extends ContainerAwareCommand
             ->addArgument(
                 'url',
                 InputArgument::REQUIRED,
-                'URL of ICS calendar feed; Example feed source: http://www.schulferien.eu/downloads/feiertage-im-ical-format/'
+                'URL of ICS calendar feed;' .
+                'Example feed source: http://www.schulferien.eu/downloads/feiertage-im-ical-format/'
             );
     }
 

@@ -5,6 +5,10 @@
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="qafoo.time_planner.homepage" path="/">
+        <default key="_controller">QafooTimePlannerBundle:Default:index</default>
+    </route>
+
+    <route id="qafoo.time_planner.vacation.overview" path="/vacation">
         <default key="_controller">QafooTimePlannerBundle:Vacation:index</default>
     </route>
 

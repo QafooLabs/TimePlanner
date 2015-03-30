@@ -2,7 +2,7 @@
 
 namespace Qafoo\UserBundle\Domain;
 
-use Qafoo\UserBundle\Gateway\User as UserGateway;
+use Qafoo\UserBundle\Gateway\UserGateway;
 
 class UserService
 {

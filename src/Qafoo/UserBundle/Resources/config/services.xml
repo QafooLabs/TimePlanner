@@ -9,7 +9,7 @@
             <argument type="service" id="qafoo.user.gateway.user" />
         </service>
 
-        <service id="qafoo.user.gateway.user" class="Qafoo\UserBundle\Gateway\User">
+        <service id="qafoo.user.gateway.user" class="Qafoo\UserBundle\Gateway\UserGateway">
             <argument type="service" id="qafoo.user.repository.user" />
         </service>
 

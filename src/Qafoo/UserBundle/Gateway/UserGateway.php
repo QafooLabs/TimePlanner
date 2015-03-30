@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Doctrine\ODM\CouchDB\DocumentRepository;
 
-class User implements UserProviderInterface
+class UserGateway implements UserProviderInterface
 {
     /**
      * Document manager

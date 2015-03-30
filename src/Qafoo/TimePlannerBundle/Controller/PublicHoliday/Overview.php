@@ -14,6 +14,13 @@ class Overview extends DataObject
     public $holidays = array();
 
     /**
+     * Currently displayed year
+     *
+     * @var int
+     */
+    public $year;
+
+    /**
      * Years with defined public holidays
      *
      * @var int[]

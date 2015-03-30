@@ -36,7 +36,7 @@ class PublicHolidayService
      */
     public function getYears()
     {
-        return array(date("Y"));
+        return $this->publicHolidayGateway->getYears();
     }
 
     /**

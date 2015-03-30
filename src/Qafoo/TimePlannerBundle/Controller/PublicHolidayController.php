@@ -15,14 +15,16 @@ use Qafoo\TimePlannerBundle\Controller\PublicHoliday\Edit;
 
 class PublicHolidayController extends Controller
 {
-    public function indexAction()
+    public function indexAction($year = null)
     {
-        $holidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
+        $year = $year ?: date("Y");
+        $publicHolidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
 
         return new Overview(
             array(
-                'holidays' => $holidayService->getHolidays(date("Y")),
-                'years' => $holidayService->getYears(),
+                'holidays' => $publicHolidayService->getHolidays($year),
+                'year' => $year,
+                'years' => $publicHolidayService->getYears(),
             )
         );
     }

@@ -17,8 +17,9 @@
         <requirement key="_method">POST</requirement>
     </route>
 
-    <route id="qafoo.time_planner.public_holiday.overview" path="/holiday">
+    <route id="qafoo.time_planner.public_holiday.overview" path="/holiday/{year}">
         <default key="_controller">QafooTimePlannerBundle:PublicHoliday:index</default>
+        <default key="year"></default>
     </route>
 
     <route id="qafoo.time_planner.public_holiday.edit" path="/holiday/edit/{publicHoliday}">
@@ -27,13 +28,13 @@
 
     <route id="qafoo.time_planner.public_holiday.delete" path="/holiday/remove/{publicHoliday}">
         <default key="_controller">QafooTimePlannerBundle:PublicHoliday:remove</default>
-        <default key="publicHoliday">null</default>
+        <default key="publicHoliday"></default>
         <requirement key="_method">POST</requirement>
     </route>
 
     <route id="qafoo.time_planner.public_holiday.store" path="/holiday/store/{publicHoliday}">
         <default key="_controller">QafooTimePlannerBundle:PublicHoliday:store</default>
-        <default key="publicHoliday">null</default>
+        <default key="publicHoliday"></default>
         <requirement key="_method">POST</requirement>
     </route>
 </routes>

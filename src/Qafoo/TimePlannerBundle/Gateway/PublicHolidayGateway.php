@@ -53,6 +53,28 @@ class PublicHolidayGateway
     }
 
     /**
+     * Get years
+     *
+     * @return int[]
+     */
+    public function getYears()
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('public_holidays', 'index');
+        $result = $query
+            ->setGroup(true)
+            ->setGroupLevel(1)
+            ->setReduce(true)
+            ->execute();
+
+        return array_map(
+            function (array $row) {
+                return $row['key'][0];
+            },
+            $result->toArray()
+        );
+    }
+
+    /**
      * Store
      *
      * @param PublicHoliday $publicHoliday

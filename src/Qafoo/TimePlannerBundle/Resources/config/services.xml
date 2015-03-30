@@ -11,6 +11,9 @@
 
         <service id="qafoo.time_planner.domain.public_holiday_ics_importer" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayIcsImporter">
             <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
+            <argument type="service">
+                <service class="Sabre\VObject\Reader" />
+            </argument>
         </service>
 
         <service id="qafoo.time_planner.domain.public_holiday_service" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayService">

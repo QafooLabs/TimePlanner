@@ -2,6 +2,8 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
+use Sabre\VObject\Reader;
+
 class PublicHolidayIcsImporter
 {
     /**
@@ -11,10 +13,17 @@ class PublicHolidayIcsImporter
      */
     private $service;
 
-    public function __construct(PublicHolidayService $service)
+    /**
+     * ICS reader
+     *
+     * @var \Sabre\VObject\Reader
+     */
+    private $reader;
+
+    public function __construct(PublicHolidayService $service, Reader $reader)
     {
         $this->service = $service;
-
+        $this->reader = $reader;
     }
 
     /**
@@ -25,6 +34,20 @@ class PublicHolidayIcsImporter
      */
     public function import($url)
     {
-        return array();
+        $calendar = $this->reader->read(file_get_contents($url));
+
+        $holidays = array();
+        foreach ($calendar->VEVENT as $event) {
+            $holiday = new PublicHoliday(
+                array(
+                    'name' => (string) $event->SUMMARY,
+                    'date' => $event->DTSTART->getDateTime(),
+                )
+            );
+
+            $holidays[] = $this->service->store($holiday);
+        }
+
+        return $holidays;
     }
 }

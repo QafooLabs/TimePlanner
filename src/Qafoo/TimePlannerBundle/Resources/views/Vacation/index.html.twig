@@ -11,7 +11,7 @@
         <ul class="nav nav-tabs" role="tablist">
         {% for year in view.years %}
             <li role="presentation" {% if year == view.year %}class="active"{% endif %}>
-                <a href="{{path("qafoo.time_planner.public_holiday.overview", {year: year})}}" role="tab">{{year}}</a>
+                <a href="{{path("qafoo.time_planner.vacation.overview", {year: year})}}" role="tab">{{year}}</a>
             </li>
         {% endfor %}
         </ul>

@@ -22,6 +22,17 @@ class PublicHolidayGateway
     }
 
     /**
+     * Find
+     *
+     * @param string $publicHolidayId
+     * @return PublicHoliday
+     */
+    public function get($publicHolidayId)
+    {
+        return $this->documentRepository->find($publicHolidayId);
+    }
+
+    /**
      * Get holidays
      *
      * @param int $year

@@ -27,23 +27,23 @@ class PublicHolidayController extends Controller
         );
     }
 
-    public function editAction(PublicHoliday $holiday = null)
+    public function editAction(PublicHoliday $publicHoliday = null)
     {
         return new Edit(
             array(
-                'holiday' => $holiday,
+                'holiday' => $publicHoliday,
             )
         );
     }
 
-    public function storeAction(Request $request, PublicHoliday $holiday = null)
+    public function storeAction(Request $request, PublicHoliday $publicHoliday = null)
     {
-        $holiday = $holiday ?: new PublicHoliday();
-        $holiday->name = $request->get('name');
-        $holiday->date = new \DateTime($request->get('start'));
+        $publicHoliday = $publicHoliday ?: new PublicHoliday();
+        $publicHoliday->name = $request->get('name');
+        $publicHoliday->date = new \DateTime($request->get('start'));
 
-        $holidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
-        $holidayService->store($holiday);
+        $publicHolidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
+        $publicHolidayService->store($publicHoliday);
 
         return new RedirectRouteResponse('qafoo.time_planner.public_holiday.overview');
     }

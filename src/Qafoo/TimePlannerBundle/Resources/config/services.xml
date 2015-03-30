@@ -41,5 +41,11 @@
                  factory-method="getRepository">
             <argument>Qafoo\TimePlannerBundle\Domain\PublicHoliday</argument>
         </service>
+
+        <service id="qafoo.time_planner.parameter_converter.public_holiday" class="Qafoo\TimePlannerBundle\Controller\PublicHoliday\ParamConverter">
+            <argument type="service" id="qafoo.time_planner.gateway.public_holiday" />
+
+            <tag name="request.param_converter" converter="publicHoliday" priority="10" />
+        </service>
     </services>
 </container>

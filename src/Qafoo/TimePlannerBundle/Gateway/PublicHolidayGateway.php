@@ -66,4 +66,17 @@ class PublicHolidayGateway
 
         return $publicHoliday;
     }
+
+    /**
+     * Remove
+     *
+     * @param PublicHoliday $publicHoliday
+     * @return void
+     */
+    public function remove(PublicHoliday $publicHoliday)
+    {
+        $documentManager = $this->documentRepository->getDocumentManager();
+        $documentManager->remove($publicHoliday);
+        $documentManager->flush();
+    }
 }

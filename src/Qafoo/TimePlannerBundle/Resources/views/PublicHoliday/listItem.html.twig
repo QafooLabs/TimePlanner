@@ -1,5 +1,5 @@
 <li>
-    <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.public_holiday.delete", {publicHoliday: holiday.publicHolidayId}) }}">
+    <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.public_holiday.delete", {publicHoliday: holiday.publicHolidayId}) }}" onsubmit="return confirm('Really remove {{holiday.name}}?');">
         {{holiday.date|date("d. F")}}: <strong>{{holiday.name}}</strong>
         <div class="btn-group btn-group-xs" role="group" aria-label="Operations">
             <a class="btn btn-default" href="{{ path("qafoo.time_planner.public_holiday.edit", {publicHoliday: holiday.publicHolidayId}) }}" title="Edit">

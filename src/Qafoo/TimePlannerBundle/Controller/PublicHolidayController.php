@@ -36,6 +36,14 @@ class PublicHolidayController extends Controller
         );
     }
 
+    public function removeAction(PublicHoliday $publicHoliday)
+    {
+        $publicHolidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
+        $publicHolidayService->remove($publicHoliday);
+
+        return new RedirectRouteResponse('qafoo.time_planner.public_holiday.overview');
+    }
+
     public function storeAction(Request $request, PublicHoliday $publicHoliday = null)
     {
         $publicHoliday = $publicHoliday ?: new PublicHoliday();

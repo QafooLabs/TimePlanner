@@ -49,4 +49,15 @@ class PublicHolidayService
     {
         return $this->publicHolidayGateway->store($publicHoliday);
     }
+
+    /**
+     * Remove
+     *
+     * @param PublicHoliday $publicHoliday
+     * @return void
+     */
+    public function remove(PublicHoliday $publicHoliday)
+    {
+        return $this->publicHolidayGateway->remove($publicHoliday);
+    }
 }

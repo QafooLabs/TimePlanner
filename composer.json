@@ -12,7 +12,8 @@
         "doctrine/couchdb": "dev-master",
         "symfony/swiftmailer-bundle": "~2.3",
         "doctrine/couchdb-odm-bundle": "dev-master",
-        "sabre/vobject": "~3.4"
+        "sabre/vobject": "~3.4",
+        "sensio/framework-extra-bundle": "~3.0"
     },
     "require-dev": {
         "pdepend/pdepend": "@stable",

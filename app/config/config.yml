@@ -19,6 +19,11 @@ framework:
     session: ~
     translator: ~
 
+sensio_framework_extra:
+    request:
+        converters: true
+        auto_convert: true
+
 monolog:
     handlers:
         main:

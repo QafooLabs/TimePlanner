@@ -10,6 +10,8 @@ use QafooLabs\MVC\RedirectRouteResponse;
 
 use Qafoo\TimePlannerBundle\Domain\VacationService;
 use Qafoo\TimePlannerBundle\Domain\Vacation;
+use Qafoo\TimePlannerBundle\Controller\Vacation\Overview;
+use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
 
 class VacationController extends Controller
 {
@@ -18,7 +20,7 @@ class VacationController extends Controller
         $currentUser = $context->getCurrentUser();
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
 
-        return new Vacation\Overview(
+        return new Overview(
             array(
                 'user' => $currentUser,
                 'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, date('Y')),
@@ -32,7 +34,7 @@ class VacationController extends Controller
         $currentUser = $context->getCurrentUser();
         $userService = $this->get('qafoo.user.domain.user_service');
 
-        return new Vacation\Edit(
+        return new Edit(
             array(
                 'user' => $currentUser,
                 'users' => $userService->getAllUsers(),

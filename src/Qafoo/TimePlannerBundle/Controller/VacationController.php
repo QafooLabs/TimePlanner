@@ -25,9 +25,9 @@ class VacationController extends Controller
             array(
                 'user' => $currentUser,
                 'year' => $year,
-                'years' => array($year),
+                'years' => $vacationService->getYears(),
                 'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, $year),
-                'vacations' => $vacationService->getNextVacations(10),
+                'vacations' => $vacationService->getVacations($year),
             )
         );
     }

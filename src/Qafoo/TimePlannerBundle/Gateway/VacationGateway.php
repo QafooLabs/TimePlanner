@@ -69,18 +69,41 @@ class VacationGateway
     }
 
     /**
-     * Get next vacations
+     * Get years
      *
-     * @param int $count
+     * @return int[]
+     */
+    public function getYears()
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'index');
+        $result = $query
+            ->setGroup(true)
+            ->setGroupLevel(1)
+            ->setReduce(true)
+            ->execute();
+
+        return array_map(
+            function (array $row) {
+                return $row['key'][0];
+            },
+            $result->toArray()
+        );
+    }
+
+    /**
+     * Get vacations
+     *
+     * @param int $year
      * @return Vacation[]
      */
-    public function getNextVacations($count = 10)
+    public function getVacations($year)
     {
-        $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'upcoming');
+        $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'index');
         $result = $query
-            ->setStartKey(date('Y-m-d'))
+            ->setStartKey(array((int) $year))
+            ->setEndKey(array((int) $year, CouchDBClient::COLLATION_END))
+            ->setIncludeDocs(true)
             ->setReduce(false)
-            ->setLimit($count)
             ->onlyDocs(true)
             ->execute();
 

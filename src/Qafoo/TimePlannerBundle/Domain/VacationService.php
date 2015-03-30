@@ -33,14 +33,24 @@ class VacationService
     }
 
     /**
-     * Get next vacations
+     * Get years
      *
-     * @param int $count
+     * @return int[]
+     */
+    public function getYears()
+    {
+        return $this->vacationGateway->getYears();
+    }
+
+    /**
+     * Get vacations
+     *
+     * @param int $year
      * @return Vacation[]
      */
-    public function getNextVacations($count = 10)
+    public function getVacations($year)
     {
-        return $this->vacationGateway->getNextVacations($count);
+        return $this->vacationGateway->getVacations($year);
     }
 
     /**

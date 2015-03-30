@@ -1,0 +1,22 @@
+{% extends 'QafooTimePlannerBundle::layout.html.twig' %}
+
+{% block content %}
+<form action="{{ path("qafoo.time_planner.public_holiday.store") }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="hidden" name="publicHolidayId" value="{{view.holiday.publicHolidayId}}" />
+
+    <div class="form-group">
+        <label for="name">{{ 'Name'|trans }}</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ view.holiday.name }}" />
+    </div>
+    <div class="form-group">
+        <label for="date">{{ 'Holiday date'|trans }}</label>
+        <input type="date" class="form-control" id="date" name="date" value="{{ view.holiday.date|date("Y-m-d") }}" required="required" />
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="submit" class="btn btn-primary" id="_submit" name="_submit">{{ 'Create'|trans }}</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

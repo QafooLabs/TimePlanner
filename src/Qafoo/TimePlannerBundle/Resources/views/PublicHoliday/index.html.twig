@@ -1,5 +1,18 @@
 {% extends 'QafooTimePlannerBundle::layout.html.twig' %}
 
 {% block content %}
-Huh?
+<div class="row">
+    <div class="col-md-6">
+        <h2>Public Holidays</h2>
+        <ul class="vacations">
+        {% for holiday in view.holidays %}
+            {% include "QafooTimePlannerBundle:PublicHoliday:listItem.html.twig" with {holiday: holiday} %}
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Add Public Holiday</h2>
+        {{render(controller('QafooTimePlannerBundle:PublicHoliday:edit'))}}
+    </div>
+</div>
 {% endblock %}

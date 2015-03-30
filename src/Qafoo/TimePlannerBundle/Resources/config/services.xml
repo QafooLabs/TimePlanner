@@ -17,7 +17,7 @@
             <argument type="service" id="qafoo.time_planner.repository.vacation" />
         </service>
 
-        <service id="qafoo.time_planner.gateway.public_holiday" class="Qafoo\TimePlannerBundle\Gateway\PublicHoliday">
+        <service id="qafoo.time_planner.gateway.public_holiday" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway">
             <argument type="service" id="qafoo.time_planner.repository.public_holiday" />
         </service>
 

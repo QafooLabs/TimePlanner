@@ -1,29 +1,15 @@
 <?php
 
-namespace Qafoo\TimePlannerBundle\Controller\Vacation;
+namespace Qafoo\TimePlannerBundle\Controller\PublicHoliday;
 
 use Kore\DataObject\DataObject;
 
 class Edit extends DataObject
 {
     /**
-     * User
+     * Holiday
      *
-     * @var User
+     * @var Holiday
      */
-    public $user;
-
-    /**
-     * All users
-     *
-     * @var User[]
-     */
-    public $users = array();
-
-    /**
-     * Vacation
-     *
-     * @var Vacation
-     */
-    public $vacation;
+    public $holiday;
 }

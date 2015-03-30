@@ -42,9 +42,9 @@ class PublicHolidayController extends Controller
         $holiday->name = $request->get('name');
         $holiday->date = new \DateTime($request->get('start'));
 
-        $holidayService = $this->get('qafoo.time_planner.domain.holiday_service');
+        $holidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
         $holidayService->store($holiday);
 
-        return new RedirectRouteResponse('qafoo.time_planner.holiday.overview');
+        return new RedirectRouteResponse('qafoo.time_planner.public_holiday.overview');
     }
 }

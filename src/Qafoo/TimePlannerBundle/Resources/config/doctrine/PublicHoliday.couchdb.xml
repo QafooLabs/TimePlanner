@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <document name="Qafoo\TimePlannerBundle\Domain\PublicHoliday" indexed="true">
+        <id name="publicHolidayId" />
+
+        <field name="date" type="datetime" />
+        <field name="name" type="string" />
+    </document>
+</doctrine-mapping>

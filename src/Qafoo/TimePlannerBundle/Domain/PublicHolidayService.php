@@ -2,8 +2,22 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
+use Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway;
+
 class PublicHolidayService
 {
+    /**
+     * PublicHoliday gateway;
+     *;
+     * @var PublicHolidayGateway;
+     */
+    private $publicHolidayGateway;
+
+    public function __construct(PublicHolidayGateway $publicHolidayGateway)
+    {
+        $this->publicHolidayGateway = $publicHolidayGateway;
+    }
+
     /**
      * Get holidays
      *
@@ -23,5 +37,16 @@ class PublicHolidayService
     public function getYears()
     {
         return array(date("Y"));
+    }
+
+    /**
+     * Store
+     *
+     * @param PublicHoliday $publicHoliday
+     * @return PublicHoliday
+     */
+    public function store(PublicHoliday $publicHoliday)
+    {
+        return $this->publicHolidayGateway->store($publicHoliday);
     }
 }

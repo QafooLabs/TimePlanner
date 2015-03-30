@@ -26,7 +26,7 @@ class PublicHolidayService
      */
     public function getHolidays($year)
     {
-        return array();
+        return $this->publicHolidayGateway->getHolidays($year);
     }
 
     /**

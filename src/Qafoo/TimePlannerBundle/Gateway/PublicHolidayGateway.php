@@ -22,6 +22,26 @@ class PublicHolidayGateway
     }
 
     /**
+     * Get holidays
+     *
+     * @param int $year
+     * @return PublicHoliday[]
+     */
+    public function getHolidays($year)
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('public_holidays', 'index');
+        $result = $query
+            ->setStartKey(array((int) $year))
+            ->setEndKey(array((int) $year, CouchDBClient::COLLATION_END))
+            ->setIncludeDocs(true)
+            ->setReduce(false)
+            ->onlyDocs(true)
+            ->execute();
+
+        return $result->toArray();
+    }
+
+    /**
      * Store
      *
      * @param PublicHoliday $publicHoliday

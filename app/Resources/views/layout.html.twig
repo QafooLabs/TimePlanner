@@ -36,12 +36,26 @@
                         Time Planner
                     </a>
                 </div>
+
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         {% block navigation %}
-                            <li class="active"><a href="/">Home</a></li>
+                            <li><a href="{{ path("qafoo.time_planner.vacation.overview") }}">Vacation</a></li>
+                            <li><a href="/holiday">Public Holidays</a></li>
                         {% endblock %}
                     </ul>
+
+                    {% if app.user %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ path("fos_user_security_logout") }}">Logout</a></li>
+                                <li><a href="{{ path("fos_user_profile_edit") }}">Profile</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>

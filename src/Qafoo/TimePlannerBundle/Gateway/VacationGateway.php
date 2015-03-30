@@ -5,7 +5,9 @@ namespace Qafoo\TimePlannerBundle\Gateway;
 use Doctrine\ODM\CouchDB\DocumentRepository;
 use Doctrine\CouchDB\CouchDBClient;
 
-class Vacation
+use Qafoo\TimePlannerBundle\Domain\Vacation;
+
+class VacationGateway
 {
     /**
      * Document repository

@@ -3,7 +3,7 @@
 namespace Qafoo\TimePlannerBundle\Domain;
 
 use Qafoo\UserBundle\Domain\User;
-use Qafoo\TimePlannerBundle\Gateway\Vacation as VacationGateway;
+use Qafoo\TimePlannerBundle\Gateway\VacationGateway;
 
 class VacationService
 {

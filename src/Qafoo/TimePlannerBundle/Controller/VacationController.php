@@ -15,15 +15,18 @@ use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
 
 class VacationController extends Controller
 {
-    public function indexAction(TokenContext $context)
+    public function indexAction(TokenContext $context, $year = null)
     {
+        $year = $year ?: date("Y");
         $currentUser = $context->getCurrentUser();
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
 
         return new Overview(
             array(
                 'user' => $currentUser,
-                'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, date('Y')),
+                'year' => $year,
+                'years' => array($year),
+                'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, $year),
                 'vacations' => $vacationService->getNextVacations(10),
             )
         );
@@ -43,15 +46,22 @@ class VacationController extends Controller
         );
     }
 
+    public function removeAction(Vacation $vacation)
+    {
+        $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
+        $vacationService->remove($vacation);
+
+        return new RedirectRouteResponse('qafoo.time_planner.vacation.overview');
+    }
+
     public function storeAction(Request $request, TokenContext $context, Vacation $vacation = null)
     {
         $userService = $this->get('qafoo.user.domain.user_service');
-        $user = $userService->getUserByLogin($request->get('user'));
 
         $vacation = $vacation ?: new Vacation();
         $vacation->start = new \DateTime($request->get('start'));
         $vacation->end = new \DateTime($request->get('end'));
-        $vacation->user = $user;
+        $vacation->user = $userService->getUserByLogin($request->get('user'));
         $vacation->comment = $request->get('comment', null);
 
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');

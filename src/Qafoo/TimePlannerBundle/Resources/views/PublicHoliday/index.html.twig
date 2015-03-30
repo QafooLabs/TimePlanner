@@ -13,7 +13,7 @@
         {% endfor %}
         </ul>
 
-        <ul class="vacations">
+        <ul class="public-holidays">
         {% for holiday in view.holidays %}
             {% include "QafooTimePlannerBundle:PublicHoliday:listItem.html.twig" with {holiday: holiday} %}
         {% endfor %}

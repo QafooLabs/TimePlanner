@@ -14,6 +14,20 @@ class Overview extends DataObject
     public $user;
 
     /**
+     * Years
+     *
+     * @var int[]
+     */
+    public $years = array();
+
+    /**
+     * Year
+     *
+     * @var int
+     */
+    public $year;
+
+    /**
      * Remaining vacation
      *
      * @var int

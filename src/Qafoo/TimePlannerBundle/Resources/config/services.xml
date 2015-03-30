@@ -42,6 +42,12 @@
             <argument>Qafoo\TimePlannerBundle\Domain\PublicHoliday</argument>
         </service>
 
+        <service id="qafoo.time_planner.parameter_converter.vacation" class="Qafoo\TimePlannerBundle\Controller\Vacation\ParamConverter">
+            <argument type="service" id="qafoo.time_planner.gateway.vacation" />
+
+            <tag name="request.param_converter" converter="vacation" priority="10" />
+        </service>
+
         <service id="qafoo.time_planner.parameter_converter.public_holiday" class="Qafoo\TimePlannerBundle\Controller\PublicHoliday\ParamConverter">
             <argument type="service" id="qafoo.time_planner.gateway.public_holiday" />
 

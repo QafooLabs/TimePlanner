@@ -53,4 +53,15 @@ class VacationService
     {
         return $this->vacationGateway->store($vacation);
     }
+
+    /**
+     * Remove
+     *
+     * @param Vacation $vacation
+     * @return void
+     */
+    public function remove(Vacation $vacation)
+    {
+        return $this->vacationGateway->remove($vacation);
+    }
 }

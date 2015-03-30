@@ -22,6 +22,17 @@ class VacationGateway
     }
 
     /**
+     * Find
+     *
+     * @param string $vacationId
+     * @return PublicHoliday
+     */
+    public function get($vacationId)
+    {
+        return $this->documentRepository->find($vacationId);
+    }
+
+    /**
      * Get vacation days
      *
      * Unfiltered, without any processing of weekends or public holidays.
@@ -89,5 +100,18 @@ class VacationGateway
         $documentManager->flush();
 
         return $vacation;
+    }
+
+    /**
+     * Remove
+     *
+     * @param Vacation $vacation
+     * @return void
+     */
+    public function remove(Vacation $vacation)
+    {
+        $documentManager = $this->documentRepository->getDocumentManager();
+        $documentManager->remove($vacation);
+        $documentManager->flush();
     }
 }

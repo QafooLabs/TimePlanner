@@ -1,9 +1,8 @@
 {% extends 'QafooTimePlannerBundle::layout.html.twig' %}
 
 {% block content %}
-<form action="{{ path("qafoo.time_planner.vacation.store") }}" method="post">
+<form action="{{ path("qafoo.time_planner.vacation.store", {vacation: view.vacation.vacationId}) }}" method="post">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-    <input type="hidden" name="vacationId" value="{{view.vacation.vacationId}}" />
 
     <div class="form-group">
         <label for="start">{{ 'Vacation start'|trans }}</label>

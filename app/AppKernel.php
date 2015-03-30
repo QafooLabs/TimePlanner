@@ -45,6 +45,7 @@ class AppKernel extends Kernel
             $loader->load(function ($container) {
                 $container->loadFromExtension('web_profiler', array(
                     'toolbar' => true,
+                    'intercept_redirects' => false,
                 ));
             });
         }

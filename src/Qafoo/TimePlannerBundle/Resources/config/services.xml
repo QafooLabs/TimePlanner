@@ -9,6 +9,10 @@
             <argument type="service" id="qafoo.time_planner.gateway.vacation" />
         </service>
 
+        <service id="qafoo.time_planner.domain.public_holiday_ics_importer" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayIcsImporter">
+            <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
+        </service>
+
         <service id="qafoo.time_planner.domain.public_holiday_service" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayService">
             <argument type="service" id="qafoo.time_planner.gateway.public_holiday" />
         </service>

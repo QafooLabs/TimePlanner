@@ -9,8 +9,16 @@
             <argument type="service" id="qafoo.time_planner.gateway.vacation" />
         </service>
 
+        <service id="qafoo.time_planner.domain.public_holiday_service" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayService">
+            <argument type="service" id="qafoo.time_planner.gateway.public_holiday" />
+        </service>
+
         <service id="qafoo.time_planner.gateway.vacation" class="Qafoo\TimePlannerBundle\Gateway\Vacation">
             <argument type="service" id="qafoo.time_planner.repository.vacation" />
+        </service>
+
+        <service id="qafoo.time_planner.gateway.public_holiday" class="Qafoo\TimePlannerBundle\Gateway\PublicHoliday">
+            <argument type="service" id="qafoo.time_planner.repository.public_holiday" />
         </service>
 
         <service id="qafoo.time_planner.repository.vacation"
@@ -18,6 +26,13 @@
                  factory-service="doctrine_couchdb.odm.document_manager"
                  factory-method="getRepository">
             <argument>Qafoo\TimePlannerBundle\Domain\Vacation</argument>
+        </service>
+
+        <service id="qafoo.time_planner.repository.public_holiday"
+                 class="Doctrine\ODM\CouchDB\DocumentRepository"
+                 factory-service="doctrine_couchdb.odm.document_manager"
+                 factory-method="getRepository">
+            <argument>Qafoo\TimePlannerBundle\Domain\PublicHoliday</argument>
         </service>
     </services>
 </container>

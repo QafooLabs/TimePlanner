@@ -7,6 +7,7 @@
     <services>
         <service id="qafoo.time_planner.domain.vacation_service" class="Qafoo\TimePlannerBundle\Domain\VacationService">
             <argument type="service" id="qafoo.time_planner.gateway.vacation" />
+            <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
         </service>
 
         <service id="qafoo.time_planner.domain.public_holiday_ics_importer" class="Qafoo\TimePlannerBundle\Domain\PublicHolidayIcsImporter">

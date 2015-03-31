@@ -26,7 +26,7 @@ class VacationController extends Controller
                 'user' => $currentUser,
                 'year' => $year,
                 'years' => $vacationService->getYears(),
-                'remainingVacation' => $vacationService->getRemainingVacationDays($currentUser, $year),
+                'remainingVacation' => 30 - count($vacationService->getVacationDays($currentUser, $year)),
                 'vacations' => $vacationService->getVacations($year),
             )
         );

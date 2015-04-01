@@ -36,51 +36,42 @@ class VacationService
      */
     public function getVacationDays(User $user, $year)
     {
+        $vacationDays = new DaySet(
+            array_map(
+                function (\DateTimeInterface $date) {
+                    return Day::fromDateTime($date);
+                },
+                $this->vacationGateway->getVacationDays($user->login, $year)
+            )
+        );
+
         $weekendDays = $this->getWeekendDays($year);
-        $publicHolidays = array_map(
-            function (PublicHoliday $publicHoliday) {
-                return Date::fromDateTime($publicHoliday->date)->format("Y-m-d");
-            },
-            $this->publicHolidayService->getHolidays($year)
-        );
+        $vacationDays = $vacationDays->diff($weekendDays);
 
-        $vacationDays = array_map(
-            function (\DateTimeInterface $dateTime) {
-                return Date::fromDateTime($dateTime)->format("Y-m-d");
-            },
-            $this->vacationGateway->getVacationDays($user->login, $year)
-        );
+        $publicHolidays = $this->publicHolidayService->getHolidayDays($year);
+        $vacationDays = $vacationDays->diff($publicHolidays);
 
-        $vacationDays = array_diff($vacationDays, $weekendDays);
-        $vacationDays = array_diff($vacationDays, $publicHolidays);
-
-        return array_map(
-            function ($dayString) {
-                return new Date($dayString);
-            },
-            $vacationDays
-        );
+        return $vacationDays;
     }
 
     /**
      * Get weekend days
      *
      * @param string $year
-     * @return \DateTimeImmutable[]
+     * @return DaySet
      */
     protected function getWeekendDays($year)
     {
-        $weekendDays = array();
-        $startDate = new Date("1.1.$year 12:00");
-        $endDate = new Date("1.1." . ($year + 1));
+        $weekendDays = new DaySet();
+        $day = new Day("1.1.$year");
+        $endDate = new Day("1.1." . ($year + 1));
         do {
-            if ($startDate->isWeekend()) {
-                // Weekend
-                $weekendDays[] = $startDate->format("Y-m-d");
+            if ($day->isWeekend()) {
+                $weekendDays[] = $day;
             }
 
-            $startDate = $startDate->modify("+1 day");
-        } while ($startDate < $endDate);
+            $day = $day->modify("+1 day");
+        } while ($day < $endDate);
 
         return $weekendDays;
     }

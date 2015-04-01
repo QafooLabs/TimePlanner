@@ -30,6 +30,24 @@ class PublicHolidayService
     }
 
     /**
+     * Get public holiday days
+     *
+     * @param int $year
+     * @return DaySet
+     */
+    public function getHolidayDays($year)
+    {
+        return new DaySet(
+            array_map(
+                function (PublicHoliday $publicHoliday) {
+                    return Day::fromDateTime($publicHoliday->date);
+                },
+                $this->publicHolidayGateway->getHolidays($year)
+            )
+        );
+    }
+
+    /**
      * Get years
      *
      * @return int[]

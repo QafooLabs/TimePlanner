@@ -4,6 +4,11 @@ namespace Qafoo\TimePlannerBundle\Domain;
 
 class Day extends \DateTimeImmutable
 {
+    public function __construct($time = "now")
+    {
+        parent::__construct($time, new \DateTimeZone("UTC"));
+    }
+
     /**
      * From date time
      *
@@ -12,7 +17,7 @@ class Day extends \DateTimeImmutable
      */
     public static function fromDateTime(\DateTimeInterface $dateTime)
     {
-        return new static($dateTime->format('r'), new \DateTimeZone("UTC"));
+        return new static($dateTime->format('Y-m-d'));
     }
 
     /**

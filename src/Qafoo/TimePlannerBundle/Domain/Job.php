@@ -30,7 +30,7 @@ class Job extends DataObject
     /**
      * Person days
      *
-     * @var PersonDays
+     * @var Job\PersonDays
      */
     public $personDays;
 

@@ -40,5 +40,4 @@ class Overview extends DataObject
      * @var Job[]
      */
     public $jobs = array();
-
 }

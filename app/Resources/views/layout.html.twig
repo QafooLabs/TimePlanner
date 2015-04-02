@@ -40,9 +40,21 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         {% block navigation %}
-                            <li><a href="{{ path("qafoo.time_planner.vacation.overview") }}">Vacation</a></li>
-                            <li><a href="{{ path("qafoo.time_planner.public_holiday.overview") }}">Public Holidays</a></li>
-                            <li><a href="{{ path("qafoo.time_planner.time_planning.overview") }}">Time Planning</a></li>
+                            <li {% if "qafoo.time_planner.vacation." in app.request.attributes.get('_route') %}class="active"{% endif %}>
+                                <a href="{{ path("qafoo.time_planner.vacation.overview") }}">
+                                    <span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Vacation
+                                </a>
+                            </li>
+                            <li {% if "qafoo.time_planner.public_holiday." in app.request.attributes.get('_route') %}class="active"{% endif %}>
+                                <a href="{{ path("qafoo.time_planner.public_holiday.overview") }}">
+                                    <span class="glyphicon glyphicon-glass" aria-hidden="true"></span> Public Holidays
+                                </a>
+                            </li>
+                            <li {% if "qafoo.time_planner.time_planning." in app.request.attributes.get('_route') %}class="active"{% endif %}>
+                                <a href="{{ path("qafoo.time_planner.time_planning.overview") }}">
+                                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> Time Planning
+                                </a>
+                            </li>
                         {% endblock %}
                     </ul>
 
@@ -51,8 +63,12 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path("fos_user_security_logout") }}">Logout</a></li>
-                                <li><a href="{{ path("fos_user_profile_edit") }}">Profile</a></li>
+                                <li><a href="{{ path("fos_user_security_logout") }}">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Logout
+                                </a></li>
+                                <li><a href="{{ path("fos_user_profile_edit") }}">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
+                                </a></li>
                             </ul>
                         </li>
                     </ul>

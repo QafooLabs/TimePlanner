@@ -45,35 +45,19 @@ class VacationService
             )
         );
 
-        $weekendDays = $this->getWeekendDays($year);
-        $vacationDays = $vacationDays->diff($weekendDays);
-
-        $publicHolidays = $this->publicHolidayService->getHolidayDays($year);
-        $vacationDays = $vacationDays->diff($publicHolidays);
+        $vacationDays = $vacationDays->diff(
+            DaySet::createFromRange(
+                new Day("1.1.$year"),
+                new Day("31.12.$year")
+            )->filter(
+                function (Day $day) {
+                    return $day->isWeekend();
+                }
+            )
+        );
+        $vacationDays = $vacationDays->diff($this->publicHolidayService->getHolidayDays($year));
 
         return $vacationDays;
-    }
-
-    /**
-     * Get weekend days
-     *
-     * @param string $year
-     * @return DaySet
-     */
-    protected function getWeekendDays($year)
-    {
-        $weekendDays = new DaySet();
-        $day = new Day("1.1.$year");
-        $endDate = new Day("1.1." . ($year + 1));
-        do {
-            if ($day->isWeekend()) {
-                $weekendDays[] = $day;
-            }
-
-            $day = $day->modify("+1 day");
-        } while ($day < $endDate);
-
-        return $weekendDays;
     }
 
     /**

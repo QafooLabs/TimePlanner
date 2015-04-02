@@ -8,5 +8,5 @@ function (doc) {
         },
         start = parseDate(doc.month);
 
-    emit([start.getFullYear(), start.getMonth() + 1], 1);
+    emit([start.getFullYear(), start.getMonth() + 1, doc.customer, doc.project], 1);
 }

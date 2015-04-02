@@ -1,0 +1,16 @@
+<tr>
+    <td>{{holiday.date|date("d. F")}}</td>
+    <td><strong>{{holiday.name}}</strong></td>
+    <td class="text-right">
+        <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.public_holiday.delete", {publicHoliday: holiday.publicHolidayId}) }}" onsubmit="return confirm('Really remove {{holiday.name}}?');">
+            <div class="btn-group btn-group-xs" role="group" aria-label="Operations">
+                <a class="btn btn-default" href="{{ path("qafoo.time_planner.public_holiday.edit", {publicHoliday: holiday.publicHolidayId}) }}" title="Edit">
+                    <span class="glyphicon glyphicon-pencil" aria-label="Edit"></span>
+                </a>
+                <button class="btn btn-default">
+                    <span class="glyphicon glyphicon-remove" aria-label="Remove"></span>
+                </button>
+            </div>
+        </form>
+    </td>
+</tr>

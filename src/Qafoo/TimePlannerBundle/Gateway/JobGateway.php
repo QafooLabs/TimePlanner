@@ -41,7 +41,7 @@ class JobGateway
      */
     public function getJobs($year, $month)
     {
-        $query = $this->documentRepository->getDocumentManager()->createQuery('job', 'index');
+        $query = $this->documentRepository->getDocumentManager()->createQuery('jobs', 'index');
         $result = $query
             ->setStartKey(array((int) $year, (int) $month))
             ->setEndKey(array((int) $year, (int) $month, CouchDBClient::COLLATION_END))

@@ -43,7 +43,7 @@ class JobService
      */
     public function getJobs($year, $month)
     {
-        return array();
+        return $this->jobGateway->getJobs($year, $month);
     }
 
     /**

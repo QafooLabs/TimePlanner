@@ -15,17 +15,21 @@ use Qafoo\TimePlannerBundle\Controller\TimePlanning\Edit;
 
 class TimePlanningController extends Controller
 {
-    public function indexAction($year = null, $month = null)
+    public function indexAction(Request $request)
     {
-        $year = $year ?: date("Y");
-        $month = $month ?: date("m");
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        $userService = $this->get('qafoo.user.domain.user_service');
 
         return new Overview(
             array(
-                'jobs' => $jobService->getJobs($year, $month),
                 'year' => $year,
                 'month' => $month,
+                'users' => $userService->getAllUsers(),
+                'availableWorkDays' => $jobService->getAvailableWorkDays($year, $month),
+                'jobs' => $jobService->getJobs($year, $month),
             )
         );
     }

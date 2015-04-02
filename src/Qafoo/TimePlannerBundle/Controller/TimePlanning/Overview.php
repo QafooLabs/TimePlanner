@@ -7,13 +7,6 @@ use Kore\DataObject\DataObject;
 class Overview extends DataObject
 {
     /**
-     * Jobs
-     *
-     * @var Job[]
-     */
-    public $jobs = array();
-
-    /**
      * Currently displayed year
      *
      * @var int
@@ -26,4 +19,26 @@ class Overview extends DataObject
      * @var int
      */
     public $month;
+
+    /**
+     * Users
+     *
+     * @var User
+     */
+    public $users = array();
+
+    /**
+     * Available work days
+     *
+     * @var int
+     */
+    public $availableWorkDays;
+
+    /**
+     * Jobs
+     *
+     * @var Job[]
+     */
+    public $jobs = array();
+
 }

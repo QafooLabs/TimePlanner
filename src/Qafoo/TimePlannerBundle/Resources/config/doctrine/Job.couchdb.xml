@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <document name="Qafoo\TimePlannerBundle\Domain\Job" indexed="true">
+        <id name="jobId" />
+
+        <field name="customer" type="string" />
+        <field name="project" type="string" />
+        <embed-one field="personDays" target-document="Qafoo\UserBundle\Domain\Job\PersonDays"/>
+        <field name="expectedRevenue" type="string" />
+        <embed-many field="assignees" target-document="Qafoo\UserBundle\Domain\Job\Assignment"/>
+        <field name="invoiceId" type="string" />
+        <field name="comment" type="string" />
+    </document>
+</doctrine-mapping>

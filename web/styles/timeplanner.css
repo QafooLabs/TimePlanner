@@ -5,3 +5,7 @@ body {
 .navbar-brand img {
     display: inline;
 }
+
+.table > tbody > tr:first-child > td {
+    border-top: none;
+}

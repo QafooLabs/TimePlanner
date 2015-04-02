@@ -9,3 +9,7 @@ body {
 .table > tbody > tr:first-child > td {
     border-top: none;
 }
+
+.table .form-control {
+    width: 100%;
+}

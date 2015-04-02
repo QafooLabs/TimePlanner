@@ -5,9 +5,10 @@
 
         <field name="customer" type="string" />
         <field name="project" type="string" />
-        <embed-one field="personDays" target-document="Qafoo\UserBundle\Domain\Job\PersonDays"/>
+        <field name="month" type="datetime" />
+        <embed-one field="personDays" target-document="Qafoo\TimePlannerBundle\Domain\Job\PersonDays"/>
         <field name="expectedRevenue" type="string" />
-        <embed-many field="assignees" target-document="Qafoo\UserBundle\Domain\Job\Assignment"/>
+        <embed-many field="assignees" target-document="Qafoo\TimePlannerBundle\Domain\Job\Assignment"/>
         <field name="invoiceId" type="string" />
         <field name="comment" type="string" />
     </document>

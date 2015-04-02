@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embedded-document name="Qafoo\TimePlannerBundle\Domain\Job\PersonDays" indexed="true">
+        <field name="minimum" type="number" />
+        <field name="maximum" type="number" />
+    </embedded-document>
+</doctrine-mapping>

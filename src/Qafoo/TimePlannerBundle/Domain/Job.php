@@ -14,6 +14,13 @@ class Job extends DataObject
     public $jobId;
 
     /**
+     * Job date
+     *
+     * @var \DateTime
+     */
+    public $month;
+
+    /**
      * Customer
      *
      * @var string

@@ -53,9 +53,19 @@ class TimePlanningController extends Controller
 
     public function storeAction(Request $request, Job $job = null)
     {
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
         $job = $job ?: new Job();
-        $job->name = $request->get('name');
-        $job->date = new \DateTime($request->get('start'));
+        $job->month = new \DateTime("$year-$month-01");
+        $job->customer = $request->get('customer');
+        $job->project = $request->get('project');
+        $job->personDays = new Job\PersonDays(
+            $request->get('pt.min'),
+            $request->get('pt.max')
+        );
+        $job->expectedRevenue = $request->get('revenue');
+        $job->comment = $request->get('comment');
 
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $jobService->store($job);

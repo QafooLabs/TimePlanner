@@ -77,4 +77,26 @@ class JobService
     {
         return floor(count($this->getWorkDays($year, $month)) * (1 - $this->expectedSickLeave));
     }
+
+    /**
+     * Store
+     *
+     * @param Job $job
+     * @return Job
+     */
+    public function store(Job $job)
+    {
+        return $this->jobGateway->store($job);
+    }
+
+    /**
+     * Remove
+     *
+     * @param Job $job
+     * @return void
+     */
+    public function remove(Job $job)
+    {
+        return $this->jobGateway->remove($job);
+    }
 }

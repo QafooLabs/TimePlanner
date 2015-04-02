@@ -82,5 +82,11 @@
 
             <tag name="request.param_converter" converter="publicHoliday" priority="10" />
         </service>
+
+        <service id="qafoo.time_planner.parameter_converter.job" class="Qafoo\TimePlannerBundle\Controller\TimePlanning\ParamConverter">
+            <argument type="service" id="qafoo.time_planner.gateway.job" />
+
+            <tag name="request.param_converter" converter="job" priority="10" />
+        </service>
     </services>
 </container>

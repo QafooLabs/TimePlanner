@@ -22,6 +22,24 @@ class DaySet extends \ArrayObject
     }
 
     /**
+     * Create from range
+     *
+     * @param Day $start
+     * @param Day $end
+     * @return DaySet
+     */
+    public static function createFromRange(Day $start, Day $end)
+    {
+        $result = new static();
+        do {
+            $result->append($start);
+            $start = $start->modify("+1 day");
+        } while ($start <= $end);
+
+        return $result;
+    }
+
+    /**
      * Diff
      *
      * Returns a new day set with all days contained in this day set minus the
@@ -46,6 +64,29 @@ class DaySet extends \ArrayObject
             }
         }
         return $diff;
+    }
+
+    /**
+     * Filter
+     *
+     * Returns a new day set filtered by the callback function
+     *
+     * The callback function is called with the Day to filter and should return
+     * true or false. On false the Day will be removed from the set.
+     *
+     * @param \Closure $callback
+     * @return DaySet
+     */
+    public function filter(\Closure $callback)
+    {
+        $result = new static();
+        foreach ($this as $day) {
+            if ($callback($day)) {
+                $result[] = $day;
+            }
+        }
+
+        return $result;
     }
 
     /**

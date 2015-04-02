@@ -59,4 +59,24 @@ class DaySetTest extends \PHPUnit_Framework_TestCase
             $startSet->diff(new DaySet(array('2.1.2015')))
         );
     }
+
+    public function testCreateFromRange()
+    {
+        $this->assertEquals(
+            new DaySet(array('1.1.2015', '2.1.2015', '3.1.2015')),
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('3.1.2015'))
+        );
+    }
+
+    public function testFilter()
+    {
+        $this->assertEquals(
+            new DaySet(array('1.1.2015', '3.1.2015')),
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('3.1.2015'))->filter(
+                function (Day $day) {
+                    return $day->format('d') % 2;
+                }
+            )
+        );
+    }
 }

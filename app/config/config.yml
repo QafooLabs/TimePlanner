@@ -3,6 +3,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine.yml }
+    - { resource: timeplanner.yml }
 
 framework:
     secret: %secret%

@@ -20,13 +20,15 @@ class VacationController extends Controller
         $year = $year ?: date("Y");
         $currentUser = $context->getCurrentUser();
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
+        $availableVacation = $this->get('qafoo.time_planner.gateway.available_vacation');
 
         return new Overview(
             array(
                 'user' => $currentUser,
                 'year' => $year,
                 'years' => $vacationService->getYears(),
-                'remainingVacation' => 30 - count($vacationService->getVacationDays($currentUser, $year)),
+                'remainingVacation' => $availableVacation->getAvailableVacationDays($currentUser->login, $year) -
+                    count($vacationService->getVacationDays($currentUser, $year)),
                 'vacations' => $vacationService->getVacations($year),
             )
         );

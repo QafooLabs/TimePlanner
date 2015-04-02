@@ -4,6 +4,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
+    <parameters>
+        <parameter key="qafoo.time_planner.vacation">30</parameter>
+        <parameter key="qafoo.time_planner.vacationOverrides" type="collection"></parameter>
+    </parameters>
+
     <services>
         <service id="qafoo.time_planner.domain.vacation_service" class="Qafoo\TimePlannerBundle\Domain\VacationService">
             <argument type="service" id="qafoo.time_planner.gateway.vacation" />
@@ -27,6 +32,11 @@
 
         <service id="qafoo.time_planner.gateway.public_holiday" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway">
             <argument type="service" id="qafoo.time_planner.repository.public_holiday" />
+        </service>
+
+        <service id="qafoo.time_planner.gateway.available_vacation" class="Qafoo\TimePlannerBundle\Gateway\AvailableVacationGateway">
+            <argument>%qafoo.time_planner.vacation%</argument>
+            <argument>%qafoo.time_planner.vacationOverrides%</argument>
         </service>
 
         <service id="qafoo.time_planner.repository.vacation"

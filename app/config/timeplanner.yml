@@ -1,0 +1,5 @@
+parameters:
+    qafoo.time_planner.vacationOverrides:
+        2015:
+            kore: 31
+            tobyS: 34

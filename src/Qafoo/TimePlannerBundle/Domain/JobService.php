@@ -79,6 +79,24 @@ class JobService
     }
 
     /**
+     * Calculate sum
+     *
+     * @param Job[] $jobs
+     * @return Job
+     */
+    public function calculateSum(array $jobs)
+    {
+        $sum = new Job();
+        foreach ($jobs as $job) {
+            $sum->personDays->minimum += $job->personDays->minimum;
+            $sum->personDays->maximum += $job->personDays->maximum;
+            $sum->expectedRevenue += $job->expectedRevenue;
+        }
+
+        return $sum;
+    }
+
+    /**
      * Store
      *
      * @param Job $job

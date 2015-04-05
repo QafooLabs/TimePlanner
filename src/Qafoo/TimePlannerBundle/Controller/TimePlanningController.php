@@ -29,7 +29,8 @@ class TimePlanningController extends Controller
                 'month' => $month,
                 'users' => $userService->getAllUsers(),
                 'availableWorkDays' => $jobService->getAvailableWorkDays($year, $month),
-                'jobs' => $jobService->getJobs($year, $month),
+                'jobs' => $jobs = $jobService->getJobs($year, $month),
+                'sum' => $jobService->calculateSum($jobs),
             )
         );
     }

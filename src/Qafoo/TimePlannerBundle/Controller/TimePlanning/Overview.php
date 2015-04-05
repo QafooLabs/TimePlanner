@@ -40,4 +40,11 @@ class Overview extends DataObject
      * @var Job[]
      */
     public $jobs = array();
+
+    /**
+     * Summed up jobs
+     *
+     * @var Job
+     */
+    public $sum;
 }

@@ -70,4 +70,11 @@ class Job extends DataObject
      * @var string
      */
     public $comment;
+
+    public function __construct(array $values = array())
+    {
+        parent::__construct($values);
+
+        $this->personDays = $this->personDays ?: new Job\PersonDays(0, 0);
+    }
 }

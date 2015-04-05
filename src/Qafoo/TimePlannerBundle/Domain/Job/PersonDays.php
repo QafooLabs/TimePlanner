@@ -31,5 +31,11 @@ class PersonDays extends DataObject
     {
         $this->minimum = $minimum;
         $this->maximum = $maximum ?: $minimum;
+
+        if ($this->maximum < $this->minimum) {
+            throw new \OutOfBoundsException(
+                "The maximum of {$this->maximum} should not be smalled then the minimum of {$this->minimum}."
+            );
+        }
     }
 }

@@ -107,11 +107,15 @@
                     </tr>
                     <tr>
                         <th colspan="2">Result</th>
-                        <th class="number">{{(view.sum.expectedRevenue - 25700)|number_format(2)}} €</th>
-                        <th class="number">{{(view.availableWorkDays * view.users|length()) - view.sum.personDays.minimum}}</th>
-                        <th class="number">{{(view.availableWorkDays * view.users|length()) - view.sum.personDays.maximum}}</th>
+                        {% set value = (view.sum.expectedRevenue - 25700) %}
+                        <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value|number_format(2)}} €</th>
+                        {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.minimum %}
+                        <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>
+                        {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.maximum %}
+                        <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>
                     {% for user in view.users %}
-                        <th class="number">{{view.availableWorkDays - view.sum.assignments[user.login]|default(0)}}</th>
+                        {% set value = view.availableWorkDays - view.sum.assignments[user.login]|default(0) %}
+                        <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>
                     {% endfor %}
                         <th></th>
                         <th></th>

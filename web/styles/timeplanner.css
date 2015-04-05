@@ -14,6 +14,17 @@ body {
     width: 100%;
 }
 
+.table .form-control.assignment {
+    width: 4em;
+    border: none;
+    padding: 2px 5px;
+    height: 1.8em;
+}
+
+.table .number {
+    text-align: right;
+}
+
 .table > tfoot > tr:first-child > td {
     border-top-width: 2px;
 }

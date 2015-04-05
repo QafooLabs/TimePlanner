@@ -13,3 +13,7 @@ body {
 .table .form-control {
     width: 100%;
 }
+
+.table > tfoot > tr > td {
+    border-top-width: 2px;
+}

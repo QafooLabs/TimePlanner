@@ -37,8 +37,9 @@
                         <th>{{"Revenue"|trans()}}</th>
                         <th>{{"Min. PT"|trans()}}</th>
                         <th>{{"Max. PT"|trans()}}</th>
-                        <th>{{"Assignments"|trans()}}</th>
-                        <th>{{"Open"|trans()}}</th>
+                    {% for user in view.users %}
+                        <th>{{user.login}}</th>
+                    {% endfor %}
                         <th>{{"Invoice"|trans()}}</th>
                         <th>{{"Comment"|trans()}}</th>
                         <th>{{"Options"|trans()}}</th>
@@ -49,14 +50,19 @@
                     <tr>
                         <td>{{job.customer}}</td>
                         <td>{{job.project}}</td>
-                        <td>{{job.expectedRevenue}}</td>
-                        <td>{{job.personDays.minimum}}</td>
-                        <td>{{job.personDays.maximum}}</td>
-                        <td></td>
-                        <td></td>
+                        <td class="number">{{job.expectedRevenue|number_format(2)}} €</td>
+                        <td class="number">{{job.personDays.minimum}}</td>
+                        <td class="number">{{job.personDays.maximum}}</td>
+                    {% for user in view.users %}
+                        <td>
+                            <form method="POST" class="form-inline" action="{{path("qafoo.time_planner.time_planning.create")}}">
+                                <input type="text" class="form-control assignment number input-sm" name="assignments[user.login]" value="{{job.assignments[user.login]|default(0)}}">
+                            </form>
+                        </td>
+                    {% endfor %}
                         <td>{{job.invoiceId}}</td>
                         <td>{{job.comment}}</td>
-                        <td class="text-right">
+                        <td class="number">
                             <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.delete", {job: job.jobId}) }}" onsubmit="return confirm('Really remove i{{job.project}} for {{job.customer}}?');">
                                 <div class="btn-group btn-group-xs" role="group" aria-label="Operations">
                                     <a class="btn btn-default" href="{{ path("qafoo.time_planner.time_planning.edit", {job: job.jobId}) }}" title="Edit">
@@ -74,11 +80,11 @@
                         <form method="POST" class="form-inline" action="{{path("qafoo.time_planner.time_planning.create")}}">
                             <td><input type="text" class="form-control input-sm" required name="customer" placeholder="{{"Customer"|trans()}}"></td>
                             <td><input type="text" class="form-control input-sm" required name="project" placeholder="{{"Project"|trans()}}"></td>
-                            <td><input type="text" class="form-control input-sm" required name="revenue" placeholder="{{"Revenue"|trans()}}"></td>
-                            <td><input type="text" class="form-control input-sm" required name="pt.min" placeholder="{{"Min. PT"|trans()}}"></td>
-                            <td><input type="text" class="form-control input-sm" required name="pt.max" placeholder="{{"Max. PT"|trans()}}"></td>
-                            <td colspan="4"><input type="text" class="form-control input-sm" name="comment" placeholder="{{"Comment"|trans()}}"></td>
-                            <td class="text-right">
+                            <td><input type="text" class="form-control number input-sm" required name="revenue" placeholder="{{"Revenue"|trans()}}"></td>
+                            <td><input type="text" class="form-control number input-sm" required name="pt.min" placeholder="{{"Min. PT"|trans()}}"></td>
+                            <td><input type="text" class="form-control number input-sm" required name="pt.max" placeholder="{{"Max. PT"|trans()}}"></td>
+                            <td colspan="{{view.users|length() + 2}}"><input type="text" class="form-control input-sm" name="comment" placeholder="{{"Comment"|trans()}}"></td>
+                            <td class="number">
                                 <button class="btn btn-default btn-sm">
                                     <span class="glyphicon glyphicon-save" aria-label="Store"></span>
                                 </button>
@@ -89,22 +95,24 @@
                 <tfoot>
                     <tr>
                         <td colspan="2">Sum</td>
-                        <td>{{view.sum.expectedRevenue}}</td>
-                        <td>{{view.sum.personDays.minimum}}</td>
-                        <td>{{view.sum.personDays.maximum}}</td>
-                        <td></td>
-                        <td></td>
+                        <td class="number">{{view.sum.expectedRevenue|number_format(2)}} €</td>
+                        <td class="number">{{view.sum.personDays.minimum}}</td>
+                        <td class="number">{{view.sum.personDays.maximum}}</td>
+                    {% for user in view.users %}
+                        <td class="number">{{view.sum.assignments[user.login]|default(0)}}</td>
+                    {% endfor %}
                         <td></td>
                         <td></td>
                         <td></td>
                     </tr>
                     <tr>
                         <th colspan="2">Result</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="number">{{(view.sum.expectedRevenue - 25700)|number_format(2)}} €</th>
+                        <th class="number">{{(view.availableWorkDays * view.users|length()) - view.sum.personDays.minimum}}</th>
+                        <th class="number">{{(view.availableWorkDays * view.users|length()) - view.sum.personDays.maximum}}</th>
+                    {% for user in view.users %}
+                        <th class="number">{{view.availableWorkDays - view.sum.assignments[user.login]|default(0)}}</th>
+                    {% endfor %}
                         <th></th>
                         <th></th>
                         <th></th>

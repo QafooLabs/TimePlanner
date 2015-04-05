@@ -61,8 +61,8 @@ class TimePlanningController extends Controller
         $job->customer = $request->get('customer');
         $job->project = $request->get('project');
         $job->personDays = new Job\PersonDays(
-            $request->get('pt.min'),
-            $request->get('pt.max')
+            $request->get('pt_min'),
+            $request->get('pt_max')
         );
         $job->expectedRevenue = $request->get('revenue');
         $job->comment = $request->get('comment');

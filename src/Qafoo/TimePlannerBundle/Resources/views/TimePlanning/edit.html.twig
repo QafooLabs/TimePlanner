@@ -4,6 +4,8 @@
 <h2>Edit Job</h2>
 <form action="{{ path("qafoo.time_planner.time_planning.store", {job: view.job.jobId}) }}" method="post">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    <input type="hidden" name="year" value="{{view.job.month|date("Y")}}" />
+    <input type="hidden" name="month" value="{{view.job.month|date("n")}}" />
 
     <div class="form-group">
         <label for="customer">{{ 'Customer'|trans }}</label>
@@ -19,11 +21,11 @@
     </div>
     <div class="form-group">
         <label for="pt.min">{{ 'Minimum Person Days'|trans }}</label>
-        <input type="number" class="form-control" id="pt.min" name="pt.min" value="{{view.job.personDays.minimum}}" required="required" />
+        <input type="text" class="form-control" id="pt.min" name="pt.min" value="{{view.job.personDays.minimum}}" required="required" />
     </div>
     <div class="form-group">
         <label for="pt.max">{{ 'Maximum Person Days'|trans }}</label>
-        <input type="number" class="form-control" id="pt.max" name="pt.max" value="{{view.job.personDays.maximum}}" required="required" />
+        <input type="text" class="form-control" id="pt.max" name="pt.max" value="{{view.job.personDays.maximum}}" required="required" />
     </div>
     <div class="form-group">
         <label for="comment">{{ 'Comment'|trans }}</label>

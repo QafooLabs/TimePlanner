@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embedded-document name="Qafoo\TimePlannerBundle\Domain\Job\Assignment" indexed="false">
+        <field name="user" type="string" />
+        <field name="days" type="integer" />
+    </embedded-document>
+</doctrine-mapping>

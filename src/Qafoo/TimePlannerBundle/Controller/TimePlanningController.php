@@ -52,6 +52,31 @@ class TimePlanningController extends Controller
         return new RedirectRouteResponse('qafoo.time_planner.time_planning.overview');
     }
 
+    public function assignAction(Request $request, Job $job)
+    {
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
+        $userService = $this->get('qafoo.user.domain.user_service');
+        $assignees = $request->get('assignees', array());
+        foreach ($assignees as $user => $days) {
+            $job->assignees[$user] = new Job\Assignment(
+                $userService->getUserByLogin($user)->login,
+                $days
+            );
+        }
+        $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        $jobService->store($job);
+
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.time_planning.overview',
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
+    }
+
     public function storeAction(Request $request, Job $job = null)
     {
         $year = $request->get('year', date("Y"));
@@ -71,6 +96,12 @@ class TimePlanningController extends Controller
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $jobService->store($job);
 
-        return new RedirectRouteResponse('qafoo.time_planner.time_planning.overview');
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.time_planning.overview',
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
     }
 }

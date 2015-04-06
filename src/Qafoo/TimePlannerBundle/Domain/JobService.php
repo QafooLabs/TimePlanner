@@ -91,6 +91,14 @@ class JobService
             $sum->personDays->minimum += $job->personDays->minimum;
             $sum->personDays->maximum += $job->personDays->maximum;
             $sum->expectedRevenue += $job->expectedRevenue;
+
+            foreach ($job->assignees as $assignment) {
+                if (!isset($sum->assignees[$assignment->user])) {
+                    $sum->assignees[$assignment->user] = new Job\Assignment($assignment->user);
+                }
+
+                $sum->assignees[$assignment->user]->days += $assignment->days;
+            }
         }
 
         return $sum;

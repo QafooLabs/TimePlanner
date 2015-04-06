@@ -1,0 +1,38 @@
+{% extends 'QafooTimePlannerBundle::layout.html.twig' %}
+
+{% block content %}
+<h2>Edit Job</h2>
+<form action="{{ path("qafoo.time_planner.time_planning.store", {job: view.job.jobId}) }}" method="post">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    <div class="form-group">
+        <label for="customer">{{ 'Customer'|trans }}</label>
+        <input type="text" class="form-control" id="customer" name="customer" value="{{view.job.customer}}" required="required" />
+    </div>
+    <div class="form-group">
+        <label for="project">{{ 'Project'|trans }}</label>
+        <input type="text" class="form-control" id="project" name="project" value="{{view.job.project}}" required="required" />
+    </div>
+    <div class="form-group">
+        <label for="revenue">{{ 'Revenue'|trans }}</label>
+        <input type="text" class="form-control" id="revenue" name="revenue" value="{{view.job.expectedRevenue}}" required="required" />
+    </div>
+    <div class="form-group">
+        <label for="pt.min">{{ 'Minimum Person Days'|trans }}</label>
+        <input type="number" class="form-control" id="pt.min" name="pt.min" value="{{view.job.personDays.minimum}}" required="required" />
+    </div>
+    <div class="form-group">
+        <label for="pt.max">{{ 'Maximum Person Days'|trans }}</label>
+        <input type="number" class="form-control" id="pt.max" name="pt.max" value="{{view.job.personDays.maximum}}" required="required" />
+    </div>
+    <div class="form-group">
+        <label for="comment">{{ 'Comment'|trans }}</label>
+        <input type="text" class="form-control" id="comment" name="comment" value="{{ view.job.comment }}" />
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="submit" class="btn btn-primary" id="_submit" name="_submit">{{ 'Store'|trans }}</button>
+        </div>
+    </div>
+</form>
+{% endblock %}

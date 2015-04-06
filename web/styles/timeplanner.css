@@ -25,6 +25,10 @@ body {
     color: #f4f4f4;
 }
 
+.table .form-control.assignment.text-muted:focus {
+    color: #777777;
+}
+
 .table .number {
     text-align: right;
 }

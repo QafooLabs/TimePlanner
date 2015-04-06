@@ -42,5 +42,5 @@ This software features the following:
 
 The software might or might not fit your usage patterns. We do not plan to
 develop this as a generic time planning software solution. You might be able to
-adapt it to your usage patterns, but it is very unlikely that we do not want to
-merge your changes.
+adapt it to your usage patterns, but it is very unlikely that we want to merge
+your changes.

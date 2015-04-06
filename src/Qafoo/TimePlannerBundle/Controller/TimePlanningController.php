@@ -77,6 +77,24 @@ class TimePlanningController extends Controller
         );
     }
 
+    public function assignInvoiceAction(Request $request, Job $job)
+    {
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
+        $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        $job->invoiceId = $request->get('invoiceId', null);
+        $jobService->store($job);
+
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.time_planning.overview',
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
+    }
+
     public function storeAction(Request $request, Job $job = null)
     {
         $year = $request->get('year', date("Y"));

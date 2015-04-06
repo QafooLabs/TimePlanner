@@ -85,7 +85,7 @@
                     {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.minimum %}
                     <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>
                     {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.maximum %}
-                    <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>
+                    <th class="number {% if value < 0 %}warning{% elseif value > 0 %}success{% endif %}">{{value}}</th>
                 {% for user in view.users %}
                     {% set value = view.availableWorkDays - view.sum.assignees[user.login].days|default(0) %}
                     <th class="number {% if value < 0 %}danger{% elseif value > 0 %}success{% endif %}">{{value}}</th>

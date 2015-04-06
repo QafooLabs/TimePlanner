@@ -6,8 +6,8 @@
     <td>{{job.customer}}</td>
     <td>{{job.project}}</td>
     <td class="number">{{job.expectedRevenue|number_format(2)}} €</td>
-    <td class="number {% if assignedDays < job.personDays.minimum %}danger{% endif %}"">{{job.personDays.minimum}}</td>
-    <td class="number {% if assignedDays < job.personDays.maximum %}warning{% endif %}">{{job.personDays.maximum}}</td>
+    <td class="number {% if assignedDays < job.personDays.minimum %}danger{% endif %}"">{{assignedDays}} / {{job.personDays.minimum}}</td>
+    <td class="number {% if assignedDays < job.personDays.maximum %}warning{% endif %}">{{assignedDays}} / {{job.personDays.maximum}}</td>
 {% for user in view.users %}
     <td>
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign", {job: job.jobId}) }}">

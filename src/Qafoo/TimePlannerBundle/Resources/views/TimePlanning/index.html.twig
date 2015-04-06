@@ -45,36 +45,7 @@
             </thead>
             <tbody>
             {% for job in view.jobs %}
-                <tr>
-                    <td>{{job.customer}}</td>
-                    <td>{{job.project}}</td>
-                    <td class="number">{{job.expectedRevenue|number_format(2)}} €</td>
-                    <td class="number">{{job.personDays.minimum}}</td>
-                    <td class="number">{{job.personDays.maximum}}</td>
-                {% for user in view.users %}
-                    <td>
-                        <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign", {job: job.jobId}) }}">
-                            <input type="hidden" name="year" value="{{view.year}}">
-                            <input type="hidden" name="month" value="{{view.month}}">
-                            <input type="text" class="form-control assignment number input-sm" name="assignees[{{user.login}}]" value="{{job.assignees[user.login].days|default(0)}}">
-                        </form>
-                    </td>
-                {% endfor %}
-                    <td>{{job.invoiceId}}</td>
-                    <td>{{job.comment}}</td>
-                    <td class="number">
-                        <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.delete", {job: job.jobId}) }}" onsubmit="return confirm('Really remove i{{job.project}} for {{job.customer}}?');">
-                            <div class="btn-group btn-group-xs" role="group" aria-label="Operations">
-                                <a class="btn btn-default" href="{{ path("qafoo.time_planner.time_planning.edit", {job: job.jobId}) }}" title="Edit">
-                                    <span class="glyphicon glyphicon-pencil" aria-label="Edit"></span>
-                                </a>
-                                <button class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove" aria-label="Remove"></span>
-                                </button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
+                {% include "QafooTimePlannerBundle:TimePlanning:tableRow.html.twig" with {job: job} %}
             {% endfor %}
                 <tr>
                     <form method="POST" class="form-inline" action="{{path("qafoo.time_planner.time_planning.create")}}">

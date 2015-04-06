@@ -21,6 +21,10 @@ body {
     height: 1.8em;
 }
 
+.table .form-control.assignment.text-muted {
+    color: #f4f4f4;
+}
+
 .table .number {
     text-align: right;
 }

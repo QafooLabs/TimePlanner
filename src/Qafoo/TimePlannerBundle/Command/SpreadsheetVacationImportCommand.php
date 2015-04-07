@@ -30,7 +30,7 @@ class SpreadsheetVacationImportCommand extends ContainerAwareCommand
             $input->getArgument('url'),
             array(
                 'Kore' => 'kore',
-                'Manuel' => 'mapi',
+                'Manuel' => 'manuel',
                 'Benjamin' => 'benjamin',
                 'Toby' => 'toby',
             )

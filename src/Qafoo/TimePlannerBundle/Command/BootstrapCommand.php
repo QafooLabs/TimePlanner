@@ -15,7 +15,7 @@ class BootstrapCommand extends ContainerAwareCommand
      *
      * @var array
      */
-    protected $defaultUsers = array('mapi', 'kore', 'toby', 'benjamin');
+    protected $defaultUsers = array('manuel', 'kore', 'toby', 'benjamin');
 
     protected function configure()
     {

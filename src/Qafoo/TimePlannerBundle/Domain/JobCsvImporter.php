@@ -50,7 +50,7 @@ class JobCsvImporter
             $job->invoiceId = $row[12];
             $job->comment = $row[13];
 
-            foreach (array('mapi', null, 'kore', 'toby', 'benjamin') as $nr => $user) {
+            foreach (array('manuel', null, 'kore', 'toby', 'benjamin') as $nr => $user) {
                 if (!($row[5 + $nr])) {
                     continue;
                 }

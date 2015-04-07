@@ -16,7 +16,7 @@
         <label for="end">{{ 'User'|trans }}</label>
         <select class="form-control" id="user" name="user">
         {% for user in view.users %}
-            <option {% if user.login == view.user.login %}selected{% endif %} value="{{user.login}}">{{user.login}}</option>
+            <option {% if user.login == view.vacation.user.login %}selected{% endif %} value="{{user.login}}">{{user.login}}</option>
         {% endfor %}
         </select>
     </div>

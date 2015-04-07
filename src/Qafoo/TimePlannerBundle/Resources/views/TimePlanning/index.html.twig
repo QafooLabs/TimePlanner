@@ -15,7 +15,7 @@
                     {% endfor %}
                     </select>
                     <select name="year" class="form-control">
-                    {% for year in range(2010, 2020) %}
+                    {% for year in range(2010, (("now"|date("Y")) + 1)) %}
                         <option {% if year == view.year %}selected{% endif %} value="{{year}}">
                             {{year}}
                         </option>
@@ -33,8 +33,8 @@
                     <th>{{"Customer"|trans()}}</th>
                     <th>{{"Project"|trans()}}</th>
                     <th>{{"Revenue"|trans()}}</th>
-                    <th>{{"Min. PT"|trans()}}</th>
-                    <th>{{"Max. PT"|trans()}}</th>
+                    <th><abbr title="{{"Minimum Person Days"|trans()}}">{{"Min"|trans()}}</abbr></th>
+                    <th><abbr title="{{"Maximum Person Days"|trans()}}">{{"Max"|trans()}}</abbr></th>
                 {% for user in view.users %}
                     <th>{{user.login}}</th>
                 {% endfor %}

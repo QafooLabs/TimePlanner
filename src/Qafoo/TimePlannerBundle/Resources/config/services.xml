@@ -33,6 +33,10 @@
             <argument>%qafoo.time_planner.expectedSickLeave%</argument>
         </service>
 
+        <service id="qafoo.time_planner.domain.job_csv_importer" class="Qafoo\TimePlannerBundle\Domain\JobCsvImporter">
+            <argument type="service" id="qafoo.time_planner.domain.job_service" />
+        </service>
+
         <service id="qafoo.time_planner.gateway.vacation" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway">
             <argument type="service" id="qafoo.time_planner.repository.vacation" />
         </service>

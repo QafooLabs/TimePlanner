@@ -11,6 +11,11 @@
     </parameters>
 
     <services>
+        <service id="qafoo.time_planner.domain.vacation_csv_importer" class="Qafoo\TimePlannerBundle\Domain\VacationCsvImporter">
+            <argument type="service" id="qafoo.time_planner.domain.vacation_service" />
+            <argument type="service" id="qafoo.user.domain.user_service" />
+        </service>
+
         <service id="qafoo.time_planner.domain.vacation_service" class="Qafoo\TimePlannerBundle\Domain\VacationService">
             <argument type="service" id="qafoo.time_planner.gateway.vacation" />
             <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
@@ -27,14 +32,14 @@
             <argument type="service" id="qafoo.time_planner.gateway.public_holiday" />
         </service>
 
+        <service id="qafoo.time_planner.domain.job_csv_importer" class="Qafoo\TimePlannerBundle\Domain\JobCsvImporter">
+            <argument type="service" id="qafoo.time_planner.domain.job_service" />
+        </service>
+
         <service id="qafoo.time_planner.domain.job_service" class="Qafoo\TimePlannerBundle\Domain\JobService">
             <argument type="service" id="qafoo.time_planner.gateway.job" />
             <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
             <argument>%qafoo.time_planner.expectedSickLeave%</argument>
-        </service>
-
-        <service id="qafoo.time_planner.domain.job_csv_importer" class="Qafoo\TimePlannerBundle\Domain\JobCsvImporter">
-            <argument type="service" id="qafoo.time_planner.domain.job_service" />
         </service>
 
         <service id="qafoo.time_planner.gateway.vacation" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway">

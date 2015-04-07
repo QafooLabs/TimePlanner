@@ -6,6 +6,8 @@ use Doctrine\ODM\CouchDB\DocumentRepository;
 use Doctrine\CouchDB\CouchDBClient;
 
 use Qafoo\TimePlannerBundle\Domain\Vacation;
+use Qafoo\TimePlannerBundle\Domain\DaySet;
+use Qafoo\TimePlannerBundle\Domain\Day;
 
 class VacationGateway
 {
@@ -40,32 +42,12 @@ class VacationGateway
      * @param string $user
      * @param int $year
      * @param int $year
-     * @return \DateTimeImmutable[]
+     * @return DaySet
      */
     public function getVacationDays($user, $year, $month = null)
     {
-        $parameters = array($user, (int) $year);
-        if ($month !== null) {
-            $parameters[] = (int) $month;
-        }
-
-        $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'days');
-        $result = $query
-            ->setStartKey($parameters)
-            ->setEndKey(array_merge($parameters, array(CouchDBClient::COLLATION_END)))
-            ->setIncludeDocs(false)
-            ->setReduce(false)
-            ->execute();
-
-        $days = array();
-        foreach ($result as $row) {
-            $days[] = new \DateTimeImmutable(
-                "{$row['key'][1]}-{$row['key'][2]}-{$row['key'][3]} 12:00",
-                new \DateTimeZone("UTC")
-            );
-        }
-
-        return $days;
+        $days = $this->getVacationDaysPerUser($year, $month);
+        return isset($days[$user]) ? $days[$user] : new DaySet();
     }
 
     /**
@@ -88,6 +70,41 @@ class VacationGateway
             },
             $result->toArray()
         );
+    }
+
+    /**
+     * Get vacation days per user
+     *
+     * @param int $year
+     * @param int $month
+     * @return Day[][]
+     */
+    public function getVacationDaysPerUser($year, $month = null)
+    {
+        $parameters = array((int) $year);
+        if ($month !== null) {
+            $parameters[] = (int) $month;
+        }
+
+        $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'days');
+        $result = $query
+            ->setStartKey($parameters)
+            ->setEndKey(array_merge($parameters, array(CouchDBClient::COLLATION_END)))
+            ->setIncludeDocs(false)
+            ->setReduce(false)
+            ->execute();
+
+        $days = array();
+        foreach ($result as $row) {
+            list ($year, $month, $day, $user) = $row['key'];
+            if (!isset($days[$user])) {
+                $days[$user] = new DaySet();
+            }
+
+            $days[$user][] = new Day("$year-$month-$day");
+        }
+
+        return $days;
     }
 
     /**

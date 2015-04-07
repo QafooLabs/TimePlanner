@@ -21,6 +21,7 @@ class TimePlanningController extends Controller
         $month = $request->get('month', date("n"));
 
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
         $userService = $this->get('qafoo.user.domain.user_service');
 
         return new Overview(
@@ -29,6 +30,7 @@ class TimePlanningController extends Controller
                 'month' => $month,
                 'users' => $userService->getAllUsers(),
                 'availableWorkDays' => $jobService->getAvailableWorkDays($year, $month),
+                'vacationDays' => $vacationService->getVacationDaysPerUser($year, $month),
                 'jobs' => $jobs = $jobService->getJobs($year, $month),
                 'sum' => $jobService->calculateSum($jobs),
             )

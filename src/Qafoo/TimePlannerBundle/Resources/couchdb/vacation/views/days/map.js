@@ -10,7 +10,7 @@ function (doc) {
         end = parseDate(doc.end);
 
     while (start <= end) {
-        emit([doc.user, start.getFullYear(), start.getMonth() + 1, start.getDate()], 1);
+        emit([start.getFullYear(), start.getMonth() + 1, start.getDate(), doc.user], 1);
         start.setDate(start.getDate() + 1);
     }
 }

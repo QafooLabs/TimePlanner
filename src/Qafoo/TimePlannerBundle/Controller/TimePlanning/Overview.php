@@ -35,6 +35,13 @@ class Overview extends DataObject
     public $availableWorkDays;
 
     /**
+     * Vacation days per user
+     *
+     * @var DaySet[]
+     */
+    public $vacationDays = array();
+
+    /**
      * Jobs
      *
      * @var Job[]

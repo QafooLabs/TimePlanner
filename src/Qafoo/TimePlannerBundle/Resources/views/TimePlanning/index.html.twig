@@ -79,6 +79,15 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td colspan="5">{{"Vacations"|trans()}}</td>
+                {% for user in view.users %}
+                    <td class="number">{{view.vacationDays[user.login]|length()}}</td>
+                {% endfor %}
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <th colspan="2">Result</th>
                     {% set value = (view.sum.expectedRevenue - 25700) %}
                     <th class="number {% if value < 0 %}text-danger danger{% elseif value > 0 %}text-success{% endif %}">{{value|number_format(2)}} €</th>
@@ -87,7 +96,7 @@
                     {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.maximum %}
                     <th class="number {% if value < 0 %}text-danger warning{% endif %}">{{value}}</th>
                 {% for user in view.users %}
-                    {% set value = view.availableWorkDays - view.sum.assignees[user.login].days|default(0) %}
+                    {% set value = view.availableWorkDays - view.sum.assignees[user.login].days - view.vacationDays[user.login]|length()|default(0) %}
                     <th class="number {% if value < 0 %}text-danger danger{% endif %}">{{value}}</th>
                 {% endfor %}
                     <th></th>

@@ -36,14 +36,7 @@ class VacationService
      */
     public function getVacationDays(User $user, $year)
     {
-        $vacationDays = new DaySet(
-            array_map(
-                function (\DateTimeInterface $date) {
-                    return Day::fromDateTime($date);
-                },
-                $this->vacationGateway->getVacationDays($user->login, $year)
-            )
-        );
+        $vacationDays = $this->vacationGateway->getVacationDays($user->login, $year);
 
         $vacationDays = $vacationDays->diff(
             DaySet::createFromRange(
@@ -79,6 +72,18 @@ class VacationService
     public function getVacations($year)
     {
         return $this->vacationGateway->getVacations($year);
+    }
+
+    /**
+     * Get vacation days per user
+     *
+     * @param int $year
+     * @param int $month
+     * @return DaySet[]
+     */
+    public function getVacationDaysPerUser($year, $month = null)
+    {
+        return $this->vacationGateway->getVacationDaysPerUser($year, $month);
     }
 
     /**

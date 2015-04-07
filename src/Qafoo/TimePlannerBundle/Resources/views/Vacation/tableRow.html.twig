@@ -1,6 +1,11 @@
 <tr>
     <td>
-        <strong>{{vacation.start|date("d. F")}} to {{vacation.end|date("d. F")}}</strong>
+        <strong>
+            {{vacation.start|date("d. F")}}
+            {% if vacation.end != vacation.start %}
+                to {{vacation.end|date("d. F")}}
+            {% endif %}
+        </strong>
     </td>
     <td>{{vacation.user.username}}</td>
     <td><p class="comment">{{vacation.comment}}</p></td>

@@ -1,11 +1,10 @@
-{% extends "FOSUserBundle::layout.html.twig" %}
+{% extends "FOSUserBundle::profile.html.twig" %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block navigation %}
-{% endblock %}
+{% block profile_content %}
+<h2>Add User</h2>
 
-{% block fos_user_content %}
 {% if error %}
     <div class="alert alert-warning">{{ error|trans }}</div>
 {% endif %}
@@ -34,8 +33,8 @@
 
     <div class="row">
         <div class="col-md-6 text-center">
-            <button type="submit" disabled class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
+            <button type="submit" class="btn btn-primary">{{ 'registration.submit'|trans }}</button>
         </div>
     </div>
 </form>
-{% endblock fos_user_content %}
+{% endblock profile_content %}

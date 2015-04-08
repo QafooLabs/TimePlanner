@@ -19,6 +19,10 @@
                 href="{{ path("fos_user_change_password") }}">
                 <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Change Password
             </a>
+            <a class="list-group-item {% if "fos_user_registration_" in app.request.attributes.get('_route') %}active{% endif %}"
+                href="{{ path("fos_user_registration_register") }}">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add User
+            </a>
         </div>
     </div>
     <div class="col-md-9">

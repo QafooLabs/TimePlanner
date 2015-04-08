@@ -1,0 +1,26 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></h2>
+        <div class="list-group">
+            <a class="list-group-item {% if "fos_user_profile_edit" in app.request.attributes.get('_route') %}active{% endif %}"
+                href="{{ path("fos_user_profile_edit") }}">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
+            </a>
+            <a class="list-group-item {% if "fos_user_change_password" in app.request.attributes.get('_route') %}active{% endif %}"
+                href="{{ path("fos_user_change_password") }}">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Change Password
+            </a>
+        </div>
+    </div>
+    <div class="col-md-9">
+    {% block profile_content %}
+        Profile Content
+    {% endblock %}
+    </div>
+</div>
+{% endblock fos_user_content %}

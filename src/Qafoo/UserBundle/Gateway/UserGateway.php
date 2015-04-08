@@ -87,7 +87,12 @@ class UserGateway implements UserProviderInterface
         }
 
         if (null === $reloadedUser = $this->loadUserByUsername($user->getUsername())) {
-            throw new UsernameNotFoundException(sprintf('User with login "%d" could not be reloaded.', $user->getUsername()));
+            throw new UsernameNotFoundException(
+                sprintf(
+                    'User with login "%d" could not be reloaded.',
+                    $user->getUsername()
+                )
+            );
         }
 
         return $reloadedUser;

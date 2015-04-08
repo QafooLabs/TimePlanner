@@ -15,7 +15,12 @@ To run the project just execute the following command:
     ant serve
 
 The open the URL echoed on the command line, and you should be fine. All
-required project initializations should already be included.
+required project initializations should already be included. The prerequisites
+for this projects are:
+
+* PHP >= 5.5
+
+* A running CouchDB server
 
 ## Testing
 

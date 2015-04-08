@@ -28,7 +28,6 @@ security:
     access_control:
         - { path: ^/auth$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        # - { path: ^/register$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/request$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }

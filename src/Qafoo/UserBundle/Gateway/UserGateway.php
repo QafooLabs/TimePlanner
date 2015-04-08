@@ -5,10 +5,13 @@ namespace Qafoo\UserBundle\Gateway;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ODM\CouchDB\DocumentRepository;
 
 class UserGateway implements UserProviderInterface
 {
+    const USER_CLASS = 'Qafoo\\UserBundle\\Domain\\FOSUserHelper';
+
     /**
      * Document manager
      *
@@ -73,7 +76,21 @@ class UserGateway implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        return $user;
+        if (!$this->supportsClass(get_class($user))) {
+            throw new UnsupportedUserException(
+                sprintf(
+                    'Expected an instance of %s, but got "%s".',
+                    self::USER_CLASS,
+                    get_class($user)
+                )
+            );
+        }
+
+        if (null === $reloadedUser = $this->loadUserByUsername($user->getUsername())) {
+            throw new UsernameNotFoundException(sprintf('User with login "%d" could not be reloaded.', $user->getUsername()));
+        }
+
+        return $reloadedUser;
     }
 
     /**
@@ -85,7 +102,7 @@ class UserGateway implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return '\\Qafoo\\UserBundle\\Domain\\FOSUserHelper' === $class ||
+        return self::USER_CLASS === $class ||
             is_subclass_of($class, self::USER_CLASS);
     }
 }

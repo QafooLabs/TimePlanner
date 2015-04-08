@@ -63,8 +63,11 @@
                         <li class="dropdown {% if "fos_user_" in app.request.attributes.get('_route') %}active{% endif %}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path("fos_user_profile_edit") }}">
+                                <li><a href="{{ path("fos_user_profile_show") }}">
                                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
+                                </a></li>
+                                <li><a href="{{ path("fos_user_profile_edit") }}">
+                                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Profile
                                 </a></li>
                                 <li><a href="{{ path("fos_user_change_password") }}">
                                     <span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Change Password

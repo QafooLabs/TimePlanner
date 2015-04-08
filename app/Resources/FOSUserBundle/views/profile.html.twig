@@ -7,9 +7,13 @@
     <div class="col-md-3">
         <h2 class="text-center"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></h2>
         <div class="list-group">
+            <a class="list-group-item {% if "fos_user_profile_show" in app.request.attributes.get('_route') %}active{% endif %}"
+                href="{{ path("fos_user_profile_show") }}">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
+            </a>
             <a class="list-group-item {% if "fos_user_profile_edit" in app.request.attributes.get('_route') %}active{% endif %}"
                 href="{{ path("fos_user_profile_edit") }}">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Profile
             </a>
             <a class="list-group-item {% if "fos_user_change_password" in app.request.attributes.get('_route') %}active{% endif %}"
                 href="{{ path("fos_user_change_password") }}">

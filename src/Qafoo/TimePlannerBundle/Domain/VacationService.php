@@ -36,21 +36,7 @@ class VacationService
      */
     public function getVacationDays(User $user, $year)
     {
-        $vacationDays = $this->vacationGateway->getVacationDays($user->login, $year);
-
-        $vacationDays = $vacationDays->diff(
-            DaySet::createFromRange(
-                new Day("1.1.$year"),
-                new Day("31.12.$year")
-            )->filter(
-                function (Day $day) {
-                    return $day->isWeekend();
-                }
-            )
-        );
-        $vacationDays = $vacationDays->diff($this->publicHolidayService->getHolidayDays($year));
-
-        return $vacationDays;
+        return $this->getVacationDaysPerUser($year)[$user->login];
     }
 
     /**
@@ -83,7 +69,24 @@ class VacationService
      */
     public function getVacationDaysPerUser($year, $month = null)
     {
-        return $this->vacationGateway->getVacationDaysPerUser($year, $month);
+        $userVacations = $this->vacationGateway->getVacationDaysPerUser($year, $month);
+
+        foreach ($userVacations as $user => $vacations) {
+            $vacations = $vacations->diff(
+                DaySet::createFromRange(
+                    new Day("1.1.$year"),
+                    new Day("31.12.$year")
+                )->filter(
+                    function (Day $day) {
+                        return $day->isWeekend();
+                    }
+                )
+            );
+
+            $userVacations[$user] = $vacations->diff($this->publicHolidayService->getHolidayDays($year, $month));
+        }
+
+        return $userVacations;
     }
 
     /**

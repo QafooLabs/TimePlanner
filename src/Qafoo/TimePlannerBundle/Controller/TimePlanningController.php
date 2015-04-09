@@ -46,12 +46,21 @@ class TimePlanningController extends Controller
         );
     }
 
-    public function removeAction(Job $job)
+    public function removeAction(Request $request, Job $job)
     {
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $jobService->remove($job);
 
-        return new RedirectRouteResponse('qafoo.time_planner.time_planning.overview');
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.time_planning.overview',
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
     }
 
     public function assignAction(Request $request, Job $job)

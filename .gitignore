@@ -4,3 +4,4 @@
 /app/cache/
 /app/logs/
 /web/bundles
+/build.properties.local

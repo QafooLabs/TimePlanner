@@ -72,7 +72,9 @@
                     <td class="number">{{view.sum.personDays.minimum}}</td>
                     <td class="number">{{view.sum.personDays.maximum}}</td>
                 {% for user in view.users %}
-                    <td class="number">{{view.sum.assignees[user.login].days|default(0)}}</td>
+                    <td class="number {% if user.login == view.user.login %}active{% endif %}">
+                        {{view.sum.assignees[user.login].days|default(0)}}
+                    </td>
                 {% endfor %}
                     <td></td>
                     <td></td>
@@ -87,7 +89,9 @@
                     <td class="number">{{vacationSum}}</td>
                     <td class="number">{{vacationSum}}</td>
                 {% for user in view.users %}
-                    <td class="number">{{view.vacationDays[user.login]|length()}}</td>
+                    <td class="number {% if user.login == view.user.login %}active{% endif %}">
+                        {{view.vacationDays[user.login]|length()}}
+                    </td>
                 {% endfor %}
                     <td></td>
                     <td></td>
@@ -103,7 +107,10 @@
                     <th class="number {% if value < 0 %}text-danger warning{% endif %}">{{value}}</th>
                 {% for user in view.users %}
                     {% set value = view.availableWorkDays - view.sum.assignees[user.login].days - view.vacationDays[user.login]|length()|default(0) %}
-                    <th class="number {% if value < 0 %}text-danger danger{% endif %}">{{value}}</th>
+                    <th class="number
+                        {% if value < 0 %}text-danger danger{% elseif user.login == view.user.login %}active{% endif %}">
+                        {{value}}
+                    </th>
                 {% endfor %}
                     <th></th>
                     <th></th>

@@ -15,7 +15,7 @@ use Qafoo\TimePlannerBundle\Controller\TimePlanning\Edit;
 
 class TimePlanningController extends Controller
 {
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, TokenContext $context)
     {
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
@@ -28,6 +28,7 @@ class TimePlanningController extends Controller
             array(
                 'year' => $year,
                 'month' => $month,
+                'user' => $context->getCurrentUser(),
                 'users' => $userService->getAllUsers(),
                 'availableWorkDays' => $jobService->getAvailableWorkDays($year, $month),
                 'vacationDays' => $vacationService->getVacationDaysPerUser($year, $month),

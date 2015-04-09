@@ -21,6 +21,13 @@ class Overview extends DataObject
     public $month;
 
     /**
+     * User
+     *
+     * @var User
+     */
+    public $user;
+
+    /**
      * Users
      *
      * @var User

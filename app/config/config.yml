@@ -1,6 +1,5 @@
 # app/config/config.yml
 imports:
-    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: doctrine.yml }
     - { resource: timeplanner.yml }
@@ -24,6 +23,13 @@ sensio_framework_extra:
     request:
         converters: true
         auto_convert: true
+
+swiftmailer:
+    transport: "%mailer.transport%"
+    host:      "%mailer.host%"
+    username:  "%mailer.user%"
+    password:  "%mailer.password%"
+
 
 monolog:
     handlers:

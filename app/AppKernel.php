@@ -83,6 +83,7 @@ class AppKernel extends Kernel
         self::$configuration = array(
             'env' => 'prod',
             'debug' => false,
+            'monolog_action_level' => 'error',
         );
 
         $baseDir = __DIR__ . '/../';

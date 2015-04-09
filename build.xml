@@ -46,6 +46,17 @@
         </exec>
     </target>
 
+    <target name="deploy" depends="test" extensionOf="-deploy:main~hook">
+        <!-- Not using sshexec, because it does not know / handle local SSH
+             configuration, and we probably cannot and do not want to duplicate
+             tunnel configuration etc.
+        -->
+        <exec executable="ssh">
+            <arg value="${deploy.host}" />
+            <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; ant" />
+        </exec>
+    </target>
+
     <!--
         Task group, which installs the build-commons, if they do not exist yet.
     -->

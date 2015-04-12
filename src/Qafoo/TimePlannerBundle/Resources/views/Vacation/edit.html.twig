@@ -16,7 +16,9 @@
         <label for="end">{{ 'User'|trans }}</label>
         <select class="form-control" id="user" name="user">
         {% for user in view.users %}
-            <option {% if user.login == view.vacation.user.login|default(view.user.login) %}selected{% endif %} value="{{user.login}}">{{user.login}}</option>
+            <option {% if user.login == view.vacation.user.login|default(view.user.login) %}selected{% endif %} value="{{user.login}}">
+                {% include "QafooUserBundle:User:normal.html.twig" with {user: user} %}
+            </option>
         {% endfor %}
         </select>
     </div>

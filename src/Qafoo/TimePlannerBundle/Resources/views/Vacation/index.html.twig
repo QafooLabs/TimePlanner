@@ -3,7 +3,7 @@
 {% block content %}
 <div class="alert alert-info">
     <p>Hello {% include "QafooUserBundle:User:normal.html.twig" with {user: view.user} %}</p>
-    <p>You have <strong>{{view.remainingVacation}} days</strong> of vacation left in year {{view.year}}.</p>
+    <p>You have <strong>{{view.remainingVacation}} days</strong> of vacation left in {{view.year}}.</p>
 </div>
 <div class="row">
     <div class="col-md-6">

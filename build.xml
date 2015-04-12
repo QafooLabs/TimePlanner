@@ -47,6 +47,12 @@
     </target>
 
     <target name="deploy" depends="test" extensionOf="-deploy:main~hook">
+        <exec executable="git">
+            <arg value="push" />
+            <arg value="origin" />
+            <arg value="master" />
+        </exec>
+
         <!-- Not using sshexec, because it does not know / handle local SSH
              configuration, and we probably cannot and do not want to duplicate
              tunnel configuration etc.

@@ -4,6 +4,7 @@ namespace Qafoo\TimePlannerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use QafooLabs\MVC\TokenContext;
 use QafooLabs\MVC\RedirectRouteResponse;
@@ -30,6 +31,32 @@ class VacationController extends Controller
                 'remainingVacation' => $availableVacation->getAvailableVacationDays($currentUser->login, $year) -
                     count($vacationService->getVacationDays($currentUser, $year)),
                 'vacations' => $vacationService->getVacations($year),
+            )
+        );
+    }
+
+    public function listAction()
+    {
+        $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
+        $vacations = $vacationService->getVacations();
+        $calendar = new \Sabre\VObject\Component\VCalendar();
+        foreach ($vacations as $vacation) {
+            $calendar->add(
+                'VEVENT',
+                array(
+                    'SUMMARY' => $vacation->user->getUsername() .
+                        ($vacation->comment ? ' (' . $vacation->comment . ')' : ''),
+                    'DTSTART' => $vacation->start,
+                    'DTEND' => $vacation->end,
+                )
+            );
+        }
+
+        return new Response(
+            $calendar->serialize(),
+            200,
+            array(
+                'Content-Type: text/calendar'
             )
         );
     }

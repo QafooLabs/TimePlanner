@@ -55,7 +55,7 @@ class VacationService
      * @param int $year
      * @return Vacation[]
      */
-    public function getVacations($year)
+    public function getVacations($year = null)
     {
         return $this->vacationGateway->getVacations($year);
     }

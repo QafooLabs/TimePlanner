@@ -113,12 +113,17 @@ class VacationGateway
      * @param int $year
      * @return Vacation[]
      */
-    public function getVacations($year)
+    public function getVacations($year = null)
     {
+        $parameters = array();
+        if ($year !== null) {
+            $parameters[] = (int) $year;
+        }
+
         $query = $this->documentRepository->getDocumentManager()->createQuery('vacation', 'index');
         $result = $query
-            ->setStartKey(array((int) $year))
-            ->setEndKey(array((int) $year, CouchDBClient::COLLATION_END))
+            ->setStartKey($parameters)
+            ->setEndKey(array_merge($parameters, array(CouchDBClient::COLLATION_END)))
             ->setIncludeDocs(true)
             ->setReduce(false)
             ->onlyDocs(true)

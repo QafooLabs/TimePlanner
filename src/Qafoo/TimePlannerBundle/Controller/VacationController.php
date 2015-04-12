@@ -56,7 +56,7 @@ class VacationController extends Controller
             $calendar->serialize(),
             200,
             array(
-                'Content-Type: text/calendar'
+                'Content-Type' => 'text/calendar',
             )
         );
     }

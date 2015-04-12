@@ -1,4 +1,4 @@
-<tr {% if vacation.user.login == view.user.login %}class="active"{% endif %}>
+<tr {% if vacation.user.login == view.user.login %}class="info"{% endif %}>
     <td>
         <strong>
             {{vacation.start|date("d. F")}}
@@ -7,7 +7,7 @@
             {% endif %}
         </strong>
     </td>
-    <td>{{vacation.user.username}}</td>
+    <td>{% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.user} %}</td>
     <td><p class="comment">{{vacation.comment}}</p></td>
     <td class="text-right">
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.vacation.delete", {vacation: vacation.vacationId}) }}" onsubmit="return confirm('Really remove vacation?');">

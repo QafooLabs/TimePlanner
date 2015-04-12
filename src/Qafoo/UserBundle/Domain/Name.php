@@ -47,18 +47,31 @@ class Name extends DataObject
     }
 
     /**
+     * Get initials
+     *
+     * @return string
+     */
+    public function getInitials()
+    {
+        return iconv_substr($this->firstName, 0, 1, 'UTF-8') .
+            iconv_substr($this->lastName, 0, 1, 'UTF-8');
+    }
+
+    /**
      * Convert to string
      *
      * @return string
      */
     public function __toString()
     {
-        return implode(
-            ' ',
-            array_merge(
-                array($this->firstName),
-                $this->intermediateNames,
-                array($this->lastName)
+        return trim(
+            implode(
+                ' ',
+                array_merge(
+                    array($this->firstName),
+                    $this->intermediateNames,
+                    array($this->lastName)
+                )
             )
         );
     }

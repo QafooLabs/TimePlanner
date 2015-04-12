@@ -36,7 +36,7 @@
                     <th><abbr title="{{"Minimum Person Days"|trans()}}">{{"Min"|trans()}}</abbr></th>
                     <th><abbr title="{{"Maximum Person Days"|trans()}}">{{"Max"|trans()}}</abbr></th>
                 {% for user in view.users %}
-                    <th>{{user.login}}</th>
+                    <th>{% include "QafooUserBundle:User:small.html.twig" with {user: user} %}</th>
                 {% endfor %}
                     <th>{{"Invoice"|trans()}}</th>
                     <th>{{"Comment"|trans()}}</th>

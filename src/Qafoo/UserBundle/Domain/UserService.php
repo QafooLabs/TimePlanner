@@ -8,6 +8,15 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Qafoo\UserBundle\Gateway\UserGateway;
 
+/**
+ * Class: UserService
+ *
+ * Class to map the excessive number of methods from the UserManagerInterface
+ * to our cleaner domain object. The itnerface enables us to replace the
+ * internal UserManager, which does not find users by login or email.
+ *
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ */
 class UserService implements UserManagerInterface
 {
     /**

@@ -87,7 +87,7 @@ class AppKernel extends Kernel
         );
 
         $baseDir = __DIR__ . '/../';
-        foreach (self::getAdditionalConfigFiles() as $file) {
+        foreach (static::getAdditionalConfigFiles() as $file) {
             if (file_exists($fileName = $baseDir . $file)) {
                 self::$configuration = array_merge(self::$configuration, parse_ini_file($fileName));
             }

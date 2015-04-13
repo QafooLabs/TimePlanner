@@ -40,4 +40,11 @@ class Vacation extends DataObject
      * @var string
      */
     public $comment;
+
+    /**
+     * Change meta data
+     *
+     * @var MetaData
+     */
+    public $metaData;
 }

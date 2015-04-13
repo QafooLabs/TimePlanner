@@ -11,6 +11,7 @@ use QafooLabs\MVC\RedirectRouteResponse;
 
 use Qafoo\TimePlannerBundle\Domain\VacationService;
 use Qafoo\TimePlannerBundle\Domain\Vacation;
+use Qafoo\TimePlannerBundle\Domain\MetaData;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Overview;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
 
@@ -92,6 +93,7 @@ class VacationController extends Controller
         $vacation->end = new \DateTime($request->get('end'));
         $vacation->user = $userService->getUserByLogin($request->get('user'));
         $vacation->comment = $request->get('comment', null);
+        $vacation->metaData = new MetaData($context->getCurrentUser());
 
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
         $vacationService->store($vacation);

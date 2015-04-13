@@ -71,6 +71,13 @@ class Job extends DataObject
      */
     public $comment;
 
+    /**
+     * Change meta data
+     *
+     * @var MetaData
+     */
+    public $metaData;
+
     public function __construct(array $values = array())
     {
         parent::__construct($values);

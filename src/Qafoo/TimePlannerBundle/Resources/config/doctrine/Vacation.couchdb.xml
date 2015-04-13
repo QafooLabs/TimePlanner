@@ -7,5 +7,6 @@
         <field name="end" type="datetime" />
         <reference-one field="user" target-document="Qafoo\UserBundle\Domain\FOSUserHelper" />
         <field name="comment" type="string" />
+        <embed-one field="metaData" target-document="Qafoo\TimePlannerBundle\Domain\MetaData"/>
     </document>
 </doctrine-mapping>

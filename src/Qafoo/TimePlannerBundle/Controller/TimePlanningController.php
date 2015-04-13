@@ -10,6 +10,7 @@ use QafooLabs\MVC\RedirectRouteResponse;
 
 use Qafoo\TimePlannerBundle\Domain\JobService;
 use Qafoo\TimePlannerBundle\Domain\Job;
+use Qafoo\TimePlannerBundle\Domain\MetaData;
 use Qafoo\TimePlannerBundle\Controller\TimePlanning\Overview;
 use Qafoo\TimePlannerBundle\Controller\TimePlanning\Edit;
 
@@ -107,7 +108,7 @@ class TimePlanningController extends Controller
         );
     }
 
-    public function storeAction(Request $request, Job $job = null)
+    public function storeAction(Request $request, TokenContext $context, Job $job = null)
     {
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
@@ -122,6 +123,7 @@ class TimePlanningController extends Controller
         );
         $job->expectedRevenue = $request->get('revenue');
         $job->comment = $request->get('comment');
+        $job->metaData = new MetaData($context->getCurrentUser());
 
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $jobService->store($job);

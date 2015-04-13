@@ -11,5 +11,6 @@
         <embed-many field="assignees" target-document="Qafoo\TimePlannerBundle\Domain\Job\Assignment"/>
         <field name="invoiceId" type="string" />
         <field name="comment" type="string" />
+        <embed-one field="metaData" target-document="Qafoo\TimePlannerBundle\Domain\MetaData"/>
     </document>
 </doctrine-mapping>

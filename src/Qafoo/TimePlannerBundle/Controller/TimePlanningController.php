@@ -66,7 +66,7 @@ class TimePlanningController extends Controller
         );
     }
 
-    public function assignAction(Request $request, Job $job)
+    public function assignAction(Request $request, TokenContext $context, Job $job)
     {
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
@@ -80,6 +80,7 @@ class TimePlanningController extends Controller
             );
         }
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        $job->metaData = new MetaData($context->getCurrentUser());
         $jobService->store($job);
 
         return new RedirectRouteResponse(
@@ -91,13 +92,14 @@ class TimePlanningController extends Controller
         );
     }
 
-    public function assignInvoiceAction(Request $request, Job $job)
+    public function assignInvoiceAction(Request $request, TokenContext $context, Job $job)
     {
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
 
         $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $job->invoiceId = $request->get('invoiceId', null);
+        $job->metaData = new MetaData($context->getCurrentUser());
         $jobService->store($job);
 
         return new RedirectRouteResponse(

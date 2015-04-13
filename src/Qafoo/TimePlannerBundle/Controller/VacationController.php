@@ -46,8 +46,8 @@ class VacationController extends Controller
                 array(
                     'SUMMARY' => 'Vacation: ' . $vacation->user->getUsername() .
                         ($vacation->comment ? ' (' . $vacation->comment . ')' : ''),
-                    'DTSTART' => $vacation->start->setTimezone(new \DateTimeZone('UTC'))->modify('today'),
-                    'DTEND' => $vacation->end->setTimezone(new \DateTimeZone('UTC'))->modify('tomorrow'),
+                    'DTSTART' => $vacation->start->modify('today'),
+                    'DTEND' => $vacation->end->modify('tomorrow'),
                 )
             );
         }

@@ -39,6 +39,14 @@ class NameTest extends \PHPUnit_Framework_TestCase
         $this->assertSame("Nordmann", $name->lastName);
     }
 
+    /**
+     * @depends testCreateFromCommonName
+     */
+    public function testGetInitials(Name $name)
+    {
+        $this->assertSame("KN", $name->getInitials());
+    }
+
     public function testCreateFromNameWithMiddleName()
     {
         $name = new Name("Kore Dirk Nordmann");
@@ -69,5 +77,13 @@ class NameTest extends \PHPUnit_Framework_TestCase
     public function testParseLastNameFromMiddleName(Name $name)
     {
         $this->assertSame("Nordmann", $name->lastName);
+    }
+
+    /**
+     * @depends testCreateFromNameWithMiddleName
+     */
+    public function testGetInitialsWithMiddleName(Name $name)
+    {
+        $this->assertSame("KN", $name->getInitials());
     }
 }

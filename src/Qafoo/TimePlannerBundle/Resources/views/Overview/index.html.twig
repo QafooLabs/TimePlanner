@@ -1,0 +1,43 @@
+{% extends 'QafooTimePlannerBundle::layout.html.twig' %}
+
+{% block content %}
+{% include "QafooTimePlannerBundle:Vacation:remaining.html.twig" with {user: view.user, year: "now"|date("Y"), remaining: view.remainingVacation} %}
+<h2>Last Edits</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h3>Time Planning</h3>
+        <ul class="list-unstyled">
+        {% for job in view.jobs %}
+            <li>
+                <p>
+                    {{job.month|date("F, Y")}} –
+                    <a href="{{ path("qafoo.time_planner.time_planning.overview", {year: job.month|date("Y"), month: job.month|date("n"), highlight: job.jobId}) }}">
+                        {{job.customer}}: {{job.project}}
+                    </a>
+                </p>
+                <p><em>Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: job.metaData.author} %} at {{job.metaData.changed|date("j. F Y – H:i")}}</em></p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h3>Vacations</h3>
+        <ul class="list-unstyled">
+        {% for vacation in view.vacations %}
+            <li>
+                <p>
+                    <a href="{{ path("qafoo.time_planner.vacation.overview", {year: vacation.end|date("Y"), highlight: vacation.vacationId}) }}">
+                        {{vacation.start|date("d. F")}}
+                        {% if vacation.end != vacation.start %}
+                            to {{vacation.end|date("d. F")}}
+                        {% endif %}
+                    </a>
+                    by {% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.user} %}
+                </p>
+                <p><em>Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.metaData.author} %} at {{vacation.metaData.changed|date("j. F Y – H:i")}}</em></p>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

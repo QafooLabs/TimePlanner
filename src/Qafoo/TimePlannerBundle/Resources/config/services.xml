@@ -42,6 +42,10 @@
             <argument>%qafoo.time_planner.expectedSickLeave%</argument>
         </service>
 
+        <service id="qafoo.time_planner.domain.meta_data_service" class="Qafoo\TimePlannerBundle\Domain\MetaDataService">
+            <argument type="service" id="qafoo.time_planner.gateway.meta_data" />
+        </service>
+
         <service id="qafoo.time_planner.gateway.vacation" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway">
             <argument type="service" id="qafoo.time_planner.repository.vacation" />
         </service>
@@ -52,6 +56,10 @@
 
         <service id="qafoo.time_planner.gateway.job" class="Qafoo\TimePlannerBundle\Gateway\JobGateway">
             <argument type="service" id="qafoo.time_planner.repository.job" />
+        </service>
+
+        <service id="qafoo.time_planner.gateway.meta_data" class="Qafoo\TimePlannerBundle\Gateway\MetaDataGateway">
+            <argument type="service" id="qafoo.time_planner.repository.meta_data" />
         </service>
 
         <service id="qafoo.time_planner.gateway.available_vacation" class="Qafoo\TimePlannerBundle\Gateway\AvailableVacationGateway">
@@ -78,6 +86,13 @@
                  factory-service="doctrine_couchdb.odm.document_manager"
                  factory-method="getRepository">
             <argument>Qafoo\TimePlannerBundle\Domain\Job</argument>
+        </service>
+
+        <service id="qafoo.time_planner.repository.meta_data"
+                 class="Doctrine\ODM\CouchDB\DocumentRepository"
+                 factory-service="doctrine_couchdb.odm.document_manager"
+                 factory-method="getRepository">
+            <argument>Qafoo\TimePlannerBundle\Domain\MetaData</argument>
         </service>
 
         <service id="qafoo.time_planner.parameter_converter.vacation" class="Qafoo\TimePlannerBundle\Controller\Vacation\ParamConverter">

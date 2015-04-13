@@ -10,13 +10,11 @@
 
 {% if invalid_username is defined %}
 <div class="alert alert-danger">
-    <strong>Error</strong> {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
+    {{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}
 </div>
 {% endif %}
 
 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
     <div class="form-group">
         <label for="username">{{ 'resetting.request.username'|trans }}</label>
         <input class="form-control" id="username" name="username" required="required" type="text" />

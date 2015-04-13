@@ -4,6 +4,7 @@
         <field name="password" type="string" />
         <field name="salt" type="string" />
         <field name="confirmationToken" type="string" />
+        <field name="requestedAt" type="datetime" />
         <field name="isEnabled" type="boolean" />
         <field name="isLocked" type="boolean" />
         <field name="lastLogin" type="datetime" />

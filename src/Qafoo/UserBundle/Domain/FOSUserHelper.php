@@ -305,7 +305,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function setPasswordRequestedAt(\DateTime $date = null)
     {
-        // Ignore
+        $this->auth->requestedAt = $date;
         return $this;
     }
 
@@ -318,7 +318,8 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function isPasswordRequestNonExpired($ttl)
     {
-        return false;
+        return $this->auth->requestedAt instanceof \DateTimeInterface &&
+            $this->auth->requestedAt->getTimestamp() + $ttl > time();
     }
 
     /**

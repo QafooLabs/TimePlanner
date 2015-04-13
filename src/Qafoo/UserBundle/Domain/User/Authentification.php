@@ -28,6 +28,13 @@ class Authentification extends DataObject
     public $confirmationToken;
 
     /**
+     * Password requested at
+     *
+     * @var \DateTime
+     */
+    public $requestedAt;
+
+    /**
      * Is enabled
      *
      * @var bool

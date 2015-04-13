@@ -318,7 +318,7 @@ class FOSUserHelper extends User implements UserInterface
      */
     public function isPasswordRequestNonExpired($ttl)
     {
-        return true;
+        return false;
     }
 
     /**

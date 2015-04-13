@@ -4,16 +4,29 @@ namespace Qafoo;
 
 abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
-    private $container;
+    private static $container;
 
-    protected function getContainer()
+    protected static function getContainer()
     {
-        if (!$this->container) {
-            $this->kernel = new TestKernel('test', true);
-            $this->kernel->boot();
-            $this->container = $this->kernel->getContainer();
+        if (!self::$container) {
+            $kernel = new TestKernel('test', true);
+            $kernel->boot();
+            self::$container = $kernel->getContainer();
         }
 
-        return $this->container;
+        return self::$container;
+    }
+
+    public static function setUpBeforeClass()
+    {
+        $couchDbConnection = self::getContainer()->get('doctrine_couchdb.client.default_connection');
+
+        try {
+            $couchDbConnection->getHttpClient()->request('DELETE', '/' . $couchDbConnection->getDatabase());
+        } catch (\Doctrine\CouchDB\HTTP\HTTPException $e) {
+            // Just ignore if database did not exist
+        }
+
+        $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
     }
 }

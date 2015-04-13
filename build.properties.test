@@ -1,0 +1,5 @@
+env=test
+monolog_action_level=debug
+database.name=timeplanner_test
+secret="Test"
+mailer.transport="null"

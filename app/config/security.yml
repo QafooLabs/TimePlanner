@@ -30,6 +30,7 @@ security:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/request$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/send-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reset/, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/vacation.ics$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_wdt, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/_profiler, role: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -3,6 +3,7 @@
 {% block content %}
 {% include "QafooTimePlannerBundle:Vacation:remaining.html.twig" with {user: view.user, year: "now"|date("Y"), remaining: view.remainingVacation} %}
 <h2>Last Edits</h2>
+<p>Last update: {{"now"|date("j. F Y – H:i")}}</p>
 <div class="row">
     <div class="col-md-6">
         <h3>Time Planning</h3>

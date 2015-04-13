@@ -8,6 +8,8 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ODM\CouchDB\DocumentRepository;
 
+use Qafoo\UserBundle\Domain\User;
+
 class UserGateway implements UserProviderInterface
 {
     const USER_CLASS = 'Qafoo\\UserBundle\\Domain\\FOSUserHelper';
@@ -48,6 +50,34 @@ class UserGateway implements UserProviderInterface
         }
 
         return $user;
+    }
+
+    /**
+     * Store
+     *
+     * @param User $user
+     * @return User
+     */
+    public function store(User $user)
+    {
+        $documentManager = $this->documentRepository->getDocumentManager();
+        $documentManager->persist($user);
+        $documentManager->flush();
+
+        return $user;
+    }
+
+    /**
+     * Remove
+     *
+     * @param User $user
+     * @return void
+     */
+    public function remove(User $user)
+    {
+        $documentManager = $this->documentRepository->getDocumentManager();
+        $documentManager->remove($user);
+        $documentManager->flush();
     }
 
     /**

@@ -30,7 +30,7 @@ class TimePlanningController extends Controller
                 'year' => $year,
                 'month' => $month,
                 'user' => $context->getCurrentUser(),
-                'users' => $userService->getAllUsers(),
+                'users' => $userService->findUsers(),
                 'availableWorkDays' => $jobService->getAvailableWorkDays($year, $month),
                 'vacationDays' => $vacationService->getVacationDaysPerUser($year, $month),
                 'jobs' => $jobs = $jobService->getJobs($year, $month),

@@ -7,6 +7,7 @@
     <services>
         <service id="qafoo.user.domain.user_service" class="Qafoo\UserBundle\Domain\UserService">
             <argument type="service" id="qafoo.user.gateway.user" />
+            <argument type="service" id="security.encoder_factory" />
         </service>
 
         <service id="qafoo.user.gateway.user" class="Qafoo\UserBundle\Gateway\UserGateway">

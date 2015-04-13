@@ -21,3 +21,5 @@ fos_user:
     profile:
         form:
             type: qafoo_user_profile
+    service:
+        user_manager: qafoo.user.domain.user_service

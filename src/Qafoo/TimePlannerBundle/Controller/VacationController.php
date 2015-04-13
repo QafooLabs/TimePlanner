@@ -71,7 +71,7 @@ class VacationController extends Controller
         return new Edit(
             array(
                 'user' => $currentUser,
-                'users' => $userService->getAllUsers(),
+                'users' => $userService->findUsers(),
                 'vacation' => $vacation,
             )
         );

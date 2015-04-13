@@ -32,11 +32,12 @@ class VacationService
      *
      * @param User $user
      * @param int $year
-     * @return Date[]
+     * @return DaySet
      */
     public function getVacationDays(User $user, $year)
     {
-        return $this->getVacationDaysPerUser($year)[$user->login];
+        $vacations = $this->getVacationDaysPerUser($year);
+        return isset($vacations[$user->login]) ? $vacations[$user->login] : new DaySet();
     }
 
     /**

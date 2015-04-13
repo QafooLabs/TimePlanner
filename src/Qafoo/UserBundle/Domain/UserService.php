@@ -105,8 +105,7 @@ class UserService implements UserManagerInterface
      */
     public function findUserByEmail($email)
     {
-        // @TODO
-        return;
+        return $this->userGateway->findByProperty('email', $email);
     }
 
     /**
@@ -134,8 +133,7 @@ class UserService implements UserManagerInterface
      */
     public function findUserByConfirmationToken($token)
     {
-        // @TODO
-        return;
+        return $this->userGateway->findByProperty('token', $token);
     }
 
     /**

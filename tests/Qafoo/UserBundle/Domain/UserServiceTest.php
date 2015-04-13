@@ -88,6 +88,81 @@ class UserServiceTest extends IntegrationTest
     /**
      * @depends testStoreAndRetriveUser
      */
+    public function testUpdatePlainPassword($user)
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user->setPlainPassword("password");
+
+        $userService->updatePassword($user);
+
+        $this->assertNotNull($user->auth->password);
+        return $user;
+    }
+
+    /**
+     * @depends testUpdatePlainPassword
+     */
+    public function testUpdateAndClearPlainPassword($user)
+    {
+        $this->assertNull($user->getPlainPassword());
+    }
+
+    /**
+     * @depends testStoreAndRetriveUser
+     */
+    public function testFindUserByEmail($user)
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+
+        $loadedUser = $userService->findUserByEmail("kore@example.com");
+
+        $this->assertEquals($user, $loadedUser);
+    }
+
+    /**
+     * @depends testStoreAndRetriveUser
+     */
+    public function testFindUserByConfirmationToken($user)
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+
+        $user->auth->confirmationToken = 'token';
+        $userService->updateUser($user);
+
+        $loadedUser = $userService->findUserByConfirmationToken("token");
+
+        $this->assertEquals($user, $loadedUser);
+    }
+
+    /**
+     * @return array[]
+     */
+    public function getUsernameAndEmail()
+    {
+        return array(
+            array('kore'),
+            array('kore@example.com'),
+        );
+    }
+
+    /**
+     * @dataProvider getUsernameAndEmail
+     * @depends testStoreAndRetriveUser
+     */
+    public function testFindUserByUsernameOrEmail($value, $user)
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+
+        $loadedUser = $userService->findUserByUsernameOrEmail($value);
+
+        $this->assertEquals($user, $loadedUser);
+    }
+
+    /**
+     * @IMORTANT Should be the last test, obviously.
+     *
+     * @depends testStoreAndRetriveUser
+     */
     public function testDeleteUser($user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');

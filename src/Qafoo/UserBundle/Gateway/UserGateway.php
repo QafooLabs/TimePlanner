@@ -91,6 +91,30 @@ class UserGateway implements UserProviderInterface
     }
 
     /**
+     * Find by property
+     *
+     * @param string $property
+     * @param mixed $value
+     * @return User
+     */
+    public function findByProperty($property, $value)
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('users', 'index');
+        $result = $query
+            ->setKey(array($property, $value))
+            ->setIncludeDocs(true)
+            ->setReduce(false)
+            ->onlyDocs(true)
+            ->execute();
+
+        if (!count($result) === 1) {
+            throw new \OutOfBoundsException("No user found with $property $value");
+        }
+
+        return $result->toArray()[0];
+    }
+
+    /**
      * Refreshes the user for the account interface.
      *
      * It is up to the implementation to decide if the user data should be

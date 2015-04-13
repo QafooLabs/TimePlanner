@@ -1,4 +1,4 @@
-<tr {% if vacation.user.login == view.user.login %}class="info"{% endif %}>
+<tr {% if vacation.user.login == view.user.login %}class="active"{% endif %}>
     <td>
         <strong>
             {{vacation.start|date("d. F")}}

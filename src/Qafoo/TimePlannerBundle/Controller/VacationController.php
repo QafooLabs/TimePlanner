@@ -17,7 +17,7 @@ use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
 
 class VacationController extends Controller
 {
-    public function indexAction(TokenContext $context, $year = null)
+    public function indexAction(Request $request, TokenContext $context, $year = null)
     {
         $year = $year ?: date("Y");
         $currentUser = $context->getCurrentUser();
@@ -32,6 +32,7 @@ class VacationController extends Controller
                 'remainingVacation' => $availableVacation->getAvailableVacationDays($currentUser->login, $year) -
                     count($vacationService->getVacationDays($currentUser, $year)),
                 'vacations' => $vacationService->getVacations($year),
+                'highlight' => $request->get('highlight', null),
             )
         );
     }

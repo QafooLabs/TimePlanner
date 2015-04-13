@@ -1,4 +1,4 @@
-<tr>
+<tr {% if highlight == job.jobId %}class="info"{% endif %}>
 {% set assignedDays = 0 %}
 {% for assignment in job.assignees %}
     {% set assignedDays = assignedDays + assignment.days %}

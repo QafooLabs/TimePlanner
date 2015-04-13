@@ -61,4 +61,11 @@ class Overview extends DataObject
      * @var Job
      */
     public $sum;
+
+    /**
+     * Job ID to highlight
+     *
+     * @var string
+     */
+    public $highlight;
 }

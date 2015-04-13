@@ -35,6 +35,7 @@ class TimePlanningController extends Controller
                 'vacationDays' => $vacationService->getVacationDaysPerUser($year, $month),
                 'jobs' => $jobs = $jobService->getJobs($year, $month),
                 'sum' => $jobService->calculateSum($jobs),
+                'highlight' => $request->get('highlight', null),
             )
         );
     }

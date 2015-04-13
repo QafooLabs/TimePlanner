@@ -16,7 +16,7 @@
 
         <table class="table table-striped table-hover table-condensed">
         {% for vacation in view.vacations %}
-            {% include "QafooTimePlannerBundle:Vacation:tableRow.html.twig" with {vacation: vacation} %}
+            {% include "QafooTimePlannerBundle:Vacation:tableRow.html.twig" with {vacation: vacation, highlight: view.highlight} %}
         {% endfor %}
         </table>
     </div>

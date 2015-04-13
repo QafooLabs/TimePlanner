@@ -40,4 +40,11 @@ class Overview extends DataObject
      * @var Vacation[]
      */
     public $vacations;
+
+    /**
+     * Vacation ID to highlight
+     *
+     * @var string
+     */
+    public $highlight;
 }

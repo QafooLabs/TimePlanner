@@ -45,7 +45,7 @@
             </thead>
             <tbody>
             {% for job in view.jobs %}
-                {% include "QafooTimePlannerBundle:TimePlanning:tableRow.html.twig" with {job: job, year: view.year, month: view.month} %}
+                {% include "QafooTimePlannerBundle:TimePlanning:tableRow.html.twig" with {job: job, year: view.year, month: view.month, highlight: view.highlight} %}
             {% endfor %}
                 <tr>
                     <form method="POST" class="form-inline" action="{{path("qafoo.time_planner.time_planning.create")}}">

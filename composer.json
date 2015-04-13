@@ -25,7 +25,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Qafoo": "src/"
+            "Qafoo": ["src/", "tests/"]
         }
     }
 }

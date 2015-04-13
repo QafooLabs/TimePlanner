@@ -45,7 +45,7 @@ class AppKernel extends Kernel
             $loader->load(function ($container) {
                 $container->loadFromExtension('web_profiler', array(
                     'toolbar' => true,
-                    'intercept_redirects' => false,
+                    'intercept_redirects' => true,
                 ));
             });
         }
@@ -87,7 +87,7 @@ class AppKernel extends Kernel
         );
 
         $baseDir = __DIR__ . '/../';
-        foreach (array('build.properties', 'build.properties.local') as $file) {
+        foreach (self::getAdditionalConfigFiles() as $file) {
             if (file_exists($fileName = $baseDir . $file)) {
                 self::$configuration = array_merge(self::$configuration, parse_ini_file($fileName));
             }
@@ -104,6 +104,16 @@ class AppKernel extends Kernel
     public static function getEnvironmentFromConfiguration()
     {
         return self::getConfiguration()['env'];
+    }
+
+    /**
+     * Get additional config files
+     *
+     * @return string[]
+     */
+    public static function getAdditionalConfigFiles()
+    {
+        return array('build.properties', 'build.properties.local');
     }
 
     /**

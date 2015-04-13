@@ -5,3 +5,4 @@
 /app/logs/
 /web/bundles
 /build.properties.local
+/tests/Qafoo/cache

@@ -1,5 +1,6 @@
+; This file overwrites properties in build.properties and
+; build.properties.local just for testing.
 env=test
-monolog_action_level=debug
 database.name=timeplanner_test
 secret="Test"
 mailer.transport="null"

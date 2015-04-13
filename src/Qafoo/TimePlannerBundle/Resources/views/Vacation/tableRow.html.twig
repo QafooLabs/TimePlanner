@@ -6,6 +6,9 @@
                 to {{vacation.end|date("d. F")}}
             {% endif %}
         </strong>
+        <a class="hover-link" href="{{ path("qafoo.time_planner.vacation.overview", {year: vacation.end|date("Y"), highlight: vacation.vacationId}) }}">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
     </td>
     <td>{% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.user} %}</td>
     <td><p class="comment">{{vacation.comment}}</p></td>

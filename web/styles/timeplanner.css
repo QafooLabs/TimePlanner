@@ -16,6 +16,14 @@ footer {
   height: 2em;
 }
 
+.hover-link {
+    display: none;
+}
+
+tr:hover .hover-link {
+    display: inline;
+}
+
 .navbar-brand img {
     display: inline;
 }

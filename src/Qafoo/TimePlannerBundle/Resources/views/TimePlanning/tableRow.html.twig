@@ -3,7 +3,12 @@
 {% for assignment in job.assignees %}
     {% set assignedDays = assignedDays + assignment.days %}
 {% endfor %}
-    <td>{{job.customer}}</td>
+    <td>
+        {{job.customer}}
+        <a class="hover-link" href="{{ path("qafoo.time_planner.time_planning.overview", {year: job.month|date("Y"), month: job.month|date("n"), highlight: job.jobId}) }}">
+            <span class="glyphicon glyphicon-link"></span>
+        </a>
+    </td>
     <td>{{job.project}}</td>
     <td class="number {% if not job.expectedRevenue %}text-muted{% endif %}">
         {{job.expectedRevenue|number_format(2)}} €

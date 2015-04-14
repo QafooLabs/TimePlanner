@@ -21,7 +21,10 @@
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "@stable",
         "sebastian/phpcpd": "@stable",
-        "squizlabs/php_codesniffer": "@stable"
+        "squizlabs/php_codesniffer": "@stable",
+        "behat/mink": "@dev",
+        "behat/mink-goutte-driver": "@dev",
+        "behat/mink-sahi-driver": "@dev"
     },
     "autoload": {
         "psr-0": {

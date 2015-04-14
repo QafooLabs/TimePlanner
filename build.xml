@@ -10,7 +10,7 @@
     <!--
         Import main target defintions (extension points)
     -->
-    <import optional="true" file="${basedir}/ant/main.xml" />
+    <import file="${basedir}/ant/main.xml" />
 
     <!--
         Enable used modules

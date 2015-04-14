@@ -186,6 +186,11 @@ class UserService implements UserManagerInterface
      */
     public function updateUser(UserInterface $user)
     {
+        // Those methods are not called by the caller – we must take care of
+        // this ourselves
+        $this->updateCanonicalFields($user);
+        $this->updatePassword($user);
+
         $this->userGateway->store($user);
     }
 

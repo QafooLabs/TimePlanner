@@ -19,6 +19,7 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     public static function setUpBeforeClass()
     {
+        self::$container = null;
         $couchDbConnection = self::getContainer()->get('doctrine_couchdb.client.default_connection');
 
         try {

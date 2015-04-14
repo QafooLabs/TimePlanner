@@ -9,7 +9,7 @@ abstract class FeatureTest extends IntegrationTest
 {
     protected $session;
 
-    public function setUp()
+    public function start()
     {
         switch (strtolower(getenv('DRIVER'))) {
             case 'sahi':
@@ -26,11 +26,17 @@ abstract class FeatureTest extends IntegrationTest
         $this->session->start();
     }
 
-    public function tearDown()
+    public function stop()
     {
         if ($this->session) {
             $this->session->stop();
+            $this->session = null;
         }
+    }
+
+    public function tearDown()
+    {
+        $this->stop();
     }
 
     /**
@@ -41,6 +47,10 @@ abstract class FeatureTest extends IntegrationTest
      */
     protected function visit($path)
     {
+        if (!$this->session) {
+            $this->start();
+        }
+
         $domain = getenv('DOMAIN') ?: 'http://localhost:8888';
         $this->session->visit($domain . $path);
         return $this->session->getPage();

@@ -7,12 +7,12 @@
 
 <dl class="dl-horizontal">
     <dt>{{"Name"|trans()}}</dt>
-    <dd>{{user.name}}</dd>
+    <dd class="test-name">{{user.name}}</dd>
     <dt>{{"profile.show.username"|trans()}}</dt>
-    <dd>{{user.login}}</dd>
+    <dd class="test-login">{{user.login}}</dd>
     <dt>{{"profile.show.email"|trans()}}</dt>
-    <dd>{{user.email}}</dd>
+    <dd class="test-email">{{user.email}}</dd>
     <dt>{{"Last Login"|trans()}}</dt>
-    <dd>{{user.auth.lastLogin|date("d. F Y H:i")}}</dd>
+    <dd class="test-last-login">{{user.auth.lastLogin|date("d. F Y H:i")}}</dd>
 </dl>
 {% endblock profile_content %}

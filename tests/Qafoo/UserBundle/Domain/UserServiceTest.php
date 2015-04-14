@@ -6,6 +6,7 @@ use Qafoo\IntegrationTest;
 
 /**
  * @covers Qafoo\UserBundle\Domain\UserService
+ * @group integration
  */
 class UserServiceTest extends IntegrationTest
 {

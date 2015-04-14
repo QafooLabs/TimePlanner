@@ -30,18 +30,18 @@
     -->
     <target name="bootstrap" extensionOf="-prepare:after~hook">
         <exec executable="php" failonerror="true" dir="${basedir}">
-            <arg value="app/console" />                                              
-            <arg value="timeplanner:bootstrap" />                                              
+            <arg value="app/console" />
+            <arg value="timeplanner:bootstrap" />
         </exec>
     </target>
 
     <target name="serve" depends="prepare">
         <echo>Server starting on http://localhost:${webserver.port}/</echo>
         <exec executable="php" failonerror="true" dir="${basedir}">
-            <arg value="-S" />                                              
-            <arg value="localhost:${webserver.port}" />                                              
-            <arg value="-t" />                                              
-            <arg value="web/" />                                              
+            <arg value="-S" />
+            <arg value="localhost:${webserver.port}" />
+            <arg value="-t" />
+            <arg value="web/" />
             <arg value="web/index.php" />
         </exec>
     </target>

@@ -10,6 +10,11 @@ the very basic time planning concerns in Qafoo.
 
 ## Starting
 
+Make sure the GIT submodules are checked out – you might want to run the
+follwing command to initialize them:
+
+    git submodule update --init
+
 To run the project just execute the following command:
 
     ant serve

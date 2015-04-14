@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Qafoo Time Planner" basedir="./" default="install-and-run">
+<project name="Qafoo Time Planner" basedir="./" default="test">
 
     <!--
         Include local project properties.
@@ -16,14 +16,14 @@
         Enable used modules
     -->
     <!-- import optional="true" file="${basedir}/ant/modules/dbdeploy.xml" /-->
-    <import optional="true" file="${basedir}/ant/modules/composer.xml" />
-    <import optional="true" file="${basedir}/ant/modules/phpunit.xml" />
-    <import optional="true" file="${basedir}/ant/modules/checkstyle.xml" />
-    <import optional="true" file="${basedir}/ant/modules/pdepend.xml" />
-    <import optional="true" file="${basedir}/ant/modules/phpcpd.xml" />
-    <import optional="true" file="${basedir}/ant/modules/phpmd.xml" />
-    <import optional="true" file="${basedir}/ant/modules/doctrine-couchdb.xml" />
-    <import optional="true" file="${basedir}/ant/modules/symfony2.xml" />
+    <import file="${basedir}/ant/modules/composer.xml" />
+    <import file="${basedir}/ant/modules/phpunit.xml" />
+    <import file="${basedir}/ant/modules/checkstyle.xml" />
+    <import file="${basedir}/ant/modules/pdepend.xml" />
+    <import file="${basedir}/ant/modules/phpcpd.xml" />
+    <import file="${basedir}/ant/modules/phpmd.xml" />
+    <import file="${basedir}/ant/modules/doctrine-couchdb.xml" />
+    <import file="${basedir}/ant/modules/symfony2.xml" />
 
     <!--
          Custom project tasks
@@ -61,29 +61,5 @@
             <arg value="${deploy.host}" />
             <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; git submodule update --init &amp;&amp; ant" />
         </exec>
-    </target>
-
-    <!--
-        Task group, which installs the build-commons, if they do not exist yet.
-    -->
-    <target name="-install:check">
-        <condition property="-install:dir-exists">
-            <available file="${basedir}/ant" type="dir"/>
-        </condition>
-    </target>
-
-    <target name="install" depends="-install:check" unless="-install:dir-exists">
-        <exec executable="git" failonerror="true" dir="${basedir}">
-            <arg value="submodule" />
-            <arg value="update" />
-            <arg value="--init" />
-        </exec>
-
-        <echo>Build-Commons submodule intialized. Please re-run the build.</echo>
-        <fail />
-    </target>
-
-    <target name="install-and-run" depends="install">
-        <antcall target="test" />
     </target>
 </project>

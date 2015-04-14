@@ -116,7 +116,7 @@ class AppKernel extends Kernel
         $files = array('build.properties', 'build.properties.local');
 
         // @Hack to use test config in feature tests…
-        if (static::getDebug() && getenv("TESTING")) {
+        if (getenv("TESTING")) {
             $files[] = 'build.properties.test';
         }
         return $files;

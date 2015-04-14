@@ -49,8 +49,9 @@
     <target name="phpunit-feature" extensionOf="-test-feature:main~hook">
         <parallel>
             <daemons>
-                <exec executable="php" failonerror="true" dir="${basedir}">
+                <exec executable="php" dir="${basedir}">
                     <env key="TESTING" value="1" />
+
                     <arg value="-S" />
                     <arg value="localhost:8888" />
                     <arg value="-t" />

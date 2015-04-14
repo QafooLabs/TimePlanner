@@ -46,6 +46,32 @@
         </exec>
     </target>
 
+    <target name="phpunit-feature" extensionOf="-test-feature:main~hook">
+        <parallel>
+            <daemons>
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="TESTING" value="1" />
+                    <arg value="-S" />
+                    <arg value="localhost:8888" />
+                    <arg value="-t" />
+                    <arg value="web/" />
+                    <arg value="web/index.php" />
+                </exec>
+            </daemons>
+
+            <sequential>
+                <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <arg value="--group" />
+                    <arg value="feature" />
+                    <arg value="--configuration" />
+                    <arg value="${basedir}/phpunit.xml" />
+                    <arg value="--log-junit" />
+                    <arg value="${logdir}/feature.xml" />
+                </exec>
+            </sequential>
+        </parallel>
+    </target>
+
     <target name="deploy" depends="test" extensionOf="-deploy:main~hook">
         <exec executable="git">
             <arg value="push" />

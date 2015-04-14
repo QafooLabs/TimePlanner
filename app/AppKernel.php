@@ -113,7 +113,13 @@ class AppKernel extends Kernel
      */
     public static function getAdditionalConfigFiles()
     {
-        return array('build.properties', 'build.properties.local');
+        $files = array('build.properties', 'build.properties.local');
+
+        // @Hack to use test config in feature tests…
+        if (static::getDebug() && getenv("TESTING")) {
+            $files[] = 'build.properties.test';
+        }
+        return $files;
     }
 
     /**

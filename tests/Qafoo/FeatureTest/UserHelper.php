@@ -38,10 +38,25 @@ trait UserHelper
     }
 
     /**
-     * Login user
+     * getUser
      *
      * @param string $login
      * @return User
+     */
+    protected function getUser($login)
+    {
+        $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.document_manager');
+        $documentManager->clear();
+
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        return $userService->getUserByLogin($login);
+    }
+
+    /**
+     * Login user
+     *
+     * @param string $login
+     * @return void
      */
     protected function loginUser($login, $password = 'password')
     {

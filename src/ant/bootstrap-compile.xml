@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Compile bootstrap Task">
+    <property name="bootstrap.path" location="${basedir}/vendor/twbs/bootstrap/" />
+
+    <target name="bootstrap:compile" depends="prepare">
+        <tool-exists executable="grunt" error="Install grunt using `npm install -g grunt-cli`" />
+        <tool-exists executable="npm" />
+
+        <exec executable="npm" failonerror="true" dir="${bootstrap.path}">
+            <arg value="install" />
+        </exec>
+
+        <copy todir="${bootstrap.path}/less">
+            <fileset dir="${basedir}/src/less/" />
+        </copy>
+
+        <exec executable="grunt" failonerror="true" dir="${bootstrap.path}">
+            <arg value="dist" />
+        </exec>
+
+        <copy todir="${basedir}/web/vendor/bootstrap/">
+            <fileset dir="${bootstrap.path}/dist/">
+                <include name="**/*.min.*" />
+            </fileset>
+        </copy>
+    </target>
+</project>

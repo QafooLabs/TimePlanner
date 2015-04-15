@@ -15,7 +15,6 @@
     <!--
         Enable used modules
     -->
-    <!-- import optional="true" file="${basedir}/ant/modules/dbdeploy.xml" /-->
     <import file="${basedir}/ant/modules/composer.xml" />
     <import file="${basedir}/ant/modules/phpunit.xml" />
     <import file="${basedir}/ant/modules/checkstyle.xml" />
@@ -26,67 +25,10 @@
     <import file="${basedir}/ant/modules/symfony2.xml" />
 
     <!--
-         Custom project tasks
+        Custom modules
     -->
-    <target name="bootstrap" extensionOf="-prepare:after~hook">
-        <exec executable="php" failonerror="true" dir="${basedir}">
-            <arg value="app/console" />
-            <arg value="timeplanner:bootstrap" />
-        </exec>
-    </target>
-
-    <target name="serve" depends="prepare">
-        <echo>Server starting on http://localhost:${webserver.port}/</echo>
-        <exec executable="php" failonerror="true" dir="${basedir}">
-            <arg value="-S" />
-            <arg value="localhost:${webserver.port}" />
-            <arg value="-t" />
-            <arg value="web/" />
-            <arg value="web/index.php" />
-        </exec>
-    </target>
-
-    <target name="phpunit-feature" extensionOf="-test-feature:main~hook">
-        <parallel>
-            <daemons>
-                <exec executable="php" dir="${basedir}">
-                    <env key="TESTING" value="1" />
-
-                    <arg value="-S" />
-                    <arg value="localhost:8888" />
-                    <arg value="-t" />
-                    <arg value="web/" />
-                    <arg value="web/index.php" />
-                </exec>
-            </daemons>
-
-            <sequential>
-                <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
-                    <arg value="--group" />
-                    <arg value="feature" />
-                    <arg value="--configuration" />
-                    <arg value="${basedir}/phpunit.xml" />
-                    <arg value="--log-junit" />
-                    <arg value="${logdir}/feature.xml" />
-                </exec>
-            </sequential>
-        </parallel>
-    </target>
-
-    <target name="deploy" depends="test" extensionOf="-deploy:main~hook">
-        <exec executable="git">
-            <arg value="push" />
-            <arg value="origin" />
-            <arg value="master" />
-        </exec>
-
-        <!-- Not using sshexec, because it does not know / handle local SSH
-             configuration, and we probably cannot and do not want to duplicate
-             tunnel configuration etc.
-        -->
-        <exec executable="ssh">
-            <arg value="${deploy.host}" />
-            <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; git submodule update --init &amp;&amp; ant" />
-        </exec>
-    </target>
+    <import file="${basedir}/src/ant/deploy.xml" />
+    <import file="${basedir}/src/ant/bootstrap.xml" />
+    <import file="${basedir}/src/ant/serve.xml" />
+    <import file="${basedir}/src/ant/phpunit-feature.xml" />
 </project>

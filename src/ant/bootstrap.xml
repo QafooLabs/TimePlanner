@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Bootstrap Task">
+    <target name="bootstrap" extensionOf="-prepare:after~hook">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="timeplanner:bootstrap" />
+        </exec>
+    </target>
+</project>

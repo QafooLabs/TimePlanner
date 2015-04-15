@@ -14,7 +14,8 @@
         "symfony/swiftmailer-bundle": "~2.3",
         "doctrine/couchdb-odm-bundle": "dev-master",
         "sabre/vobject": "~3.4",
-        "sensio/framework-extra-bundle": "~3.0"
+        "sensio/framework-extra-bundle": "~3.0",
+        "twbs/bootstrap": "~3.3"
     },
     "require-dev": {
         "pdepend/pdepend": "@stable",
@@ -28,7 +29,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Qafoo": ["src/", "tests/"]
+            "Qafoo": ["src/php/", "tests/"]
         }
     }
 }

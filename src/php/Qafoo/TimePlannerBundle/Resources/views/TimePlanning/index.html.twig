@@ -1,5 +1,10 @@
 {% extends 'QafooTimePlannerBundle::layout.html.twig' %}
 
+{% block css %}
+    {{parent()}}
+    <link href="/vendor/typeahead/typeahead.css" rel="stylesheet">
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-12">
@@ -120,4 +125,46 @@
         </table>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+    {{parent()}}
+    <script src="/vendor/typeahead/typeahead.bundle.js"></script>
+    <script type="text/javascript">
+    var customers = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            limit: 5,
+            prefetch: {
+                url: '{{path("qafoo.time_planner.time_planning.customers")}}',
+                filter: function(list) {
+                    return $.map(list, function(customer) {return {name: customer};});
+                }
+            }
+        }),
+        projects = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            limit: 5,
+            prefetch: {
+                url: '{{path("qafoo.time_planner.time_planning.projects")}}',
+                filter: function(list) {
+                    return $.map(list, function(project) {return {name: project};});
+                }
+            }
+        });
+     
+    customers.initialize();
+    projects.initialize();
+    $('input[name="customer"]').typeahead(null, {
+        name: 'customer',
+        displayKey: 'name',
+        source: customers.ttAdapter()
+    });
+    $('input[name="project"]').typeahead(null, {
+        name: 'project',
+        displayKey: 'name',
+        source: projects.ttAdapter()
+    });
+    </script>
 {% endblock %}

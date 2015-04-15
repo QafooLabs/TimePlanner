@@ -54,6 +54,50 @@ class JobGateway
     }
 
     /**
+     * Get customers
+     *
+     * @return string[]
+     */
+    public function getCustomers()
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('jobs', 'customers');
+        $result = $query
+            ->setIncludeDocs(false)
+            ->setReduce(true)
+            ->setGroup(true)
+            ->execute();
+
+        return array_map(
+            function (array $row) {
+                return $row['key'];
+            },
+            $result->toArray()
+        );
+    }
+
+    /**
+     * Get projects
+     *
+     * @return string[]
+     */
+    public function getProjects()
+    {
+        $query = $this->documentRepository->getDocumentManager()->createQuery('jobs', 'projects');
+        $result = $query
+            ->setIncludeDocs(false)
+            ->setReduce(true)
+            ->setGroup(true)
+            ->execute();
+
+        return array_map(
+            function (array $row) {
+                return $row['key'];
+            },
+            $result->toArray()
+        );
+    }
+
+    /**
      * Store
      *
      * @param Job $job

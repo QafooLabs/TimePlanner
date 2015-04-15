@@ -102,4 +102,12 @@
         <default key="job"></default>
         <requirement key="_method">POST</requirement>
     </route>
+
+    <route id="qafoo.time_planner.time_planning.customers" path="/planning/customers">
+        <default key="_controller">QafooTimePlannerBundle:TimePlanning:customers</default>
+    </route>
+
+    <route id="qafoo.time_planner.time_planning.projects" path="/planning/projects">
+        <default key="_controller">QafooTimePlannerBundle:TimePlanning:projects</default>
+    </route>
 </routes>

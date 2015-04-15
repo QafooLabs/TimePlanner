@@ -4,6 +4,7 @@ namespace Qafoo\TimePlannerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use QafooLabs\MVC\TokenContext;
 use QafooLabs\MVC\RedirectRouteResponse;
@@ -137,6 +138,22 @@ class TimePlanningController extends Controller
                 'year' => $year,
                 'month' => $month,
             )
+        );
+    }
+
+    public function customersAction()
+    {
+        $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        return new JsonResponse(
+            $jobService->getCustomers()
+        );
+    }
+
+    public function projectsAction()
+    {
+        $jobService = $this->get('qafoo.time_planner.domain.job_service');
+        return new JsonResponse(
+            $jobService->getProjects()
         );
     }
 }

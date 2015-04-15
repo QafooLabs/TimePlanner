@@ -47,6 +47,26 @@ class JobService
     }
 
     /**
+     * Get customers
+     *
+     * @return string[]
+     */
+    public function getCustomers()
+    {
+        return $this->jobGateway->getCustomers();
+    }
+
+    /**
+     * Get projects
+     *
+     * @return string[]
+     */
+    public function getProjects()
+    {
+        return $this->jobGateway->getProjects();
+    }
+
+    /**
      * Get work days
      *
      * @param int $year

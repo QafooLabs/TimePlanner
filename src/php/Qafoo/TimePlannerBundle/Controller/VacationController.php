@@ -13,6 +13,7 @@ use Qafoo\TimePlannerBundle\Domain\VacationService;
 use Qafoo\TimePlannerBundle\Domain\Vacation;
 use Qafoo\TimePlannerBundle\Domain\MetaData;
 use Qafoo\TimePlannerBundle\Domain\DaySet;
+use Qafoo\TimePlannerBundle\Domain\VacationIcsVisitor;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Overview;
 use Qafoo\TimePlannerBundle\Controller\Vacation\AvailableVacation;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
@@ -52,27 +53,16 @@ class VacationController extends Controller
         );
     }
 
-    public function listAction()
+    public function exportAction()
     {
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
-        $vacations = $vacationService->getVacations();
-        $calendar = new \Sabre\VObject\Component\VCalendar();
-        foreach ($vacations as $vacation) {
-            $event = $calendar->add('VEVENT');
-            $event->add(
-                'SUMMARY',
-                'Vacation: ' . $vacation->user->getUsername() .
-                ($vacation->comment ? ' (' . $vacation->comment . ')' : '')
-            );
-            $event->add('DTSTART', $vacation->start->modify('today'))['VALUE'] = 'DATE';
-            $event->add('DTEND', $vacation->start->modify('tomorrow'))['VALUE'] = 'DATE';
-        }
+        $icsVisitor = new VacationIcsVisitor();
 
         return new Response(
-            $calendar->serialize(),
+            $icsVisitor->getIcsCalendar($vacationService->getVacations()),
             200,
             array(
-                'Content-Type' => 'text/calendar',
+                'Content-Type' => 'text/text',
             )
         );
     }

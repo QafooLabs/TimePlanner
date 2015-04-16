@@ -16,7 +16,7 @@
     </route>
 
     <route id="qafoo.time_planner.vacation.ics" path="/vacation.ics">
-        <default key="_controller">QafooTimePlannerBundle:Vacation:list</default>
+        <default key="_controller">QafooTimePlannerBundle:Vacation:export</default>
     </route>
 
     <route id="qafoo.time_planner.vacation.edit" path="/vacation/edit/{vacation}">

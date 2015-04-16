@@ -13,7 +13,7 @@
         </exec>
         <exec executable="ssh">
             <arg value="${deploy.host}" />
-            <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; git submodule update --init &amp;&amp; ant initialize" />
+            <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; git submodule update --init &amp;&amp; ant prepare" />
         </exec>
         <exec executable="ssh">
             <arg value="${deploy.host}" />

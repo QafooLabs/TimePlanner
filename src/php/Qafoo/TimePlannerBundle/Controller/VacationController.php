@@ -58,15 +58,14 @@ class VacationController extends Controller
         $vacations = $vacationService->getVacations();
         $calendar = new \Sabre\VObject\Component\VCalendar();
         foreach ($vacations as $vacation) {
-            $calendar->add(
-                'VEVENT',
-                array(
-                    'SUMMARY' => 'Vacation: ' . $vacation->user->getUsername() .
-                        ($vacation->comment ? ' (' . $vacation->comment . ')' : ''),
-                    'DTSTART' => $vacation->start->modify('today'),
-                    'DTEND' => $vacation->end->modify('tomorrow'),
-                )
+            $event = $calendar->add('VEVENT');
+            $event->add(
+                'SUMMARY',
+                'Vacation: ' . $vacation->user->getUsername() .
+                ($vacation->comment ? ' (' . $vacation->comment . ')' : '')
             );
+            $event->add('DTSTART', $vacation->start->modify('today'))['VALUE'] = 'DATE';
+            $event->add('DTEND', $vacation->start->modify('tomorrow'))['VALUE'] = 'DATE';
         }
 
         return new Response(

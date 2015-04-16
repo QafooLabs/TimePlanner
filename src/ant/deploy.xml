@@ -7,13 +7,17 @@
             <arg value="master" />
         </exec>
 
-        <!-- Not using sshexec, because it does not know / handle local SSH
-             configuration, and we probably cannot and do not want to duplicate
-             tunnel configuration etc.
-        -->
+        <exec executable="ssh">
+            <arg value="${deploy.host}" />
+            <arg value="touch ${deploy.path}/DEPLOY" />
+        </exec>
         <exec executable="ssh">
             <arg value="${deploy.host}" />
             <arg value="cd ${deploy.path} &amp;&amp; git pull &amp;&amp; git submodule update --init &amp;&amp; ant" />
+        </exec>
+        <exec executable="ssh">
+            <arg value="${deploy.host}" />
+            <arg value="rm ${deploy.path}/DEPLOY" />
         </exec>
     </target>
 </project>

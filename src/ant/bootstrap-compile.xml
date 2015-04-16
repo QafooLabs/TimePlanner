@@ -10,7 +10,7 @@
             <arg value="install" />
         </exec>
 
-        <copy todir="${bootstrap.path}/less">
+        <copy todir="${bootstrap.path}/less" overwrite="true">
             <fileset dir="${basedir}/src/less/" />
         </copy>
 

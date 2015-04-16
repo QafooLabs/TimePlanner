@@ -12,7 +12,9 @@ use QafooLabs\MVC\RedirectRouteResponse;
 use Qafoo\TimePlannerBundle\Domain\VacationService;
 use Qafoo\TimePlannerBundle\Domain\Vacation;
 use Qafoo\TimePlannerBundle\Domain\MetaData;
+use Qafoo\TimePlannerBundle\Domain\DaySet;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Overview;
+use Qafoo\TimePlannerBundle\Controller\Vacation\AvailableVacation;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
 
 class VacationController extends Controller
@@ -21,16 +23,27 @@ class VacationController extends Controller
     {
         $year = $year ?: date("Y");
         $currentUser = $context->getCurrentUser();
+        $userService = $this->get('qafoo.user.domain.user_service');
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
         $availableVacation = $this->get('qafoo.time_planner.gateway.available_vacation');
+
+        $remainingVacation = $vacationService->getVacationDaysPerUser($year);
+        foreach ($userService->findUsers() as $user) {
+            $remainingVacation[$user->login] = new AvailableVacation(
+                array(
+                    'user' => $user,
+                    'available' => $availableVacation->getAvailableVacationDays($user->login, $year),
+                    'booked' => isset($remainingVacation[$user->login]) ? $remainingVacation[$user->login] : new DaySet(),
+                )
+            );
+        }
 
         return new Overview(
             array(
                 'user' => $currentUser,
                 'year' => $year,
                 'years' => $vacationService->getYears(),
-                'remainingVacation' => $availableVacation->getAvailableVacationDays($currentUser->login, $year) -
-                    count($vacationService->getVacationDays($currentUser, $year)),
+                'remainingVacation' => $remainingVacation,
                 'vacations' => $vacationService->getVacations($year),
                 'highlight' => $request->get('highlight', null),
             )

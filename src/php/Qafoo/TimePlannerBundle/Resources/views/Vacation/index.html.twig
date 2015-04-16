@@ -1,7 +1,6 @@
 {% extends 'QafooTimePlannerBundle::layout.html.twig' %}
 
 {% block content %}
-{% include "QafooTimePlannerBundle:Vacation:remaining.html.twig" with {user: view.user, year: view.year, remaining: view.remainingVacation} %}
 <div class="row">
     <div class="col-md-6">
         <h2>Vacations</h2>
@@ -21,6 +20,25 @@
         </table>
     </div>
     <div class="col-md-6">
+        <h2>Available Days</h2>
+        <table class="table table-striped table-hover table-condensed">
+            <thead>
+                <tr {% if remaining.user.login == view.user.login %}class="active"{% endif %}>
+                    <th>User</th>
+                    <th>Booked</th>
+                    <th>Remaining</th>
+                </tr>
+            <thead>
+            <tbody>
+            {% for remaining in view.remainingVacation %}
+                <tr {% if remaining.user.login == view.user.login %}class="active"{% endif %}>
+                    <td>{% include "QafooUserBundle:User:normal.html.twig" with {user: remaining.user} %}</td>
+                    <td class="number">{{remaining.booked|length()}} / {{remaining.available}}</td>
+                    <td class="number"><strong>{{remaining.available - remaining.booked|length()}}</strong></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
         <h2>Add vacation</h2>
         {{render(controller('QafooTimePlannerBundle:Vacation:edit'))}}
     </div>

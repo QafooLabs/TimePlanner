@@ -71,6 +71,7 @@ class VacationService
     public function getVacationDaysPerUser($year, $month = null)
     {
         $userVacations = $this->vacationGateway->getVacationDaysPerUser($year, $month);
+        $publicHolidays = $this->publicHolidayService->getHolidayDays($year, $month);
 
         foreach ($userVacations as $user => $vacations) {
             $vacations = $vacations->diff(
@@ -84,7 +85,7 @@ class VacationService
                 )
             );
 
-            $userVacations[$user] = $vacations->diff($this->publicHolidayService->getHolidayDays($year, $month));
+            $userVacations[$user] = $vacations->diff($publicHolidays);
         }
 
         return $userVacations;

@@ -33,7 +33,9 @@ class VacationController extends Controller
                 array(
                     'user' => $user,
                     'available' => $availableVacation->getAvailableVacationDays($user->login, $year),
-                    'booked' => isset($remainingVacation[$user->login]) ? $remainingVacation[$user->login] : new DaySet(),
+                    'booked' => isset($remainingVacation[$user->login]) ?
+                        $remainingVacation[$user->login] :
+                        new DaySet(),
                 )
             );
         }

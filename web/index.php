@@ -12,6 +12,12 @@ if (file_exists(__DIR__ . $_SERVER['REQUEST_URI']) &&
     return false;
 }
 
+if (file_exists(__DIR__ . '/../DEPLOY')) {
+    header("HTTP/1.0 503 Service Unavailable");
+    require __DIR__ . '/../app/Resources/views/maintenance.html';
+    exit(0);
+}
+
 try {
     if (AppKernel::getDebug()) {
         fwrite(

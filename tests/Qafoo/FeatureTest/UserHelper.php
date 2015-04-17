@@ -60,7 +60,7 @@ trait UserHelper
      */
     protected function loginUser($login, $password = 'password')
     {
-        $page = $this->visit('/auth');
+        $page = $this->visit('/login');
         $page->find('css', '#username')->setValue($login);
         $page->find('css', '#password')->setValue($password);
         $page->find('css', '#submit')->press();

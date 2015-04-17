@@ -9,9 +9,4 @@
     <route id="fos_user_registration_register" pattern="/register">
         <default key="_controller">FOSUserBundle:Registration:register</default>
     </route>
-
-    <route id="qafoo.user_bundle.auth_start" pattern="/auth">
-        <default key="_controller">QafooUserBundle:Default:index</default>
-        <requirement key="_method">GET</requirement>
-    </route>
 </routes>

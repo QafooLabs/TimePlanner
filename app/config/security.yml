@@ -20,7 +20,7 @@ security:
             form_login:
                 provider: qafoo_user
                 csrf_provider: form.csrf_provider
-                login_path: /auth
+                login_path: /login
                 default_target_path: /
             logout:       true
             anonymous:    true

@@ -12,7 +12,7 @@
             Jobs
             <div class="pull-right planning-nav">
                 {% set date=view.year ~ "-" ~ view.month ~ "-01" %}
-                <form class="navbar-form navbar-left">
+                <form id="nav-left" class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="hidden" name="month" value="{{date|date_modify("-1 month")|date("n")}}">
                         <input type="hidden" name="year" value="{{date|date_modify("-1 month")|date("Y")}}">
@@ -43,7 +43,7 @@
                     </div>
                 </form>
                 {% set nextMonth=view.year ~ "-" ~ (view.month) ~ "-01" %}
-                <form class="navbar-form navbar-left">
+                <form id="nav-right" class="navbar-form navbar-left">
                     <div class="form-group">
                         <input type="hidden" name="month" value="{{date|date_modify("+1 month")|date("n")}}">
                         <input type="hidden" name="year" value="{{date|date_modify("+1 month")|date("Y")}}">
@@ -152,6 +152,7 @@
 {% block scripts %}
     {{parent()}}
     <script src="/vendor/typeahead/typeahead.bundle.js"></script>
+    <script src="/vendor/shortcut/shortcut.js"></script>
     <script type="text/javascript">
     var customers = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -187,6 +188,13 @@
         name: 'project',
         displayKey: 'name',
         source: projects.ttAdapter()
+    });
+
+    shortcut.add("Left", function () {
+        $("#nav-left").submit();
+    });
+    shortcut.add("Right", function () {
+        $("#nav-right").submit();
     });
     </script>
 {% endblock %}

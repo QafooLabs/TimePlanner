@@ -154,6 +154,7 @@
     <script src="/vendor/typeahead/typeahead.bundle.js"></script>
     <script src="/vendor/shortcut/shortcut.js"></script>
     <script type="text/javascript">
+/* Input fields are not submitted properly any more…
     var customers = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -161,7 +162,7 @@
             prefetch: {
                 url: '{{path("qafoo.time_planner.time_planning.customers")}}',
                 filter: function(list) {
-                    return $.map(list, function(customer) {return {name: customer};});
+                    return $.map(list, function(customer) {return {name: customer, value: customer};});
                 }
             }
         }),
@@ -172,23 +173,27 @@
             prefetch: {
                 url: '{{path("qafoo.time_planner.time_planning.projects")}}',
                 filter: function(list) {
-                    return $.map(list, function(project) {return {name: project};});
+                    return $.map(list, function(project) {return {name: project, value: project};});
                 }
             }
         });
-     
+
+    customers.clearPrefetchCache();
     customers.initialize();
-    projects.initialize();
     $('input[name="customer"]').typeahead(null, {
         name: 'customer',
         displayKey: 'name',
         source: customers.ttAdapter()
-    });
+    })
+
+    projects.clearPrefetchCache();
+    projects.initialize();
     $('input[name="project"]').typeahead(null, {
         name: 'project',
         displayKey: 'name',
         source: projects.ttAdapter()
     });
+*/
 
     shortcut.add("Left", function () {
         $("#nav-left").submit();

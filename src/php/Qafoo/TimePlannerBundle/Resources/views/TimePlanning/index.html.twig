@@ -74,23 +74,6 @@
             {% for job in view.jobs %}
                 {% include "QafooTimePlannerBundle:TimePlanning:tableRow.html.twig" with {job: job, year: view.year, month: view.month, highlight: view.highlight} %}
             {% endfor %}
-                <tr>
-                    <form method="POST" class="form-inline" action="{{path("qafoo.time_planner.time_planning.create")}}">
-                        <td><input type="text" class="form-control input-sm" required name="customer" placeholder="{{"Customer"|trans()}}"></td>
-                        <td><input type="text" class="form-control input-sm" required name="project" placeholder="{{"Project"|trans()}}"></td>
-                        <td><input autocomplete="off" type="text" class="form-control number input-sm" required name="revenue" placeholder="{{"Revenue"|trans()}}"></td>
-                        <td><input autocomplete="off" type="text" class="form-control number input-sm" min="0" required name="pt.min" placeholder="{{"Min. PT"|trans()}}"></td>
-                        <td><input autocomplete="off" type="text" class="form-control number input-sm" min="0" required name="pt.max" placeholder="{{"Max. PT"|trans()}}"></td>
-                        <td colspan="{{view.users|length() + 2}}"><input type="text" autocomplete="off" class="form-control input-sm" name="comment" placeholder="{{"Comment"|trans()}}"></td>
-                        <td class="number">
-                            <input type="hidden" name="year" value="{{view.year}}">
-                            <input type="hidden" name="month" value="{{view.month}}">
-                            <button class="btn btn-default btn-sm">
-                                <span class="glyphicon glyphicon-save" aria-label="Store"></span>
-                            </button>
-                        </td>
-                    </form>
-                </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -145,6 +128,36 @@
                 </tr>
             </tfoot>
         </table>
+        <h3>New Job</h3>
+        <form method="POST" action="{{path("qafoo.time_planner.time_planning.create")}}">
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <input type="text" class="form-control input-sm" required name="customer" placeholder="{{"Customer"|trans()}}">
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="text" class="form-control input-sm" required name="project" placeholder="{{"Project"|trans()}}">
+                </div>
+                <div class="form-group col-md-1">
+                    <input autocomplete="off" type="text" class="form-control number input-sm" required name="revenue" placeholder="{{"Revenue"|trans()}}">
+                </div>
+                <div class="form-group col-md-1">
+                    <input autocomplete="off" type="text" class="form-control number input-sm" min="0" required name="pt.min" placeholder="{{"Min. PT"|trans()}}">
+                </div>
+                <div class="form-group col-md-1">
+                    <input autocomplete="off" type="text" class="form-control number input-sm" min="0" required name="pt.max" placeholder="{{"Max. PT"|trans()}}">
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="text" autocomplete="off" class="form-control input-sm" name="comment" placeholder="{{"Comment"|trans()}}">
+                </div>
+                <div class="form-group col-md-1 text-right">
+                    <input type="hidden" name="year" value="{{view.year}}">
+                    <input type="hidden" name="month" value="{{view.month}}">
+                    <button class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-save" aria-label="Store"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
@@ -154,7 +167,6 @@
     <script src="/vendor/typeahead/typeahead.bundle.js"></script>
     <script src="/vendor/shortcut/shortcut.js"></script>
     <script type="text/javascript">
-/* Input fields are not submitted properly any more…
     var customers = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -193,7 +205,6 @@
         displayKey: 'name',
         source: projects.ttAdapter()
     });
-*/
 
     shortcut.add("Left", function () {
         $("#nav-left").submit();

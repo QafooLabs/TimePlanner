@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ODM\CouchDB\DocumentRepository;
 
 use Qafoo\UserBundle\Domain\User;
-use Qafoo\UserBundle\Domain\FOSUserHelper;
+use Qafoo\UserBundle\Domain\FOSUser;
 
 class UserGateway implements UserProviderInterface
 {
@@ -132,7 +132,7 @@ class UserGateway implements UserProviderInterface
             throw new UnsupportedUserException(
                 sprintf(
                     'Expected an instance of %s, but got "%s".',
-                    FOSUserHelper::class,
+                    FOSUser::class,
                     get_class($user)
                 )
             );
@@ -159,7 +159,7 @@ class UserGateway implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return FOSUserHelper::class === $class ||
-            is_subclass_of($class, FOSUserHelper::class);
+        return FOSUser::class === $class ||
+            is_subclass_of($class, FOSUser::class);
     }
 }

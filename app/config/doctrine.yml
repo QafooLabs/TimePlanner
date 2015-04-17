@@ -17,7 +17,7 @@ doctrine_couch_db:
 fos_user:
     db_driver: couchdb
     firewall_name: main
-    user_class: Qafoo\UserBundle\Domain\FOSUserHelper
+    user_class: Qafoo\UserBundle\Domain\FOSUser
     profile:
         form:
             type: qafoo_user_profile

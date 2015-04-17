@@ -3,13 +3,13 @@
 namespace Qafoo\UserBundle\Domain;
 
 /**
- * @covers Qafoo\UserBundle\Domain\FOSUserHelper
+ * @covers Qafoo\UserBundle\Domain\FOSUser
  */
-class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
+class FOSUserTest extends \PHPUnit_Framework_TestCase
 {
     public function testGetUsername()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $this->assertSame('kore', $user->getUsername());
@@ -17,7 +17,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUsername()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $user->setUsername('updated');
@@ -27,7 +27,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetUsernameCanonical()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $this->assertSame('kore', $user->getUsernameCanonical());
@@ -35,7 +35,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetUsernameCanonical()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $user->setUsernameCanonical('updated');
@@ -46,7 +46,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEmail()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->email = new EMail('kore@example.com');
 
         $this->assertSame('kore@example.com', $user->getEmail());
@@ -54,7 +54,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetEmail()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->email = new EMail('kore@example.com');
 
         $user->setEmail('updated@example.com');
@@ -64,7 +64,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetEmailCanonical()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->email = new EMail('kore@example.com');
 
         $this->assertSame('kore@example.com', $user->getEmailCanonical());
@@ -72,7 +72,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetEmailCanonical()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->email = new EMail('kore@example.com');
 
         $user->setEmailCanonical('updated@example.com');
@@ -83,14 +83,14 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPlainPassword()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
 
         $this->assertNull($user->getPlainPassword());
     }
 
     public function testSetPlainPassword()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
 
         $user->setPlainPassword("password");
 
@@ -99,7 +99,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testEraseCredentials()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
 
         $user->setPlainPassword("password");
         $user->eraseCredentials();
@@ -109,7 +109,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetPassword()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $this->assertNull($user->getPassword());
@@ -117,7 +117,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testSetPassword()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $user->setPassword('updated');
@@ -127,7 +127,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSalt()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $this->assertNotNull($user->getSalt());
@@ -135,7 +135,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testNoExpirationDatePasswordIsExpired()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $this->assertFalse($user->isPasswordRequestNonExpired(30));
@@ -143,7 +143,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testExpirationDatePasswordIsExpired()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $user->setPasswordRequestedAt(new \DateTime("1970-01-01"));
@@ -153,7 +153,7 @@ class FOSUserHelperTest extends \PHPUnit_Framework_TestCase
 
     public function testExpirationDatePasswordIsNotExpired()
     {
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
 
         $user->setPasswordRequestedAt(new \DateTime("now"));

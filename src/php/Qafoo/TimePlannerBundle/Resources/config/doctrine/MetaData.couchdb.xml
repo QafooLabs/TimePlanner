@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doctrine-mapping>
     <embedded-document name="Qafoo\TimePlannerBundle\Domain\MetaData" indexed="true">
-        <embed-one field="author" target-document="Qafoo\UserBundle\Domain\FOSUserHelper" />
+        <embed-one field="author" target-document="Qafoo\UserBundle\Domain\FOSUser" />
         <field name="changed" type="datetime" />
     </embedded-document>
 </doctrine-mapping>

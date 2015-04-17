@@ -2,7 +2,7 @@
 
 namespace Qafoo\UserBundle\Gateway;
 
-use Qafoo\UserBundle\Domain\FOSUserHelper;
+use Qafoo\UserBundle\Domain\FOSUser;
 use Qafoo\UserBundle\Domain\Name;
 use Qafoo\UserBundle\Domain\Email;
 
@@ -13,7 +13,7 @@ class UserGatewayTest extends IntegrationTest
     public function testStoreAndLoadUser()
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
-        $user = new FOSUserHelper();
+        $user = new FOSUser();
         $user->login = 'kore';
         $user->name = new Name("Kore Nordmann");
         $user->email = new Email("kore@example.com");
@@ -29,7 +29,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @depends testStoreAndLoadUser
      */
-    public function testGetAllUsers(FOSUserHelper $user)
+    public function testGetAllUsers(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $this->assertEquals(
@@ -41,7 +41,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @depends testStoreAndLoadUser
      */
-    public function testFindByEmail(FOSUserHelper $user)
+    public function testFindByEmail(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $this->assertEquals(
@@ -53,7 +53,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @depends testStoreAndLoadUser
      */
-    public function testFindByConfirmationToken(FOSUserHelper $user)
+    public function testFindByConfirmationToken(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $this->assertEquals(
@@ -65,7 +65,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @depends testStoreAndLoadUser
      */
-    public function testRemoveUser(FOSUserHelper $user)
+    public function testRemoveUser(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $userGateway->remove($user);

@@ -62,7 +62,7 @@ class UserService implements UserManagerInterface
      */
     public function createUser()
     {
-        return new FOSUserHelper();
+        return new FOSUser();
     }
 
     /**
@@ -162,7 +162,7 @@ class UserService implements UserManagerInterface
      */
     public function getClass()
     {
-        return FOSUserHelper::CLASS;
+        return FOSUser::CLASS;
     }
 
     /**

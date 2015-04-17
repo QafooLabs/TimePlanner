@@ -1,5 +1,5 @@
 function (doc) {
-    if (doc.type !== "Qafoo.UserBundle.Domain.FOSUserHelper") {
+    if (doc.type !== "Qafoo.UserBundle.Domain.FOSUser") {
         return;
     }
 

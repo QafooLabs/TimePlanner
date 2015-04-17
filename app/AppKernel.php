@@ -86,10 +86,9 @@ class AppKernel extends Kernel
             'monolog_action_level' => 'error',
         );
 
-        $baseDir = __DIR__ . '/../';
         foreach (static::getAdditionalConfigFiles() as $file) {
-            if (file_exists($fileName = $baseDir . $file)) {
-                self::$configuration = array_merge(self::$configuration, parse_ini_file($fileName));
+            if (file_exists($file)) {
+                self::$configuration = array_merge(self::$configuration, parse_ini_file($file));
             }
         }
 
@@ -113,11 +112,13 @@ class AppKernel extends Kernel
      */
     public static function getAdditionalConfigFiles()
     {
-        $files = array('build.properties', 'build.properties.local');
+        $files = array(
+            __DIR__ . '/../environment',
+            __DIR__ . '/../environment.local',
+        );
 
-        // @Hack to use test config in feature tests…
-        if (getenv("TESTING")) {
-            $files[] = 'build.properties.test';
+        if (getenv("CONFIG")) {
+            $files[] = getenv("CONFIG");
         }
         return $files;
     }

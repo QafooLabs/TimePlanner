@@ -4,7 +4,7 @@
         <parallel>
             <daemons>
                 <exec executable="php" dir="${basedir}">
-                    <env key="TESTING" value="1" />
+                    <env key="CONFIG" value="${basedir}/environment.test" />
 
                     <arg value="-S" />
                     <arg value="localhost:8888" />

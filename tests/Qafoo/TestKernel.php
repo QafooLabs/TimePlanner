@@ -13,7 +13,7 @@ class TestKernel extends \AppKernel
     {
         return array_merge(
             parent::getAdditionalConfigFiles(),
-            array('build.properties.test')
+            array(__DIR__ . '/../../environment.test')
         );
     }
 }

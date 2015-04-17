@@ -4,8 +4,8 @@
     <!--
         Include local project properties.
     -->
-    <property file="${basedir}/build.properties.local" />
-    <property file="${basedir}/build.properties" />
+    <property file="${basedir}/environment.local" />
+    <property file="${basedir}/environment" />
 
     <!--
         Import main target defintions (extension points)

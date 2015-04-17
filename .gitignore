@@ -5,5 +5,5 @@
 /app/sessions/
 /app/logs/
 /web/bundles
-/build.properties.local
+/environment.local
 /tests/Qafoo/cache

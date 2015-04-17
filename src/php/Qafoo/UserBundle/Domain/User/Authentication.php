@@ -4,7 +4,7 @@ namespace Qafoo\UserBundle\Domain\User;
 
 use Kore\DataObject\DataObject;
 
-class Authentification extends DataObject
+class Authentication extends DataObject
 {
     /**
      * Password

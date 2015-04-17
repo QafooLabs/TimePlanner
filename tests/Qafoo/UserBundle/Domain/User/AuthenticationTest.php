@@ -3,19 +3,19 @@
 namespace Qafoo\UserBundle\Domain\User;
 
 /**
- * @covers Qafoo\UserBundle\Domain\User\Authentification
+ * @covers Qafoo\UserBundle\Domain\User\Authentication
  */
-class AuthentificationTest extends \PHPUnit_Framework_TestCase
+class AuthenticationTest extends \PHPUnit_Framework_TestCase
 {
     public function testSaltNotEmpty()
     {
-        $auth = new Authentification();
+        $auth = new Authentication();
         $this->assertNotEmpty($auth->salt);
     }
 
     public function testSetSalt()
     {
-        $auth = new Authentification(array(
+        $auth = new Authentication(array(
             'salt' => $expectation = 'salt',
         ));
 

@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\UserInterface;
 
 use Qafoo\UserBundle\Domain\User;
 use Qafoo\UserBundle\Domain\EMail;
-use Qafoo\UserBundle\Domain\User\Authentification;
+use Qafoo\UserBundle\Domain\User\Authentication;
 
 /**
  * Class: FOSUserHelper

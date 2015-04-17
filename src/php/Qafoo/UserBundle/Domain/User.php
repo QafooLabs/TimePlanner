@@ -2,7 +2,7 @@
 
 namespace Qafoo\UserBundle\Domain;
 
-use Qafoo\UserBundle\Domain\User\Authentification;
+use Qafoo\UserBundle\Domain\User\Authentication;
 
 use Kore\DataObject\DataObject;
 
@@ -16,9 +16,9 @@ class User extends DataObject
     public $login;
 
     /**
-     * Authentification information
+     * Authentication information
      *
-     * @var Authentification
+     * @var Authentication
      */
     public $auth;
 
@@ -44,7 +44,7 @@ class User extends DataObject
     {
         parent::__construct($values);
 
-        $this->auth = $this->auth ?: new Authentification();
+        $this->auth = $this->auth ?: new Authentication();
         $this->name = $this->name ?: new Name();
         $this->email = $this->email ?: new EMail();
     }

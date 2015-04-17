@@ -10,13 +10,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testAuthNotEmpty()
     {
         $user = new User();
-        $this->assertTrue($user->auth instanceof User\Authentification);
+        $this->assertTrue($user->auth instanceof User\Authentication);
     }
 
     public function testSetAuth()
     {
         $user = new User(array(
-            'auth' => $expectation = new User\Authentification(),
+            'auth' => $expectation = new User\Authentication(),
         ));
 
         $this->assertSame($expectation, $user->auth);

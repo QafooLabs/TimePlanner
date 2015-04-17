@@ -22,8 +22,12 @@ security:
                 csrf_provider: form.csrf_provider
                 login_path: /login
                 default_target_path: /
-            logout:       true
-            anonymous:    true
+            logout: true
+            anonymous: true
+            remember_me:
+                key: "%secret%"
+                lifetime: 604800 # 1 week in seconds
+                path: "/"
 
     access_control:
         - { path: ^/auth$, role: IS_AUTHENTICATED_ANONYMOUSLY }

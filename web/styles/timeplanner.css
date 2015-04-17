@@ -58,3 +58,7 @@ tr:hover .hover-link {
 .table > tfoot > tr:first-child > td {
     border-top-width: 2px;
 }
+
+.planning-nav form.navbar-form {
+    padding: 0px 5px;
+}

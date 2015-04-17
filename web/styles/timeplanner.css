@@ -17,11 +17,11 @@ footer {
 }
 
 .hover-link {
-    display: none;
+    visibility: hidden;
 }
 
 tr:hover .hover-link {
-    display: inline;
+    visibility: visible;
 }
 
 .navbar-brand img {

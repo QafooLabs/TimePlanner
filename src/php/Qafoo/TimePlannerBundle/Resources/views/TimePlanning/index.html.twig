@@ -77,18 +77,18 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="2">Sum</td>
-                    <td class="number">{{view.sum.expectedRevenue|number_format(2)}} €</td>
-                    <td class="number">{{view.sum.personDays.minimum}}</td>
-                    <td class="number">{{view.sum.personDays.maximum}}</td>
+                    <th colspan="2">Sum</th>
+                    <th class="number">{{view.sum.expectedRevenue|number_format(2)}} €</th>
+                    <th class="number">{{view.sum.personDays.minimum}}</th>
+                    <th class="number">{{view.sum.personDays.maximum}}</th>
                 {% for user in view.users %}
-                    <td class="number {% if user.login == view.user.login %}active{% endif %}">
+                    <th class="number {% if user.login == view.user.login %}active{% endif %}">
                         {{view.sum.assignees[user.login].days|default(0)}}
-                    </td>
+                    </th>
                 {% endfor %}
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 <tr>
                     <td colspan="3">{{"Vacations"|trans()}}</td>

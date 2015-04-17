@@ -55,6 +55,7 @@ tr:hover .hover-link {
     text-align: right;
 }
 
+.table > tfoot > tr:first-child > th,
 .table > tfoot > tr:first-child > td {
     border-top-width: 2px;
 }

@@ -86,7 +86,7 @@ class UserService implements UserManagerInterface
      */
     public function findUserBy(array $criteria)
     {
-        throw \BadMethodCallException("Not implemented, underspecified method.");
+        throw new \BadMethodCallException("Not implemented, underspecified method.");
     }
 
     /**

@@ -62,6 +62,36 @@ class UserServiceTest extends IntegrationTest
     }
 
     /**
+     * @expectedException Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
+    public function testDoNotFindUser()
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $userService->getUserByLogin("unknown");
+    }
+
+    public function testFailLoadUserByUsername()
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $this->assertNull($userService->findUserByUsername("unknown"));
+    }
+
+    public function testGetClass()
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $this->assertSame(FOSUser::class, $userService->getClass());
+    }
+
+    /**
+     * @expectedException BadMethodCallException
+     */
+    public function testFailFinyUserBy()
+    {
+        $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $userService->findUserBy(array());
+    }
+
+    /**
      * @depends testStoreAndRetriveUser
      */
     public function testFindAllUsers($user)

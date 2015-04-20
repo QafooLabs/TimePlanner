@@ -88,7 +88,10 @@
             {% block flashMessages %}
                 {% for type, class in {error: "danger", warning: "warning", success: "success"} %}
                     {% for message in app.session.flashbag.get(type) %}
-                        <div class="alert alert-{{class}}"><p>{{message}}</p></div>
+                        <div class="alert alert-{{class}} alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <p>{{message}}</p>
+                        </div>
                     {% endfor %}
                 {% endfor %}
             {% endblock %}

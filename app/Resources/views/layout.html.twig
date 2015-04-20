@@ -85,6 +85,13 @@
         </nav>
 
         <div class="container">
+            {% block flashMessages %}
+                {% for type, class in {error: "danger", warning: "warning", success: "success"} %}
+                    {% for message in app.session.flashbag.get(type) %}
+                        <div class="alert alert-{{class}}"><p>{{message}}</p></div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
             {% block content %}
                 Dummy template – to be overwritten by application.
             {% endblock %}

@@ -45,7 +45,5 @@ class User extends DataObject
         parent::__construct($values);
 
         $this->auth = $this->auth ?: new Authentication();
-        $this->name = $this->name ?: new Name();
-        $this->email = $this->email ?: new EMail();
     }
 }

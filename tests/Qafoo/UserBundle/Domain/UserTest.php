@@ -22,25 +22,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectation, $user->auth);
     }
 
-    public function testNameNotEmpty()
-    {
-        $user = new User();
-        $this->assertTrue($user->name instanceof Name);
-    }
-
     public function testSetName()
     {
         $user = new User(array(
-            'name' => $expectation = new Name("Kore Nordmann"),
+            'name' => $expectation = Name::createFromName("Kore Nordmann"),
         ));
 
         $this->assertSame($expectation, $user->name);
-    }
-
-    public function testEMailNotEmpty()
-    {
-        $user = new User();
-        $this->assertTrue($user->email instanceof EMail);
     }
 
     public function testSetEMail()

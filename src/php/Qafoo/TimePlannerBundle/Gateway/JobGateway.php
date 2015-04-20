@@ -29,7 +29,11 @@ class JobGateway
      */
     public function get($jobId)
     {
-        return $this->documentRepository->find($jobId);
+        if (($job = $this->documentRepository->find($jobId)) === null) {
+            throw new \OutOfBoundsException("Job with id $jobId not found.");
+        }
+
+        return $job;
     }
 
     /**
@@ -105,6 +109,15 @@ class JobGateway
      */
     public function store(Job $job)
     {
+        if ($job->jobId !== null) {
+            $loaded = $this->get($job->jobId);
+            if ($loaded->revision !== $job->revision) {
+                throw new \LogicException(
+                    'Document had been updated by some else in the mean time.'
+                );
+            }
+        }
+
         $documentManager = $this->documentRepository->getDocumentManager();
         $documentManager->persist($job);
         $documentManager->flush();
@@ -120,6 +133,15 @@ class JobGateway
      */
     public function remove(Job $job)
     {
+        if ($job->jobId !== null) {
+            $loaded = $this->get($job->jobId);
+            if ($loaded->revision !== $job->revision) {
+                throw new \LogicException(
+                    'Document had been updated by some else in the mean time.'
+                );
+            }
+        }
+
         $documentManager = $this->documentRepository->getDocumentManager();
         $documentManager->remove($job);
         $documentManager->flush();

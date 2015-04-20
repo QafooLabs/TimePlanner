@@ -105,11 +105,12 @@ class UserGateway implements UserProviderInterface
             ->onlyDocs(true)
             ->execute();
 
-        if (!count($result) === 1) {
+        $documents = $result->toArray();
+        if (count($documents) !== 1) {
             throw new \OutOfBoundsException("No user found with $property $value");
         }
 
-        return $result->toArray()[0];
+        return $documents[0];
     }
 
     /**
@@ -138,16 +139,7 @@ class UserGateway implements UserProviderInterface
             );
         }
 
-        if (null === $reloadedUser = $this->loadUserByUsername($user->getUsername())) {
-            throw new UsernameNotFoundException(
-                sprintf(
-                    'User with login "%d" could not be reloaded.',
-                    $user->getUsername()
-                )
-            );
-        }
-
-        return $reloadedUser;
+        return $this->loadUserByUsername($user->getUsername());
     }
 
     /**
@@ -159,7 +151,6 @@ class UserGateway implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return FOSUser::class === $class ||
-            is_subclass_of($class, FOSUser::class);
+        return FOSUser::class === $class || is_subclass_of($class, FOSUser::class);
     }
 }

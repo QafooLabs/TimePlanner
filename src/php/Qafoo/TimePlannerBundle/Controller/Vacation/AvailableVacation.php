@@ -26,4 +26,14 @@ class AvailableVacation extends DataObject
      * @var DaySet
      */
     public $booked;
+
+    /**
+     * Get remaining days
+     *
+     * @return int
+     */
+    public function getRemainingDays()
+    {
+        return $this->available - count($this->booked);
+    }
 }

@@ -34,7 +34,7 @@
                 <tr {% if remaining.user.login == view.user.login %}class="active"{% endif %}>
                     <td>{% include "QafooUserBundle:User:normal.html.twig" with {user: remaining.user} %}</td>
                     <td class="number">{{remaining.booked|length()}} / {{remaining.available}}</td>
-                    <td class="number"><strong>{{remaining.available - remaining.booked|length()}}</strong></td>
+                    <td class="number"><strong>{{remaining.remainingDays}}</strong></td>
                 </tr>
             {% endfor %}
             </tbody>

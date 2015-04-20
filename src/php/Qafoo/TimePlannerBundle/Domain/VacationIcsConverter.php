@@ -9,6 +9,8 @@ class VacationIcsConverter
     /**
      * Get ics calendar
      *
+     * @index Visitor
+     *
      * @param Vacation[] $vacations
      * @return string
      */

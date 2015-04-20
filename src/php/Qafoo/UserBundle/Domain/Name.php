@@ -41,6 +41,8 @@ class Name extends DataObject
     /**
      * Create from name
      *
+     * @index FactoryMethod
+     *
      * @param string $name
      * @return static
      */

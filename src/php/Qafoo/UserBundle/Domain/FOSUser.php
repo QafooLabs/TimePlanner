@@ -15,6 +15,8 @@ use Qafoo\UserBundle\Domain\User\Authentication;
  * cleaner domain object. User as an adapter to enable the FOSUserBundle with
  * our own "clean" objects.
  *
+ * @index Adapter
+ *
  * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 class FOSUser extends User implements UserInterface

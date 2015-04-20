@@ -9,6 +9,9 @@ use Qafoo\UserBundle\Domain\Email;
 
 use Qafoo\IntegrationTest;
 
+/**
+ * @covers Qafoo\UserBundle\Gateway\UserGateway
+ */
 class UserGatewayTest extends IntegrationTest
 {
     public function testStoreAndLoadUser()

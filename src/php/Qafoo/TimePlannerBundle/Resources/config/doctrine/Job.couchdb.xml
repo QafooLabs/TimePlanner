@@ -2,6 +2,7 @@
 <doctrine-mapping>
     <document name="Qafoo\TimePlannerBundle\Domain\Job" indexed="true">
         <id name="jobId" />
+        <field name="revision" type="string" json-name="_rev" version="true" />
 
         <field name="customer" type="string" />
         <field name="project" type="string" />

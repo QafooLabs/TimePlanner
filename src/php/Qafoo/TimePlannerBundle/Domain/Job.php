@@ -14,6 +14,13 @@ class Job extends DataObject
     public $jobId;
 
     /**
+     * Revision
+     *
+     * @var string
+     */
+    public $revision;
+
+    /**
      * Job date
      *
      * @var \DateTime

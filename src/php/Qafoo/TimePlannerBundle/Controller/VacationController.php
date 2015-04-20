@@ -13,7 +13,7 @@ use Qafoo\TimePlannerBundle\Domain\VacationService;
 use Qafoo\TimePlannerBundle\Domain\Vacation;
 use Qafoo\TimePlannerBundle\Domain\MetaData;
 use Qafoo\TimePlannerBundle\Domain\DaySet;
-use Qafoo\TimePlannerBundle\Domain\VacationIcsVisitor;
+use Qafoo\TimePlannerBundle\Domain\VacationIcsConverter;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Overview;
 use Qafoo\TimePlannerBundle\Controller\Vacation\AvailableVacation;
 use Qafoo\TimePlannerBundle\Controller\Vacation\Edit;
@@ -56,10 +56,10 @@ class VacationController extends Controller
     public function exportAction()
     {
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
-        $icsVisitor = new VacationIcsVisitor();
+        $icsConverter = new VacationIcsConverter();
 
         return new Response(
-            $icsVisitor->getIcsCalendar($vacationService->getVacations()),
+            $icsConverter->convert($vacationService->getVacations()),
             200,
             array(
                 'Content-Type' => 'text/text',

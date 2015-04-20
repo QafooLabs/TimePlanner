@@ -4,7 +4,7 @@ namespace Qafoo\TimePlannerBundle\Domain;
 
 use Sabre\VObject\Component;
 
-class VacationIcsVisitor
+class VacationIcsConverter
 {
     /**
      * Get ics calendar
@@ -12,7 +12,7 @@ class VacationIcsVisitor
      * @param Vacation[] $vacations
      * @return string
      */
-    public function getIcsCalendar(array $vacations)
+    public function convert(array $vacations)
     {
         $calendar = new Component\VCalendar();
         foreach ($vacations as $vacation) {

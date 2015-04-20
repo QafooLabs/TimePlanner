@@ -27,6 +27,6 @@ class NameTransformer implements DataTransformerInterface
      */
     public function reverseTransform($name)
     {
-        return new Name($name);
+        return Name::createFromName($name);
     }
 }

@@ -31,19 +31,35 @@ class Name extends DataObject
      * @param string $email
      * @return void
      */
-    public function __construct($name = null)
+    public function __construct($lastName = null, $firstName = null, array $intermediateNames = array())
+    {
+        $this->firstName = $firstName;
+        $this->intermediateNames = $intermediateNames;
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Create from name
+     *
+     * @param string $name
+     * @return static
+     */
+    public static function createFromName($name)
     {
         $names = preg_split('(\\s)', $name);
 
         if (count($names)) {
-            $this->lastName = array_pop($names);
+            $firstName = array_shift($names);
         }
 
+        $lastName = null;
         if (count($names)) {
-            $this->firstName = array_shift($names);
+            $lastName = array_pop($names);
         }
 
-        $this->intermediateNames = $names;
+        $intermediateNames = $names;
+
+        return new static($lastName, $firstName, $intermediateNames);
     }
 
     /**

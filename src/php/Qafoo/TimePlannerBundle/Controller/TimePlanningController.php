@@ -55,8 +55,13 @@ class TimePlanningController extends Controller
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
 
-        $jobService = $this->get('qafoo.time_planner.domain.job_service');
-        $jobService->remove($job);
+        try {
+            $jobService = $this->get('qafoo.time_planner.domain.job_service');
+            $jobService->remove($job);
+            $request->getSession()->getFlashBag()->add('success', 'Job removed');
+        } catch (\LogicException $e) {
+            $request->getSession()->getFlashBag()->add('error', $e->getMessage());
+        }
 
         return new RedirectRouteResponse(
             'qafoo.time_planner.time_planning.overview',
@@ -69,9 +74,6 @@ class TimePlanningController extends Controller
 
     public function assignAction(Request $request, TokenContext $context, Job $job)
     {
-        $year = $request->get('year', date("Y"));
-        $month = $request->get('month', date("n"));
-
         $userService = $this->get('qafoo.user.domain.user_service');
         $assignees = $request->get('assignees', array());
         foreach ($assignees as $user => $days) {
@@ -80,58 +82,25 @@ class TimePlanningController extends Controller
                 $days
             );
         }
-        $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $job->revision = $request->get('revision', null);
         $job->metaData = new MetaData($context->getCurrentUser());
 
-        try {
-            $jobService->store($job);
-            $request->getSession()->getFlashBag()->add('success', 'Job updated');
-        } catch (\LogicException $e) {
-            $request->getSession()->getFlashBag()->add('error', $e->getMessage());
-        }
-
-        return new RedirectRouteResponse(
-            'qafoo.time_planner.time_planning.overview',
-            array(
-                'year' => $year,
-                'month' => $month,
-            )
-        );
+        return $this->storeAndRedirect($request, $job);
     }
 
     public function assignInvoiceAction(Request $request, TokenContext $context, Job $job)
     {
-        $year = $request->get('year', date("Y"));
-        $month = $request->get('month', date("n"));
-
-        $jobService = $this->get('qafoo.time_planner.domain.job_service');
         $job->revision = $request->get('revision', null);
         $job->invoiceId = $request->get('invoiceId', null);
         $job->metaData = new MetaData($context->getCurrentUser());
 
-        try {
-            $jobService->store($job);
-            $request->getSession()->getFlashBag()->add('success', 'Job updated');
-        } catch (\LogicException $e) {
-            $request->getSession()->getFlashBag()->add('error', $e->getMessage());
-        }
-
-        return new RedirectRouteResponse(
-            'qafoo.time_planner.time_planning.overview',
-            array(
-                'year' => $year,
-                'month' => $month,
-            )
-        );
+        return $this->storeAndRedirect($request, $job);
     }
 
     public function storeAction(Request $request, TokenContext $context, Job $job = null)
     {
         $year = $request->get('year', date("Y"));
         $month = $request->get('month', date("n"));
-
-        $jobService = $this->get('qafoo.time_planner.domain.job_service');
 
         $job = $job ?: new Job();
         $job->month = new \DateTime("$year-$month-01");
@@ -145,7 +114,20 @@ class TimePlanningController extends Controller
         $job->comment = $request->get('comment');
         $job->metaData = new MetaData($context->getCurrentUser());
 
+        return $this->storeAndRedirect($request, $job);
+    }
+
+    /**
+     * storeAndRedirect
+     *
+     * @param Request $request
+     * @param Job $job
+     * @return void
+     */
+    protected function storeAndRedirect(Request $request, Job $job)
+    {
         try {
+            $jobService = $this->get('qafoo.time_planner.domain.job_service');
             $jobService->store($job);
             $request->getSession()->getFlashBag()->add('success', 'Job updated');
         } catch (\LogicException $e) {
@@ -155,8 +137,9 @@ class TimePlanningController extends Controller
         return new RedirectRouteResponse(
             'qafoo.time_planner.time_planning.overview',
             array(
-                'year' => $year,
-                'month' => $month,
+                'year' => $job->month->format('Y'),
+                'month' => $job->month->format('n'),
+                'highlight' => $job->jobId,
             )
         );
     }

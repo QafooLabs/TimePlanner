@@ -18,8 +18,6 @@
 {% for user in view.users %}
     <td {% if user.login == view.user.login %}class="active"{% endif %}>
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign", {job: job.jobId}) }}">
-            <input type="hidden" name="year" value="{{view.year}}">
-            <input type="hidden" name="month" value="{{view.month}}">
             <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm {% if not job.assignees[user.login].days %}text-muted{% endif %}"
                 name="assignees[{{user.login}}]"
@@ -29,8 +27,6 @@
 {% endfor %}
     <td class="{% if (not job.invoiceId) and (job.expectedRevenue) and ((year ~ "-" ~ (month + 1) ~ "-01")|date() < "now"|date()) %}danger{% endif %}">
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign_invoice", {job: job.jobId}) }}">
-            <input type="hidden" name="year" value="{{view.year}}">
-            <input type="hidden" name="month" value="{{view.month}}">
             <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm"
                 name="invoiceId"

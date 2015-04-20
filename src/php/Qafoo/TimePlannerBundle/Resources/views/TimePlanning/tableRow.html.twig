@@ -20,6 +20,7 @@
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign", {job: job.jobId}) }}">
             <input type="hidden" name="year" value="{{view.year}}">
             <input type="hidden" name="month" value="{{view.month}}">
+            <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm {% if not job.assignees[user.login].days %}text-muted{% endif %}"
                 name="assignees[{{user.login}}]"
                 value="{{job.assignees[user.login].days|default(0)}}">
@@ -30,6 +31,7 @@
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign_invoice", {job: job.jobId}) }}">
             <input type="hidden" name="year" value="{{view.year}}">
             <input type="hidden" name="month" value="{{view.month}}">
+            <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm"
                 name="invoiceId"
                 value="{{job.invoiceId}}">
@@ -40,6 +42,7 @@
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.delete", {job: job.jobId}) }}" onsubmit="return confirm('Really remove {{job.project}} for {{job.customer}}?');">
             <input type="hidden" name="year" value="{{view.year}}">
             <input type="hidden" name="month" value="{{view.month}}">
+            <input type="hidden" name="revision" value="{{job.revision}}">
             <div class="btn-group btn-group-xs" role="group" aria-label="Operations">
                 <a class="btn btn-default" href="{{ path("qafoo.time_planner.time_planning.edit", {job: job.jobId}) }}" title="Edit">
                     <span class="glyphicon glyphicon-pencil" aria-label="Edit"></span>

@@ -102,6 +102,28 @@ class JobGateway
     }
 
     /**
+     * Check document revision
+     *
+     * Throws an exception if document has been changed in the mean time.
+     *
+     * @param Job $job
+     * @return void
+     */
+    protected function checkDocumentRevision(Job $job)
+    {
+        if (!$job->jobId) {
+            return;
+        }
+
+        $unitOfWork = $this->documentRepository->getDocumentManager()->getUnitOfWork();
+        if ($job->revision !== $unitOfWork->getDocumentRevision($job)) {
+            throw new \LogicException(
+                'Job had been updated by some else in the mean time.'
+            );
+        }
+    }
+
+    /**
      * Store
      *
      * @param Job $job
@@ -109,14 +131,7 @@ class JobGateway
      */
     public function store(Job $job)
     {
-        if ($job->jobId !== null) {
-            $loaded = $this->get($job->jobId);
-            if ($loaded->revision !== $job->revision) {
-                throw new \LogicException(
-                    'Document had been updated by some else in the mean time.'
-                );
-            }
-        }
+        $this->checkDocumentRevision($job);
 
         $documentManager = $this->documentRepository->getDocumentManager();
         $documentManager->persist($job);
@@ -133,14 +148,7 @@ class JobGateway
      */
     public function remove(Job $job)
     {
-        if ($job->jobId !== null) {
-            $loaded = $this->get($job->jobId);
-            if ($loaded->revision !== $job->revision) {
-                throw new \LogicException(
-                    'Document had been updated by some else in the mean time.'
-                );
-            }
-        }
+        $this->checkDocumentRevision($job);
 
         $documentManager = $this->documentRepository->getDocumentManager();
         $documentManager->remove($job);

@@ -6,6 +6,7 @@
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
     <input type="hidden" name="year" value="{{view.job.month|date("Y")}}" />
     <input type="hidden" name="month" value="{{view.job.month|date("n")}}" />
+    <input type="hidden" name="revision" value="{{view.job.revision}}" />
 
     <div class="form-group">
         <label for="customer">{{ 'Customer'|trans }}</label>

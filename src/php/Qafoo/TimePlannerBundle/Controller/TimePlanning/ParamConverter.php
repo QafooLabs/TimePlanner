@@ -30,6 +30,7 @@ class ParamConverter implements ParamConverterInterface
         }
 
         $job = $this->gateway->get($jobId);
+        $job->revision = $request->get('revision', $job->revision);
 
         $parameterName = $configuration->getName();
         $request->attributes->set($parameterName, $job);

@@ -29,6 +29,8 @@ class JobGatewayTest extends IntegrationTest
         $job->month = new \DateTime('1982-04');
         $job->customer = 'Customer';
         $job->project = 'Project';
+
+        // @Hack to make equal checks work with doctrine results
         $job->assignees = new ArrayCollection();
 
         $job = $jobGateway->store($job);
@@ -136,7 +138,8 @@ class JobGatewayTest extends IntegrationTest
     public function testFailUpdateWrongRevision(Job $job)
     {
         $jobGateway = $this->getContainer()->get('qafoo.time_planner.gateway.job');
-        $job = clone $job;
+
+        $job = $jobGateway->get($job->jobId);
         $job->revision = 'WrongVersion';
         $job->customer = $customer = 'New Customer';
 
@@ -151,7 +154,7 @@ class JobGatewayTest extends IntegrationTest
     {
         $jobGateway = $this->getContainer()->get('qafoo.time_planner.gateway.job');
 
-        $job->jobId = $job->jobId;
+        $job = $jobGateway->get($job->jobId);
         $job->revision = 'WrongVersion';
 
         $jobGateway->remove($job);

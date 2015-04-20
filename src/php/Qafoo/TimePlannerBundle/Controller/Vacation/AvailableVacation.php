@@ -30,6 +30,8 @@ class AvailableVacation extends DataObject
     /**
      * Get remaining days
      *
+     * @index ViewModel
+     *
      * @return int
      */
     public function getRemainingDays()

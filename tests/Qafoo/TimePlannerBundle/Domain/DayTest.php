@@ -21,6 +21,8 @@ class DayTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @index DataProvider
+     *
      * @dataProvider getWeekDays
      */
     public function testIsWeekend(Day $day, $isWeekend)

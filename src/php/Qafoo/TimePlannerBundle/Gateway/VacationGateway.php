@@ -31,7 +31,11 @@ class VacationGateway
      */
     public function get($vacationId)
     {
-        return $this->documentRepository->find($vacationId);
+        if (($vacation = $this->documentRepository->find($vacationId)) === null) {
+            throw new \OutOfBoundsException("Vacation with id $vacationId could not be found.");
+        }
+
+        return $vacation;
     }
 
     /**
@@ -124,12 +128,18 @@ class VacationGateway
         $result = $query
             ->setStartKey($parameters)
             ->setEndKey(array_merge($parameters, array(CouchDBClient::COLLATION_END)))
-            ->setIncludeDocs(true)
-            ->setReduce(false)
-            ->onlyDocs(true)
+            ->setReduce(true)
+            ->setGroup(true)
             ->execute();
 
-        return $result->toArray();
+        $vacationIds = array_map(
+            function ($row) {
+                return $row['key'][1];
+            },
+            $result->toArray()
+        );
+
+        return $this->documentRepository->findMany($vacationIds);
     }
 
     /**

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <target name="phpunit:mysql" extensionOf="-test-unit:after~hook" depends="-phpunit:check" if="-phpunit:active">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="cache:clear" />
+        </exec>
+
+        <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
+            <env key="CONFIG" file="${basedir}/tests/environment.mysql" />
+
+            <arg value="--configuration" />
+            <arg value="${basedir}/phpunit.xml" />
+        </exec>
+    </target>
+</project>

@@ -1,9 +1,9 @@
 env=test
 
-database.type=couchdb
+database.type=mysql
 database.host=127.0.0.1
-database.port=5984
-database.user=
+database.port=3306
+database.user=root
 database.password=
 database.name=timeplanner_test
 

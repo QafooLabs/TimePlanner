@@ -2,6 +2,8 @@
 
 namespace Qafoo;
 
+use Doctrine\DBAL\DriverManager;
+
 require __DIR__ . '/../../app/AppKernel.php';
 
 abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
@@ -22,6 +24,13 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         self::$container = null;
+        $databaseType = self::getContainer()->getParameter('database.type');
+        $method = 'initialize' . ucfirst($databaseType);
+        self::$method(self::getContainer());
+    }
+
+    protected static function initializeCouchdb($container)
+    {
         $couchDbConnection = self::getContainer()->get('doctrine_couchdb.client.default_connection');
 
         try {
@@ -31,6 +40,20 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
         }
 
         $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
+    }
+
+    protected static function initializeMysql($container)
+    {
+        $connection = self::getContainer()->get('doctrine.dbal.default_connection');
+        $parameters = $connection->getParams();
+        unset($parameters['dbname']);
+
+        $tmpConnection = DriverManager::getConnection($parameters);
+        $schemaManager = $tmpConnection->getSchemaManager();
+        $schemaManager->dropAndCreateDatabase($container->getParameter('database.name'));
+
+        $schemaManager = $connection->getSchemaManager();
+        $schemaManager->createSchema();
     }
 
     public function setUp()

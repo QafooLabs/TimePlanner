@@ -29,7 +29,11 @@ class PublicHolidayGateway
      */
     public function get($publicHolidayId)
     {
-        return $this->documentRepository->find($publicHolidayId);
+        if (($holiday = $this->documentRepository->find($publicHolidayId)) === null) {
+            throw new \OutOfBoundsException("Public holiday with id $publicHolidayId not found.");
+        }
+
+        return $holiday;
     }
 
     /**

@@ -85,7 +85,7 @@ class UserServiceTest extends IntegrationTest
     /**
      * @expectedException BadMethodCallException
      */
-    public function testFailFinyUserBy()
+    public function testFailFindUserBy()
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
         $userService->findUserBy(array());
@@ -122,9 +122,12 @@ class UserServiceTest extends IntegrationTest
     public function testUpdatePlainPassword($user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user = $userService->reloadUser($user);
+
         $user->setPlainPassword("password");
 
         $userService->updatePassword($user);
+        $userService->updateUser($user);
 
         $this->assertNotNull($user->auth->password);
         return $user;
@@ -144,6 +147,7 @@ class UserServiceTest extends IntegrationTest
     public function testFindUserByEmail($user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user = $userService->reloadUser($user);
 
         $loadedUser = $userService->findUserByEmail("kore@example.com");
 
@@ -156,6 +160,7 @@ class UserServiceTest extends IntegrationTest
     public function testFindUserByConfirmationToken($user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user = $userService->reloadUser($user);
 
         $user->auth->confirmationToken = 'token';
         $userService->updateUser($user);
@@ -183,6 +188,7 @@ class UserServiceTest extends IntegrationTest
     public function testFindUserByUsernameOrEmail($value, $user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user = $userService->reloadUser($user);
 
         $loadedUser = $userService->findUserByUsernameOrEmail($value);
 
@@ -197,6 +203,7 @@ class UserServiceTest extends IntegrationTest
     public function testDeleteUser($user)
     {
         $userService = $this->getContainer()->get('qafoo.user.domain.user_service');
+        $user = $userService->reloadUser($user);
 
         $userService->deleteUser($user);
 

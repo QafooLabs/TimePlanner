@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Qafoo\UserBundle\Domain\FOSUser" table="user">
+        <id name="login" field="u_id" type="string" length="100" />
+
+        <one-to-one field="auth" target-entity="Qafoo\UserBundle\Domain\User\Authentication" inversed-by="user">
+            <cascade><cascade-remove /></cascade>
+            <join-column name="ua_id" referenced-column-name="ua_id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+
+        <one-to-one field="name" target-entity="Qafoo\UserBundle\Domain\Name" inversed-by="user">
+            <cascade><cascade-remove /></cascade>
+            <join-column name="un_id" referenced-column-name="un_id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+
+        <one-to-one field="email" target-entity="EMail" inversed-by="user">
+            <cascade><cascade-remove /></cascade>
+            <join-column name="um_id" referenced-column-name="um_id" on-delete="CASCADE" on-update="CASCADE"/>
+        </one-to-one>
+    </entity>
+</doctrine-mapping>

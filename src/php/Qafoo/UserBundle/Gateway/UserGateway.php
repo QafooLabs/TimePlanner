@@ -84,5 +84,8 @@ abstract class UserGateway implements UserProviderInterface
      *
      * @return bool
      */
-    abstract public function supportsClass($class);
+    public function supportsClass($class)
+    {
+        return FOSUser::class === $class || is_subclass_of($class, FOSUser::class);
+    }
 }

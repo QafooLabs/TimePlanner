@@ -141,16 +141,4 @@ class CouchDB extends UserGateway
 
         return $this->loadUserByUsername($user->getUsername());
     }
-
-    /**
-     * Whether this provider supports the given user class.
-     *
-     * @param string $class
-     *
-     * @return bool
-     */
-    public function supportsClass($class)
-    {
-        return FOSUser::class === $class || is_subclass_of($class, FOSUser::class);
-    }
 }

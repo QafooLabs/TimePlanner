@@ -138,6 +138,8 @@ class UserGatewayTest extends IntegrationTest
     public function testRemoveUser(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
+        $user = $userGateway->refreshUser($user);
+
         $userGateway->remove($user);
         $this->assertEquals(
             array(),

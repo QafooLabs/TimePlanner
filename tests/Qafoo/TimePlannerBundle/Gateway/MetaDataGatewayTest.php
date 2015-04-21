@@ -14,7 +14,7 @@ use Qafoo\IntegrationTest;
  */
 class MetaDataGatewayTest extends IntegrationTest
 {
-    public function testStoreNewMetaData()
+    public function testQueryMetaData()
     {
         $jobGateway = $this->getContainer()->get('qafoo.time_planner.gateway.job');
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
@@ -34,6 +34,19 @@ class MetaDataGatewayTest extends IntegrationTest
         $this->assertEquals(
             array($job),
             $metadataGateway->getLastEdits(Job::class)
+        );
+    }
+
+    /**
+     * @depends testQueryMetaData
+     */
+    public function testQueryNoDataWithWrongType()
+    {
+        $metadataGateway = $this->getContainer()->get('qafoo.time_planner.gateway.metadata');
+
+        $this->assertEquals(
+            array(),
+            $metadataGateway->getLastEdits('unknown')
         );
     }
 }

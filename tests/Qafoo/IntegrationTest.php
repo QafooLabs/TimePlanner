@@ -30,4 +30,12 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
     }
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.document_manager');
+        $documentManager->clear();
+    }
 }

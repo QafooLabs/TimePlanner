@@ -23,6 +23,8 @@ class PersonDays extends DataObject
     /**
      * __construct
      *
+     * @index Validation
+     *
      * @param int $minimum
      * @param int $maximum
      * @return void
@@ -34,7 +36,7 @@ class PersonDays extends DataObject
 
         if ($this->maximum < $this->minimum) {
             throw new \OutOfBoundsException(
-                "The maximum of {$this->maximum} should not be smalled then the minimum of {$this->minimum}."
+                "The maximum of {$this->maximum} should not be smaller then the minimum of {$this->minimum}."
             );
         }
     }

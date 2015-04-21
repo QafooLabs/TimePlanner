@@ -21,6 +21,17 @@
             <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
         </service>
 
+        <service id="qafoo.user.gateway.user.mysql" class="Qafoo\UserBundle\Gateway\UserGateway\MySQL">
+            <argument type="service" id="qafoo.user.repository.user.mysql" />
+        </service>
+
+        <service id="qafoo.user.repository.user.mysql"
+                 class="Doctrine\ORM\DocumentRepository"
+                 factory-service="doctrine.orm.default_entity_manager"
+                 factory-method="getRepository">
+            <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
+        </service>
+
         <service id="qafoo.user_bundle.twig.sub_request_extension" class="Qafoo\UserBundle\Twig\SubRequestExtension">
             <tag name="twig.extension" />
         </service>

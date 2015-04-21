@@ -15,7 +15,9 @@
         "doctrine/couchdb-odm-bundle": "dev-master",
         "sabre/vobject": "~3.4",
         "sensio/framework-extra-bundle": "~3.0",
-        "twbs/bootstrap": "~3.3"
+        "twbs/bootstrap": "~3.3",
+        "doctrine/doctrine-bundle": "~1.4",
+        "doctrine/orm": "@stable"
     },
     "require-dev": {
         "pdepend/pdepend": "@stable",

@@ -22,8 +22,14 @@ class QafooUserExtension extends Extension
 
         $loader = new Loader\XmlFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.xml');
+
+        $databaseType = $container->getParameter('database.type');
+        $container->setAlias(
+            'qafoo.user.gateway.user',
+            'qafoo.user.gateway.user.' . $databaseType
+        );
     }
 }

@@ -11,6 +11,8 @@ test-static-pdepend.fail-on-violation = false
 
 webserver.port=8000
 
+; Database type may be "mysql", "sqlite" or "couchdb"
+database.type=couchdb
 database.host=127.0.0.1
 database.port=5984
 database.user=

@@ -1,10 +1,10 @@
 doctrine_couch_db:
     client:
-        host:     %database.host%     
-        port:     %database.port%     
-        dbname:   %database.name%   
-        user:     %database.user%     
-        password: %database.password% 
+        host:     %database.host%
+        port:     %database.port%
+        dbname:   %database.name%
+        user:     %database.user%
+        password: %database.password%
     odm:
         auto_generate_proxy_classes: true
         auto_mapping: true
@@ -14,8 +14,28 @@ doctrine_couch_db:
             QafooTimePlannerBundle:
                 prefix: 'Qafoo\TimePlannerBundle\Domain'
 
+doctrine:
+    dbal:
+        connections:
+            default:
+                driver:   %database.driver%
+                host:     %database.host%
+                port:     %database.port%
+                dbname:   %database.name%
+                user:     %database.user%
+                password: %database.password%
+                charset:  "UTF8"
+    orm:
+        auto_generate_proxy_classes: true
+        auto_mapping: true
+        mappings:
+            QafooUserBundle:
+                prefix: 'Qafoo\UserBundle\Domain'
+            QafooTimePlannerBundle:
+                prefix: 'Qafoo\TimePlannerBundle\Domain'
+
 fos_user:
-    db_driver: couchdb
+    db_driver: %database.mapping%
     firewall_name: main
     user_class: Qafoo\UserBundle\Domain\FOSUser
     profile:

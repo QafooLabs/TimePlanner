@@ -12,6 +12,21 @@ class AppKernel extends Kernel
      */
     private static $configuration;
 
+    private static $databaseTypes = array(
+        'couchdb' => array(
+            'database.driver' => 'pdo_sqlite',
+            'database.mapping' => 'couchdb',
+        ),
+        'mysql' => array(
+            'database.driver' => 'pdo_mysql',
+            'database.mapping' => 'orm',
+        ),
+        'couchdb' => array(
+            'database.driver' => 'pdo_sqlite',
+            'database.mapping' => 'orm',
+        ),
+    );
+
     public function registerBundles()
     {
         $bundles = array(
@@ -22,6 +37,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\CouchDBBundle\DoctrineCouchDBBundle(),
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new QafooLabs\Bundle\NoFrameworkBundle\QafooLabsNoFrameworkBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
@@ -91,6 +107,11 @@ class AppKernel extends Kernel
                 self::$configuration = array_merge(self::$configuration, parse_ini_file($file));
             }
         }
+
+        self::$configuration = array_merge(
+            self::$configuration,
+            self::$databaseTypes[self::$configuration['database.type']]
+        );
 
         return self::$configuration;
     }

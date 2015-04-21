@@ -22,6 +22,10 @@
         </exclude>
     </groups>
 
+    <php>
+        <env name="CONFIG" value="environment.test"/>
+    </php>
+
     <filter>
       <whitelist>
           <directory suffix=".php">src/</directory>

@@ -2,6 +2,8 @@
 
 namespace Qafoo;
 
+require __DIR__ . '/../../app/AppKernel.php';
+
 abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
     private static $container;
@@ -9,7 +11,7 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
     protected static function getContainer()
     {
         if (!self::$container) {
-            $kernel = new TestKernel('test', true);
+            $kernel = new \AppKernel('test', true);
             $kernel->boot();
             self::$container = $kernel->getContainer();
         }

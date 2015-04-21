@@ -23,7 +23,7 @@
     </groups>
 
     <php>
-        <env name="CONFIG" value="environment.test"/>
+        <env name="CONFIG" value="tests/environment.couchdb"/>
     </php>
 
     <filter>

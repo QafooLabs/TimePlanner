@@ -4,7 +4,7 @@
         <parallel>
             <daemons>
                 <exec executable="php" dir="${basedir}">
-                    <env key="CONFIG" value="${basedir}/environment.test" />
+                    <env key="CONFIG" value="${basedir}/tests/environment.couchdb" />
 
                     <arg value="-S" />
                     <arg value="localhost:8888" />

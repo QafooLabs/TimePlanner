@@ -90,6 +90,41 @@ class DaySet extends \ArrayObject
     }
 
     /**
+     * Merge
+     *
+     * @param DaySet $set
+     * @return DaySet
+     */
+    public function merge(DaySet $set)
+    {
+        $result = clone $this;
+        foreach ($set as $day) {
+            if (!$result->contains($day)) {
+                $result[] = $day;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Contains
+     *
+     * @param Day $needle
+     * @return boolean
+     */
+    public function contains(Day $needle)
+    {
+        foreach ($this as $day) {
+            if ($day == $needle) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Append
      *
      * @param mixed $value

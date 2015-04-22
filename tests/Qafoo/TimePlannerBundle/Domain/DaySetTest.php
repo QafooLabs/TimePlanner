@@ -79,4 +79,32 @@ class DaySetTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
+
+    public function testContains()
+    {
+        $this->assertTrue(
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('5.1.2015'))->contains(
+                new Day('2.1.2015')
+            )
+        );
+    }
+
+    public function testNotContains()
+    {
+        $this->assertFalse(
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('5.1.2015'))->contains(
+                new Day('7.1.2015')
+            )
+        );
+    }
+
+    public function testMerge()
+    {
+        $this->assertEquals(
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('5.1.2015')),
+            DaySet::createFromRange(new Day('1.1.2015'), new Day('3.1.2015'))->merge(
+                DaySet::createFromRange(new Day('3.1.2015'), new Day('5.1.2015'))
+            )
+        );
+    }
 }

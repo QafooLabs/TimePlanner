@@ -36,7 +36,9 @@ abstract class FeatureTest extends IntegrationTest
 
     public function tearDown()
     {
-        $this->stop();
+        if (!$this->hasFailed()) {
+            $this->stop();
+        }
     }
 
     /**

@@ -84,6 +84,15 @@ class UserGatewayTest extends IntegrationTest
         );
     }
 
+    /**
+     * @expectedException OutOfBoundsException
+     */
+    public function testFailFindByUnknownProperty()
+    {
+        $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
+        $userGateway->findByProperty('unknown', 'unknown');
+    }
+
     public function testSupportsClass()
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');

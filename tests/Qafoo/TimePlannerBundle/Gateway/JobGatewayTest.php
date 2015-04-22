@@ -2,6 +2,8 @@
 
 namespace Qafoo\TimePlannerBundle\Gateway;
 
+use Qafoo\UserBundle\Domain\FOSUser;
+use Qafoo\TimePlannerBundle\Domain\MetaData;
 use Qafoo\TimePlannerBundle\Domain\Job;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,11 +26,13 @@ class JobGatewayTest extends IntegrationTest
     public function testStoreNewJob()
     {
         $jobGateway = $this->getContainer()->get('qafoo.time_planner.gateway.job');
+        $user = $this->getUser();
 
         $job = new Job();
         $job->month = new \DateTime('1982-04');
         $job->customer = 'Customer';
         $job->project = 'Project';
+        $job->metaData = new MetaData($user);
 
         // @Hack to make equal checks work with doctrine results
         $job->assignees = new ArrayCollection();
@@ -174,5 +178,16 @@ class JobGatewayTest extends IntegrationTest
             array(),
             $jobGateway->getJobs(1982, 4)
         );
+    }
+
+    protected function getUser()
+    {
+        $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
+
+        $user = new FOSUser();
+        $user->login = 'kore';
+        $userGateway->store($user);
+
+        return $user;
     }
 }

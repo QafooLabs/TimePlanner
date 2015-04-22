@@ -46,7 +46,7 @@
             <argument type="service" id="qafoo.time_planner.gateway.meta_data" />
         </service>
 
-        <service id="qafoo.time_planner.gateway.vacation.couchdb" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway">
+        <service id="qafoo.time_planner.gateway.vacation.couchdb" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
                          factory-service="doctrine_couchdb.odm.document_manager"
@@ -56,7 +56,7 @@
             </argument>
         </service>
 
-        <service id="qafoo.time_planner.gateway.public_holiday.couchdb" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway">
+        <service id="qafoo.time_planner.gateway.public_holiday.couchdb" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
                          factory-service="doctrine_couchdb.odm.document_manager"
@@ -67,7 +67,7 @@
         </service>
 
 
-        <service id="qafoo.time_planner.gateway.job.couchdb" class="Qafoo\TimePlannerBundle\Gateway\JobGateway">
+        <service id="qafoo.time_planner.gateway.job.couchdb" class="Qafoo\TimePlannerBundle\Gateway\JobGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
                          factory-service="doctrine_couchdb.odm.document_manager"
@@ -77,7 +77,7 @@
             </argument>
         </service>
 
-        <service id="qafoo.time_planner.gateway.meta_data.couchdb" class="Qafoo\TimePlannerBundle\Gateway\MetaDataGateway">
+        <service id="qafoo.time_planner.gateway.meta_data.couchdb" class="Qafoo\TimePlannerBundle\Gateway\MetaDataGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
                          factory-service="doctrine_couchdb.odm.document_manager"

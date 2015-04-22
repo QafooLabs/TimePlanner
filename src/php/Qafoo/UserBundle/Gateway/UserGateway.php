@@ -75,7 +75,20 @@ abstract class UserGateway implements UserProviderInterface
      *
      * @throws UnsupportedUserException if the account is not supported
      */
-    abstract public function refreshUser(UserInterface $user);
+    public function refreshUser(UserInterface $user)
+    {
+        if (!$this->supportsClass(get_class($user))) {
+            throw new UnsupportedUserException(
+                sprintf(
+                    'Expected an instance of %s, but got "%s".',
+                    FOSUser::class,
+                    get_class($user)
+                )
+            );
+        }
+
+        return $this->loadUserByUsername($user->getUsername());
+    }
 
     /**
      * Whether this provider supports the given user class.

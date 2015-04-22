@@ -112,33 +112,4 @@ class CouchDB extends UserGateway
 
         return $documents[0];
     }
-
-    /**
-     * Refreshes the user for the account interface.
-     *
-     * It is up to the implementation to decide if the user data should be
-     * totally reloaded (e.g. from the database), or if the UserInterface
-     * object can just be merged into some internal array of users / identity
-     * map.
-     *
-     * @param UserInterface $user
-     *
-     * @return UserInterface
-     *
-     * @throws UnsupportedUserException if the account is not supported
-     */
-    public function refreshUser(UserInterface $user)
-    {
-        if (!$this->supportsClass(get_class($user))) {
-            throw new UnsupportedUserException(
-                sprintf(
-                    'Expected an instance of %s, but got "%s".',
-                    FOSUser::class,
-                    get_class($user)
-                )
-            );
-        }
-
-        return $this->loadUserByUsername($user->getUsername());
-    }
 }

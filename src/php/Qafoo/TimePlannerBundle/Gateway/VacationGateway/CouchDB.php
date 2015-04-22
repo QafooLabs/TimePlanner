@@ -83,7 +83,7 @@ class CouchDB extends VacationGateway
      *
      * @param int $year
      * @param int $month
-     * @return Day[][]
+     * @return DaySet[]
      */
     public function getVacationDaysPerUser($year, $month = null)
     {

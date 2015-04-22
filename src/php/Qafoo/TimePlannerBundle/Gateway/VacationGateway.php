@@ -43,7 +43,7 @@ abstract class VacationGateway
      *
      * @param int $year
      * @param int $month
-     * @return Day[][]
+     * @return DaySet[]
      */
     abstract public function getVacationDaysPerUser($year, $month = null);
 

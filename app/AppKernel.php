@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             'database.driver' => 'pdo_mysql',
             'database.mapping' => 'orm',
         ),
-        'couchdb' => array(
+        'sqlite' => array(
             'database.driver' => 'pdo_sqlite',
             'database.mapping' => 'orm',
         ),

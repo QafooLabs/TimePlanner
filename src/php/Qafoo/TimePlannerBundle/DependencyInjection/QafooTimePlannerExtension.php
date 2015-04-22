@@ -25,5 +25,23 @@ class QafooTimePlannerExtension extends Extension
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('services.xml');
+
+        $databaseType = $container->getParameter('database.type');
+        $container->setAlias(
+            'qafoo.time_planner.gateway.vacation',
+            'qafoo.time_planner.gateway.vacation.' . $databaseType
+        );
+        $container->setAlias(
+            'qafoo.time_planner.gateway.job',
+            'qafoo.time_planner.gateway.job.' . $databaseType
+        );
+        $container->setAlias(
+            'qafoo.time_planner.gateway.public_holiday',
+            'qafoo.time_planner.gateway.public_holiday.' . $databaseType
+        );
+        $container->setAlias(
+            'qafoo.time_planner.gateway.meta_data',
+            'qafoo.time_planner.gateway.meta_data.' . $databaseType
+        );
     }
 }

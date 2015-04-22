@@ -23,6 +23,7 @@
 
         <service id="qafoo.user.gateway.user.mysql" class="Qafoo\UserBundle\Gateway\UserGateway\MySQL">
             <argument type="service" id="qafoo.user.repository.user.mysql" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="qafoo.user.repository.user.mysql"

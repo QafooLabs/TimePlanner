@@ -6,7 +6,9 @@ use Qafoo\UserBundle\Gateway\UserGateway;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManager;
 
 use Qafoo\UserBundle\Domain\User;
 use Qafoo\UserBundle\Domain\FOSUser;
@@ -14,15 +16,23 @@ use Qafoo\UserBundle\Domain\FOSUser;
 class MySQL extends UserGateway
 {
     /**
-     * Entity manager
+     * Entity repository
      *
      * @var EntityRepository
      */
     private $entityRepository;
 
-    public function __construct(EntityRepository $entityRepository)
+    /**
+     * Entity manager
+     *
+     * @var EntityManager
+     */
+    private $entityManager;
+
+    public function __construct(EntityRepository $entityRepository, EntityManager $entityManager)
     {
         $this->entityRepository = $entityRepository;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -41,6 +51,11 @@ class MySQL extends UserGateway
      */
     public function loadUserByUsername($username)
     {
+        if (($user = $this->entityRepository->find($username)) === null) {
+            throw new UsernameNotFoundException(sprintf('Username "%s" does not exist.', $username));
+        }
+
+        return $user;
     }
 
     /**
@@ -51,6 +66,10 @@ class MySQL extends UserGateway
      */
     public function store(User $user)
     {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
+        return $user;
     }
 
     /**

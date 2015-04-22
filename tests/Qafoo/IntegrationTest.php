@@ -59,6 +59,22 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
         $schemaTool->createSchema($entityMetaData);
     }
 
+    protected static function initializeSqlite($container)
+    {
+        $connection = self::getContainer()->get('doctrine.dbal.default_connection');
+        $parameters = $connection->getParams();
+        unset($parameters['path']);
+
+        $tmpConnection = DriverManager::getConnection($parameters);
+        $schemaManager = $tmpConnection->getSchemaManager();
+        $schemaManager->dropAndCreateDatabase($container->getParameter('database.path'));
+
+        $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
+        $entityMetaData = $entityManager->getMetadataFactory()->getAllMetadata();
+        $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->createSchema($entityMetaData);
+    }
+
     public function setUp()
     {
         parent::setUp();

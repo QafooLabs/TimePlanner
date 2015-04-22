@@ -31,6 +31,8 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
+        <service id="qafoo.user.gateway.user.sqlite" alias="qafoo.user.gateway.user.mysql" />
+
         <service id="qafoo.user_bundle.twig.sub_request_extension" class="Qafoo\UserBundle\Twig\SubRequestExtension">
             <tag name="twig.extension" />
         </service>

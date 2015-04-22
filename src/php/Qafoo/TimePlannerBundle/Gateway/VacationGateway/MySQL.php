@@ -18,14 +18,14 @@ class MySQL extends VacationGateway
      *
      * @var EntityRepository
      */
-    private $entityRepository;
+    protected $entityRepository;
 
     /**
      * Entity manager
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     public function __construct(EntityRepository $entityRepository, EntityManager $entityManager)
     {
@@ -151,7 +151,7 @@ class MySQL extends VacationGateway
         }
 
         $query = $this->entityManager->createQuery(
-            "SELECT v FROM Qafoo\TimePlannerBundle\Domain\Vacation v $whereCondition"
+            "SELECT v FROM Qafoo\TimePlannerBundle\Domain\Vacation v $whereCondition ORDER BY v.start"
         );
 
         if ($whereCondition) {

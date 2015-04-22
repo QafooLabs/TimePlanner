@@ -1,0 +1,7 @@
+env=test
+
+database.type=sqlite
+database.path=%kernel.cache_dir%/database.db
+
+secret="Test"
+mailer.transport="null"

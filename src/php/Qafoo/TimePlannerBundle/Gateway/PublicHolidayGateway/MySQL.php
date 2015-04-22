@@ -16,14 +16,14 @@ class MySQL extends PublicHolidayGateway
      *
      * @var EntityRepository
      */
-    private $entityRepository;
+    protected $entityRepository;
 
     /**
      * Entity manager
      *
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     public function __construct(EntityRepository $entityRepository, EntityManager $entityManager)
     {

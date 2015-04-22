@@ -22,15 +22,14 @@
         </service>
 
         <service id="qafoo.user.gateway.user.mysql" class="Qafoo\UserBundle\Gateway\UserGateway\MySQL">
-            <argument type="service" id="qafoo.user.repository.user.mysql" />
+            <argument type="service">
+                <service class="Doctrine\ORM\DocumentRepository"
+                         factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
+                </service>
+            </argument>
             <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
-
-        <service id="qafoo.user.repository.user.mysql"
-                 class="Doctrine\ORM\DocumentRepository"
-                 factory-service="doctrine.orm.default_entity_manager"
-                 factory-method="getRepository">
-            <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
         </service>
 
         <service id="qafoo.user_bundle.twig.sub_request_extension" class="Qafoo\UserBundle\Twig\SubRequestExtension">

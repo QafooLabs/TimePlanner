@@ -65,5 +65,8 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.document_manager');
         $documentManager->clear();
+
+        $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
+        $entityManager->clear();
     }
 }

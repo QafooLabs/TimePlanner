@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Qafoo\TimePlannerBundle\Domain\Job" table="job">
+        <id name="jobId" column="j_id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="revision" column="j_revision" type="string" />
+        <field name="customer" column="j_customer" type="string" />
+        <field name="project" column="j_project" type="string" nullable="true" />
+        <field name="month" column="j_month" type="datetime" />
+        <field name="personDays" column="j_person_days" type="object" />
+        <field name="expectedRevenue" column="j_revenue" type="string" nullable="true" />
+        <field name="assignees" column="j_assignees" type="object" />
+        <field name="invoiceId" column="j_invoice" type="string" nullable="true" />
+        <field name="comment" column="j_comment" type="string" nullable="true" />
+        <embedded name="metaData" class="Qafoo\TimePlannerBundle\Domain\MetaData" column-prefix="j_meta_data_" />
+
+        <indexes>
+            <index columns="j_customer"/>
+            <index columns="j_project"/>
+            <index columns="j_month"/>
+        </indexes>
+    </entity>
+</doctrine-mapping>

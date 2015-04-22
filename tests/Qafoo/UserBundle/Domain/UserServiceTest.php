@@ -29,7 +29,7 @@ class UserServiceTest extends IntegrationTest
         return array(
             array('login', 'kore'),
             array('email', new EMail('kore@example.com')),
-            array('name', new Name('Kore Nordmann')),
+            array('name', Name::createFromName('Kore Nordmann')),
         );
     }
 

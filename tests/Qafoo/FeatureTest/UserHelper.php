@@ -30,7 +30,7 @@ trait UserHelper
         $user = $userService->createUser();
         $user->login = $login;
         $user->email = new Email($email);
-        $user->name = new Name($name);
+        $user->name = Name::createFromName($name);
         $user->setPlainPassword($password);
 
         $userService->updateUser($user);

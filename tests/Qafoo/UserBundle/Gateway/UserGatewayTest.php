@@ -19,7 +19,7 @@ class UserGatewayTest extends IntegrationTest
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $user = new FOSUser();
         $user->login = 'kore';
-        $user->name = new Name("Kore Nordmann");
+        $user->name = Name::createFromName("Kore Nordmann");
         $user->email = new Email("kore@example.com");
         $user->auth->confirmationToken = 'token';
 

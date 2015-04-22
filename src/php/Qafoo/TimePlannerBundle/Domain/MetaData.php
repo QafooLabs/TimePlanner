@@ -22,9 +22,9 @@ class MetaData extends DataObject
      */
     public $changed;
 
-    public function __construct(User $author, \DateTimeInterface $changed = null)
+    public function __construct(User $author, \DateTime $changed = null)
     {
         $this->author = $author;
-        $this->changed = $changed ?: new \DateTimeImmutable("now");
+        $this->changed = $changed ?: new \DateTime("now");
     }
 }

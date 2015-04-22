@@ -5,21 +5,10 @@
         http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Qafoo\UserBundle\Domain\FOSUser" table="user">
-        <id name="login" field="u_id" type="string" length="100" />
+        <id name="login" column="u_id" type="string" length="100" />
 
-        <one-to-one field="auth" target-entity="Qafoo\UserBundle\Domain\User\Authentication" inversed-by="user">
-            <cascade><cascade-remove /></cascade>
-            <join-column name="ua_id" referenced-column-name="ua_id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-
-        <one-to-one field="name" target-entity="Qafoo\UserBundle\Domain\Name" inversed-by="user">
-            <cascade><cascade-remove /></cascade>
-            <join-column name="un_id" referenced-column-name="un_id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
-
-        <one-to-one field="email" target-entity="EMail" inversed-by="user">
-            <cascade><cascade-remove /></cascade>
-            <join-column name="um_id" referenced-column-name="um_id" on-delete="CASCADE" on-update="CASCADE"/>
-        </one-to-one>
+        <embedded name="auth" class="Qafoo\UserBundle\Domain\User\Authentication" column-prefix="" />
+        <embedded name="name" class="Qafoo\UserBundle\Domain\Name" column-prefix="" />
+        <embedded name="email" class="Qafoo\UserBundle\Domain\Email" column-prefix="" />
     </entity>
 </doctrine-mapping>

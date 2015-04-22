@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embeddable name="Qafoo\UserBundle\Domain\EMail">
+        <field name="email" column="email" type="string" nullable="true" />
+    </embeddable>
+</doctrine-mapping>

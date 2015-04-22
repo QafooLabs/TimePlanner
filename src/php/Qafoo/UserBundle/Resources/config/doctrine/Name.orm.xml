@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping>
+    <embeddable name="Qafoo\UserBundle\Domain\Name">
+        <field name="firstName" column="first" type="string" nullable="true" />
+        <field name="intermediateNames" column="intermediate" type="array" nullable="true" />
+        <field name="lastName" column="last" type="string" nullable="true" />
+    </embeddable>
+</doctrine-mapping>

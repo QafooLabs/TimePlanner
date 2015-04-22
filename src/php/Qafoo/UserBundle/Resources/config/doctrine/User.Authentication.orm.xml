@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <embeddable name="Qafoo\UserBundle\Domain\User\Authentication">
+        <field name="password" column="password" type="string" nullable="true" />
+        <field name="salt" column="salt" type="string" />
+        <field name="confirmationToken" column="token" type="string" nullable="true" />
+        <field name="requestedAt" column="requested" type="datetime" nullable="true" />
+        <field name="isEnabled" column="enabled" type="boolean" />
+        <field name="isLocked" column="is_locked" type="boolean" />
+        <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
+    </embeddable>
+</doctrine-mapping>

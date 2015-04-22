@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <target name="symfony:cache:clear:test" extensionOf="-prepare:before~hook">
+        <delete dir="${basedir}/app/cache/test"/>
+    </target>
+</project>

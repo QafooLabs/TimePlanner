@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="PHPUnit Feature Tests Task">
-    <target name="phpunit-feature" extensionOf="-test-feature:main~hook">
+    <target name="phpunit:feature" extensionOf="-test-feature:main~hook">
         <parallel>
             <daemons>
                 <exec executable="php" dir="${basedir}">
@@ -15,6 +15,13 @@
             </daemons>
 
             <sequential>
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.couchdb" />
+
+                    <arg value="app/console" />
+                    <arg value="cache:clear" />
+                </exec>
+
                 <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
                     <arg value="--group" />
                     <arg value="feature" />

@@ -18,7 +18,7 @@ class MetaDataGatewayTest extends IntegrationTest
     {
         $jobGateway = $this->getContainer()->get('qafoo.time_planner.gateway.job');
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
-        $metadataGateway = $this->getContainer()->get('qafoo.time_planner.gateway.metadata');
+        $metadataGateway = $this->getContainer()->get('qafoo.time_planner.gateway.meta_data');
 
         $user = new FOSUser();
         $user->login = 'kore';
@@ -42,7 +42,7 @@ class MetaDataGatewayTest extends IntegrationTest
      */
     public function testQueryNoDataWithWrongType()
     {
-        $metadataGateway = $this->getContainer()->get('qafoo.time_planner.gateway.metadata');
+        $metadataGateway = $this->getContainer()->get('qafoo.time_planner.gateway.meta_data');
 
         $this->assertEquals(
             array(),

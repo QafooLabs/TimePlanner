@@ -9,6 +9,6 @@
 
         <embedded name="auth" class="Qafoo\UserBundle\Domain\User\Authentication" column-prefix="u_auth_" />
         <embedded name="name" class="Qafoo\UserBundle\Domain\Name" column-prefix="u_name_" />
-        <embedded name="email" class="Qafoo\UserBundle\Domain\Email" column-prefix="u_email_" />
+        <embedded name="email" class="Qafoo\UserBundle\Domain\EMail" column-prefix="u_email_" />
     </entity>
 </doctrine-mapping>

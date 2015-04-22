@@ -32,7 +32,7 @@ class User extends DataObject
     /**
      * E-Mail
      *
-     * @var Email
+     * @var EMail
      */
     public $email;
 

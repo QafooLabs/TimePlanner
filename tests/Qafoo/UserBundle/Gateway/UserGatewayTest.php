@@ -5,7 +5,7 @@ namespace Qafoo\UserBundle\Gateway;
 use Qafoo\UserBundle\Domain\FOSUser;
 use Qafoo\UserBundle\Domain\User;
 use Qafoo\UserBundle\Domain\Name;
-use Qafoo\UserBundle\Domain\Email;
+use Qafoo\UserBundle\Domain\EMail;
 
 use Qafoo\IntegrationTest;
 
@@ -20,7 +20,7 @@ class UserGatewayTest extends IntegrationTest
         $user = new FOSUser();
         $user->login = 'kore';
         $user->name = Name::createFromName("Kore Nordmann");
-        $user->email = new Email("kore@example.com");
+        $user->email = new EMail("kore@example.com");
         $user->auth->confirmationToken = 'token';
 
         $userGateway->store($user);
@@ -54,7 +54,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @depends testStoreAndLoadUser
      */
-    public function testFindByEmail(FOSUser $user)
+    public function testFindByEMail(FOSUser $user)
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $this->assertEquals(
@@ -66,7 +66,7 @@ class UserGatewayTest extends IntegrationTest
     /**
      * @expectedException OutOfBoundsException
      */
-    public function testFailFindByEmail()
+    public function testFailFindByEMail()
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
         $userGateway->findByProperty('email', 'unknown');

@@ -5,7 +5,7 @@ namespace Qafoo\FeatureTest;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 use Qafoo\UserBundle\Domain\Name;
-use Qafoo\UserBundle\Domain\Email;
+use Qafoo\UserBundle\Domain\EMail;
 
 trait UserHelper
 {
@@ -29,7 +29,7 @@ trait UserHelper
 
         $user = $userService->createUser();
         $user->login = $login;
-        $user->email = new Email($email);
+        $user->email = new EMail($email);
         $user->name = Name::createFromName($name);
         $user->setPlainPassword($password);
 

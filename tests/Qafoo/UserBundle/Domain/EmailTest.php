@@ -3,13 +3,13 @@
 namespace Qafoo\UserBundle\Domain;
 
 /**
- * @covers Qafoo\UserBundle\Domain\Email
+ * @covers Qafoo\UserBundle\Domain\EMail
  */
-class EmailTest extends \PHPUnit_Framework_TestCase
+class EMailTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreateFromEmail()
     {
-        $email = new Email("kore@example.com");
+        $email = new EMail("kore@example.com");
         $this->assertSame("kore@example.com", (string) $email);
 
         return $email;

@@ -29,6 +29,16 @@ class MySQL extends UserGateway
      */
     private $entityManager;
 
+    /**
+     * Property map
+     *
+     * @var array
+     */
+    private $propertyMap = array(
+        'email' => 'email.email',
+        'token' => 'auth.confirmationToken',
+    );
+
     public function __construct(EntityRepository $entityRepository, EntityManager $entityManager)
     {
         $this->entityRepository = $entityRepository;
@@ -80,6 +90,8 @@ class MySQL extends UserGateway
      */
     public function remove(User $user)
     {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
     }
 
     /**
@@ -89,6 +101,7 @@ class MySQL extends UserGateway
      */
     public function getAllUsers()
     {
+        return $this->entityRepository->findAll();
     }
 
     /**
@@ -100,23 +113,21 @@ class MySQL extends UserGateway
      */
     public function findByProperty($property, $value)
     {
-    }
+        if (!isset($this->propertyMap[$property])) {
+            throw new \OutOfBoundsException("Unknown property $property to filter by.");
+        }
 
-    /**
-     * Refreshes the user for the account interface.
-     *
-     * It is up to the implementation to decide if the user data should be
-     * totally reloaded (e.g. from the database), or if the UserInterface
-     * object can just be merged into some internal array of users / identity
-     * map.
-     *
-     * @param UserInterface $user
-     *
-     * @return UserInterface
-     *
-     * @throws UnsupportedUserException if the account is not supported
-     */
-    public function refreshUser(UserInterface $user)
-    {
+        $query = $this->entityManager->createQuery(
+            "SELECT u
+                FROM Qafoo\UserBundle\Domain\FOSUser u
+                WHERE u.{$this->propertyMap[$property]} = :value"
+        );
+        $query->setParameter('value', $value);
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            throw new \OutOfBoundsException("No user found with $property $value", 0, $e);
+        }
     }
 }

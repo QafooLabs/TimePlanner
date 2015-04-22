@@ -11,14 +11,13 @@
         </service>
 
         <service id="qafoo.user.gateway.user.couchdb" class="Qafoo\UserBundle\Gateway\UserGateway\CouchDB">
-            <argument type="service" id="qafoo.user.repository.user.couchdb" />
-        </service>
-
-        <service id="qafoo.user.repository.user.couchdb"
-                 class="Doctrine\ODM\CouchDB\DocumentRepository"
-                 factory-service="doctrine_couchdb.odm.document_manager"
-                 factory-method="getRepository">
-            <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
+            <argument type="service">
+                <service class="Doctrine\ODM\CouchDB\DocumentRepository"
+                         factory-service="doctrine_couchdb.odm.document_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\UserBundle\Domain\FOSUser</argument>
+                </service>
+            </argument>
         </service>
 
         <service id="qafoo.user.gateway.user.mysql" class="Qafoo\UserBundle\Gateway\UserGateway\MySQL">

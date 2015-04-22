@@ -56,6 +56,17 @@
             </argument>
         </service>
 
+        <service id="qafoo.time_planner.gateway.vacation.mysql" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway\MySQL">
+            <argument type="service">
+                <service class="Doctrine\ORM\DocumentRepository"
+                         factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\TimePlannerBundle\Domain\Vacation</argument>
+                </service>
+            </argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="qafoo.time_planner.gateway.public_holiday.couchdb" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
@@ -66,6 +77,16 @@
             </argument>
         </service>
 
+        <service id="qafoo.time_planner.gateway.public_holiday.mysql" class="Qafoo\TimePlannerBundle\Gateway\PublicHolidayGateway\MySQL">
+            <argument type="service">
+                <service class="Doctrine\ORM\DocumentRepository"
+                         factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\TimePlannerBundle\Domain\PublicHoliday</argument>
+                </service>
+            </argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
 
         <service id="qafoo.time_planner.gateway.job.couchdb" class="Qafoo\TimePlannerBundle\Gateway\JobGateway\CouchDB">
             <argument type="service">
@@ -77,6 +98,17 @@
             </argument>
         </service>
 
+        <service id="qafoo.time_planner.gateway.job.mysql" class="Qafoo\TimePlannerBundle\Gateway\JobGateway\MySQL">
+            <argument type="service">
+                <service class="Doctrine\ORM\DocumentRepository"
+                         factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\TimePlannerBundle\Domain\Job</argument>
+                </service>
+            </argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+
         <service id="qafoo.time_planner.gateway.meta_data.couchdb" class="Qafoo\TimePlannerBundle\Gateway\MetaDataGateway\CouchDB">
             <argument type="service">
                 <service class="Doctrine\ODM\CouchDB\DocumentRepository"
@@ -85,6 +117,17 @@
                     <argument>Qafoo\TimePlannerBundle\Domain\MetaData</argument>
                 </service>
             </argument>
+        </service>
+
+        <service id="qafoo.time_planner.gateway.meta_data.mysql" class="Qafoo\TimePlannerBundle\Gateway\MetaDataGateway\MySQL">
+            <argument type="service">
+                <service class="Doctrine\ORM\DocumentRepository"
+                         factory-service="doctrine.orm.default_entity_manager"
+                         factory-method="getRepository">
+                    <argument>Qafoo\TimePlannerBundle\Domain\MetaData</argument>
+                </service>
+            </argument>
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <service id="qafoo.time_planner.gateway.available_vacation" class="Qafoo\TimePlannerBundle\Gateway\AvailableVacationGateway">

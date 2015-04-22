@@ -3,6 +3,7 @@
 namespace Qafoo;
 
 use Doctrine\DBAL\DriverManager;
+use Doctrine\ORM\Tools\SchemaTool;
 
 require __DIR__ . '/../../app/AppKernel.php';
 
@@ -52,8 +53,10 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
         $schemaManager = $tmpConnection->getSchemaManager();
         $schemaManager->dropAndCreateDatabase($container->getParameter('database.name'));
 
-        $schemaManager = $connection->getSchemaManager();
-        $schemaManager->createSchema();
+        $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
+        $entityMetaData = $entityManager->getMetadataFactory()->getAllMetadata();
+        $schemaTool = new SchemaTool($entityManager);
+        $schemaTool->createSchema($entityMetaData);
     }
 
     public function setUp()

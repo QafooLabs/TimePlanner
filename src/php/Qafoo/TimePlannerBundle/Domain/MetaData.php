@@ -35,7 +35,7 @@ class MetaData extends DataObject
      * @param TokenContext $context
      * @return void
      */
-    public function fromContext(TokenContext $context)
+    public static function fromContext(TokenContext $context)
     {
         return new static($context->getCurrentUser()->login);
     }

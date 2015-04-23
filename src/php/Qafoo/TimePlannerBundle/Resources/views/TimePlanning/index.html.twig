@@ -73,7 +73,7 @@
             <tfoot>
                 <tr>
                     <th colspan="2">Sum</th>
-                    <th class="number">{{view.sum.expectedRevenue|number_format(2)}} €</th>
+                    <th class="number">{{view.sum.calculatedRevenue|number_format(2)}} €</th>
                     <th class="number">{{view.sum.personDays.minimum}}</th>
                     <th class="number">{{view.sum.personDays.maximum}}</th>
                 {% for user in view.users %}
@@ -104,7 +104,7 @@
                 </tr>
                 <tr>
                     <th colspan="2">Result</th>
-                    {% set value = (view.sum.expectedRevenue - 25700) %}
+                    {% set value = (view.sum.calculatedRevenue - 25700) %}
                     <th class="number {% if value < 0 %}text-danger danger{% elseif value > 0 %}text-success{% endif %}">{{value|number_format(2)}} €</th>
                     {% set value = (view.availableWorkDays * view.users|length()) - view.sum.personDays.minimum - vacationSum %}
                     <th class="number {% if value < 0 %}text-danger danger{% endif %}">{{value}}</th>

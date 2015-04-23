@@ -10,8 +10,8 @@
         </a>
     </td>
     <td>{{job.project}}</td>
-    <td class="number {% if not job.expectedRevenue %}text-muted{% endif %}">
-        {{job.expectedRevenue|number_format(2)}} €
+    <td class="number {% if not job.calculatedRevenue %}text-muted{% endif %}">
+        <abbr title="{{job.expectedRevenue}}">{{job.calculatedRevenue|number_format(2)}} €</abbr>
     </td>
     <td class="number {% if assignedDays < job.personDays.minimum %}danger{% endif %}"">{{assignedDays}} / {{job.personDays.minimum}}</td>
     <td class="number {% if assignedDays < job.personDays.maximum %}warning{% endif %}">{{assignedDays}} / {{job.personDays.maximum}}</td>

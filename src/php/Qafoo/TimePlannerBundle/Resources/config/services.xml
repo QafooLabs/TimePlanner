@@ -39,7 +39,14 @@
         <service id="qafoo.time_planner.domain.job_service" class="Qafoo\TimePlannerBundle\Domain\JobService">
             <argument type="service" id="qafoo.time_planner.gateway.job" />
             <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />
+            <argument type="service" id="qafoo.time_planner.domain.revenue_calculator" />
             <argument>%qafoo.time_planner.expectedSickLeave%</argument>
+        </service>
+
+        <service id="qafoo.time_planner.domain.revenue_calculator" class="Qafoo\TimePlannerBundle\Domain\RevenueCalculator\SymfonyExpressionLanguage">
+            <argument type="service">
+                <service class="Symfony\Component\ExpressionLanguage\ExpressionLanguage" />
+            </argument>
         </service>
 
         <service id="qafoo.time_planner.domain.meta_data_service" class="Qafoo\TimePlannerBundle\Domain\MetaDataService">

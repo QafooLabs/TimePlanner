@@ -21,17 +21,29 @@ class JobService
     private $publicHolidayService;
 
     /**
+     * Revenue calculator
+     *
+     * @var RevenueCalculator
+     */
+    private $revenueCalculator;
+
+    /**
      * Expected sick leave [0 … 1]
      *
      * @var float
      */
     private $expectedSickLeave;
 
-    public function __construct(JobGateway $jobGateway, PublicHolidayService $publicHolidayService, $expectedSickLeave)
-    {
+    public function __construct(
+        JobGateway $jobGateway,
+        PublicHolidayService $publicHolidayService,
+        RevenueCalculator $revenueCalculator,
+        $expectedSickLeave = .1
+    ) {
         $this->jobGateway = $jobGateway;
         $this->publicHolidayService = $publicHolidayService;
-        $this->expectedSickLeave = $expectedSickLeave;
+        $this->revenueCalculator = $revenueCalculator;
+        $this->expectedSickLeave = (float) $expectedSickLeave;
     }
 
     /**
@@ -43,7 +55,12 @@ class JobService
      */
     public function getJobs($year, $month)
     {
-        return $this->jobGateway->getJobs($year, $month);
+        $jobs = $this->jobGateway->getJobs($year, $month);
+        foreach ($jobs as $job) {
+            $job->calculatedRevenue = $this->revenueCalculator->calculate($job);
+        }
+
+        return $jobs;
     }
 
     /**
@@ -110,7 +127,7 @@ class JobService
         foreach ($jobs as $job) {
             $sum->personDays->minimum += $job->personDays->minimum;
             $sum->personDays->maximum += $job->personDays->maximum;
-            $sum->expectedRevenue += $job->expectedRevenue;
+            $sum->calculatedRevenue += $job->calculatedRevenue;
 
             foreach ($job->assignees as $assignment) {
                 if (!isset($sum->assignees[$assignment->user])) {

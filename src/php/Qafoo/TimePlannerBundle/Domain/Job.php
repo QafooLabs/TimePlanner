@@ -53,9 +53,16 @@ class Job extends DataObject
      *
      * May be a number or a formular based om minimumPersonDays
      *
-     * @var strin
+     * @var string
      */
     public $expectedRevenue;
+
+    /**
+     * Calculated revenue
+     *
+     * @var number
+     */
+    public $calculatedRevenue;
 
     /**
      * Assignees

@@ -60,7 +60,12 @@ setTimeout(function() {
     <script src="/vendor/moment/moment.min.js"></script>
     <script type="text/javascript">
     $(".fromNow").each(function() {
-        $(this).text(moment($(this).data("time")).fromNow());
+        var time = moment($(this).data("time")),
+            old = moment().startOf("day");
+        $(this).text(time.fromNow());
+        if (time.isBefore(old)) {
+            $(this).parents("li").addClass("text-muted");
+        }
     });
     </script>
 {% endblock %}

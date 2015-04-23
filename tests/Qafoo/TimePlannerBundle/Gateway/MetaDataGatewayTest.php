@@ -28,7 +28,7 @@ class MetaDataGatewayTest extends IntegrationTest
         $job->month = new \DateTime('1982-04');
         $job->customer = 'Customer';
         $job->project = 'Project';
-        $job->metaData = new MetaData($user);
+        $job->metaData = new MetaData($user->login);
         $jobGateway->store($job);
 
         $this->assertEquals(

@@ -32,7 +32,7 @@ class JobGatewayTest extends IntegrationTest
         $job->month = new \DateTime('1982-04');
         $job->customer = 'Customer';
         $job->project = 'Project';
-        $job->metaData = new MetaData($user);
+        $job->metaData = new MetaData($user->login);
 
         // @Hack to make equal checks work with doctrine results
         $job->assignees = new ArrayCollection();

@@ -25,7 +25,7 @@ class VacationGatewayTest extends IntegrationTest
         $vacation->start = new \DateTime("2014-12-25");
         $vacation->end = new \DateTime("2015-01-05");
         $vacation->user = $user;
-        $vacation->metaData = new MetaData($user);
+        $vacation->metaData = new MetaData($user->login);
         $vacationGateway->store($vacation);
 
         $this->assertNotNull($vacation->vacationId);

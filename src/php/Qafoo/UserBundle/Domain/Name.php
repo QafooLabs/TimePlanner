@@ -87,7 +87,7 @@ class Name extends DataObject
                 ' ',
                 array_merge(
                     array($this->firstName),
-                    $this->intermediateNames,
+                    $this->intermediateNames ?: array(),
                     array($this->lastName)
                 )
             )

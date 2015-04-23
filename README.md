@@ -15,13 +15,7 @@ follwing command to initialize them:
 
     git submodule update --init
 
-To run the project just execute the following command:
-
-    ant serve
-
-Then open the URL echo'ed on the command line, and you should be fine. All
-required project initializations should already be included. The prerequisites
-for this projects are:
+The prerequisites for this projects are:
 
 * PHP >= 5.5
 
@@ -29,6 +23,20 @@ for this projects are:
 
   Create a custom `environment.local` file with your customization of the
   `environment` file. You can look at `tests/environment.*` for examples.
+
+To initialize the database (database, schema and some default users) run the
+following command once – should probably not be executed on the production
+server:
+
+    ant bootstrap
+
+To run the project just execute the following command – this can be run each
+and every time you use the project again:
+
+    ant serve
+
+Then open the URL echo'ed on the command line, and you should be fine. All
+required project initializations should already be included. The prerequisites
 
 ## Testing
 

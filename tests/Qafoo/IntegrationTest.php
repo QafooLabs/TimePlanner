@@ -11,6 +11,8 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 {
     private static $container;
 
+    private static $databaseFailure = false;
+
     protected static function getContainer()
     {
         if (!self::$container) {
@@ -25,6 +27,8 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         self::$container = null;
+        self::$databaseFailure = false;
+
         $databaseType = self::getContainer()->getParameter('database.type');
         $method = 'initialize' . ucfirst($databaseType);
         self::$method(self::getContainer());
@@ -40,18 +44,31 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
             // Just ignore if database did not exist
         }
 
-        $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
+        try {
+            $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
+        } catch (\Doctrine\CouchDB\HTTP\HTTPException $e) {
+            self::$databaseFailure = "Could not connect to CouchDB server.";
+        }
     }
 
     protected static function initializeMysql($container)
     {
+        if (!extension_loaded('pdo_mysql')) {
+            self::$databaseFailure = "Required extension pdo_sqlite missing";
+        }
+
         $connection = self::getContainer()->get('doctrine.dbal.default_connection');
         $parameters = $connection->getParams();
         unset($parameters['dbname']);
 
-        $tmpConnection = DriverManager::getConnection($parameters);
-        $schemaManager = $tmpConnection->getSchemaManager();
-        $schemaManager->dropAndCreateDatabase($container->getParameter('database.name'));
+        try {
+            $tmpConnection = DriverManager::getConnection($parameters);
+            $schemaManager = $tmpConnection->getSchemaManager();
+            $schemaManager->dropAndCreateDatabase($container->getParameter('database.name'));
+        } catch (\Exception $e) {
+            self::$databaseFailure = "Could not connect to MySQL server: " . $e->getMessage();
+            return;
+        }
 
         $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
         $entityMetaData = $entityManager->getMetadataFactory()->getAllMetadata();
@@ -61,6 +78,10 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     protected static function initializeSqlite($container)
     {
+        if (!extension_loaded('pdo_sqlite')) {
+            self::$databaseFailure = "Required extension pdo_sqlite missing";
+        }
+
         $connection = self::getContainer()->get('doctrine.dbal.default_connection');
         $parameters = $connection->getParams();
         unset($parameters['path']);
@@ -78,6 +99,10 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         parent::setUp();
+
+        if (self::$databaseFailure) {
+            $this->markTestSkipped('Integration test skipped: ' . self::$databaseFailure);
+        }
 
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.document_manager');
         $documentManager->clear();

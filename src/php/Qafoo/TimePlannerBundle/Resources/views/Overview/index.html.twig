@@ -16,7 +16,10 @@
                         {{job.customer}}: {{job.project}}
                     </a>
                 </p>
-                <p><em>Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: job.metaData.author} %} at {{job.metaData.changed|date("j. F Y – H:i")}}</em></p>
+                <p><em>
+                    Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: job.metaData.author} %}
+                    <abbr class="fromNow" data-time="{{job.metaData.changed|date("Y-m-d H:i:sO")}}" title="{{job.metaData.changed|date("j. F Y – H:i")}}">{{job.metaData.changed|date("j. F Y – H:i")}}</abbr>
+                </em></p>
             </li>
         {% endfor %}
         </ul>
@@ -35,7 +38,10 @@
                     </a>
                     by {% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.user} %}
                 </p>
-                <p><em>Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.metaData.author} %} at {{vacation.metaData.changed|date("j. F Y – H:i")}}</em></p>
+                <p><em>
+                    Edited by {% include "QafooUserBundle:User:normal.html.twig" with {user: vacation.metaData.author} %}
+                    <abbr class="fromNow" data-time="{{vacation.metaData.changed|date("Y-m-d H:i:sO")}}" title="{{vacation.metaData.changed|date("j. F Y – H:i")}}">{{vacation.metaData.changed|date("j. F Y – H:i")}}</abbr>
+                </em></p>
             </li>
         {% endfor %}
         </ul>
@@ -47,4 +53,14 @@ setTimeout(function() {
    window.location.reload(1);
 },  5 * 60 * 1000);
 </script>
+{% endblock %}
+
+{% block scripts %}
+    {{parent()}}
+    <script src="/vendor/moment/moment.min.js"></script>
+    <script type="text/javascript">
+    $(".fromNow").each(function() {
+        $(this).text(moment($(this).data("time")).fromNow());
+    });
+    </script>
 {% endblock %}

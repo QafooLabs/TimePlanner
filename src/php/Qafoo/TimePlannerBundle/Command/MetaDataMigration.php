@@ -12,7 +12,6 @@ class MetaDataMigration extends AbstractMigration
             isset($docData['metaData']['author']) &&
             isset($docData['metaData']['author']['_id'])) {
             $docData['metaData']['author'] = $docData['metaData']['author']['_id'];
-            var_dump($docData);
             return $docData;
         }
     }

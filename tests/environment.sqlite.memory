@@ -1,0 +1,7 @@
+env=test
+
+database.type=sqlite
+database.path=:memory:
+
+secret="Test"
+mailer.transport="null"

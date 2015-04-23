@@ -44,6 +44,7 @@
 
         <service id="qafoo.time_planner.domain.meta_data_service" class="Qafoo\TimePlannerBundle\Domain\MetaDataService">
             <argument type="service" id="qafoo.time_planner.gateway.meta_data" />
+            <argument type="service" id="qafoo.user.domain.user_service" />
         </service>
 
         <service id="qafoo.time_planner.gateway.vacation.couchdb" class="Qafoo\TimePlannerBundle\Gateway\VacationGateway\CouchDB">

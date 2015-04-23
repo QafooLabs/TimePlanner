@@ -98,7 +98,7 @@ class VacationController extends Controller
         $vacation->end = new \DateTime($request->get('end'));
         $vacation->user = $userService->getUserByLogin($request->get('user'));
         $vacation->comment = $request->get('comment', null);
-        $vacation->metaData = new MetaData($context->getCurrentUser());
+        $vacation->metaData = MetaData::fromContext($context);
 
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
         $vacationService->store($vacation);

@@ -83,7 +83,7 @@ class TimePlanningController extends Controller
             );
         }
         $job->revision = $request->get('revision', null);
-        $job->metaData = new MetaData($context->getCurrentUser());
+        $job->metaData = MetaData::fromContext($context);
 
         return $this->storeAndRedirect($request, $job);
     }
@@ -92,7 +92,7 @@ class TimePlanningController extends Controller
     {
         $job->revision = $request->get('revision', null);
         $job->invoiceId = $request->get('invoiceId', null);
-        $job->metaData = new MetaData($context->getCurrentUser());
+        $job->metaData = MetaData::fromContext($context);
 
         return $this->storeAndRedirect($request, $job);
     }
@@ -112,7 +112,7 @@ class TimePlanningController extends Controller
         );
         $job->expectedRevenue = $request->get('revenue');
         $job->comment = $request->get('comment');
-        $job->metaData = new MetaData($context->getCurrentUser());
+        $job->metaData = MetaData::fromContext($context);
 
         return $this->storeAndRedirect($request, $job);
     }

@@ -3,6 +3,7 @@
 namespace Qafoo\TimePlannerBundle\Domain;
 
 use Kore\DataObject\DataObject;
+use QafooLabs\MVC\TokenContext;
 
 use Qafoo\UserBundle\Domain\User;
 
@@ -22,9 +23,20 @@ class MetaData extends DataObject
      */
     public $changed;
 
-    public function __construct(User $author, \DateTime $changed = null)
+    public function __construct($author, \DateTime $changed = null)
     {
         $this->author = $author;
         $this->changed = $changed ?: new \DateTime("now");
+    }
+
+    /**
+     * Create from token context
+     *
+     * @param TokenContext $context
+     * @return void
+     */
+    public function fromContext(TokenContext $context)
+    {
+        return new static($context->getCurrentUser()->login);
     }
 }

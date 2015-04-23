@@ -2,7 +2,7 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
-use Qafoo\UserBundle\Domain\User;
+use Qafoo\UserBundle\Domain\UserService;
 use Qafoo\TimePlannerBundle\Gateway\MetaDataGateway;
 
 class MetaDataService
@@ -14,9 +14,17 @@ class MetaDataService
      */
     private $metaDataGateway;
 
-    public function __construct(MetaDataGateway $metaDataGateway)
+    /**
+     * User service
+     *
+     * @var UserService
+     */
+    private $userService;
+
+    public function __construct(MetaDataGateway $metaDataGateway, UserService $userService)
     {
         $this->metaDataGateway = $metaDataGateway;
+        $this->userService = $userService;
     }
 
     /**
@@ -28,6 +36,13 @@ class MetaDataService
      */
     public function getLastEdits($type, $count = 10)
     {
-        return $this->metaDataGateway->getLastEdits($type, $count);
+        $objects = $this->metaDataGateway->getLastEdits($type, $count);
+        foreach ($objects as $object) {
+            if ($object->metaData instanceof MetaData) {
+                $object->metaData->author = $this->userService->getUserByLogin($object->metaData->author);
+            }
+        }
+
+        return $objects;
     }
 }

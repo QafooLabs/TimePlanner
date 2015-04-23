@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doctrine-mapping>
     <embeddable name="Qafoo\TimePlannerBundle\Domain\MetaData" indexed="true">
-        <many-to-one field="author" column="v_meta_data_u_id" target-entity="Qafoo\UserBundle\Domain\FOSUser">
-            <join-column name="v_meta_data_u_id" referenced-column-name="u_id" />
-        </many-to-one>
+        <field name="author" column="author" type="string" nullable="true" />
         <field name="changed" column="changed" type="datetime" nullable="true" />
     </embeddable>
 </doctrine-mapping>

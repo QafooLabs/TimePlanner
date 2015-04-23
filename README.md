@@ -19,13 +19,16 @@ To run the project just execute the following command:
 
     ant serve
 
-The open the URL echoed on the command line, and you should be fine. All
+Then open the URL echo'ed on the command line, and you should be fine. All
 required project initializations should already be included. The prerequisites
 for this projects are:
 
 * PHP >= 5.5
 
-* A running CouchDB server
+* A database: MySQL, SQLite or CouchDB
+
+  Create a custom `environment.local` file with your customization of the
+  `environment` file. You can look at `tests/environment.*` for examples.
 
 ## Testing
 

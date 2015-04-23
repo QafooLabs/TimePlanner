@@ -8,6 +8,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 class BootstrapCommand extends ContainerAwareCommand
 {
     /**
@@ -21,42 +23,15 @@ class BootstrapCommand extends ContainerAwareCommand
     {
         $this
             ->setName('timeplanner:bootstrap')
-            ->setDescription('Bootstrap aapplication with default users')
-            ->addOption(
-                'force',
-                null,
-                InputOption::VALUE_NONE,
-                'Force re-creation of database. Deletes all documents.'
-            );
+            ->setDescription('Bootstrap aapplication with default users');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $couchDbConnection = $this->getContainer()->get('doctrine_couchdb.client.default_connection');
-
-        if ($input->getOption('force')) {
-            try {
-                $output->writeln("Drop database.");
-                $couchDbConnection->getHttpClient()->request('DELETE', '/' . $couchDbConnection->getDatabase());
-            } catch (\Doctrine\CouchDB\HTTP\HTTPException $e) {
-                // Just ignore
-            }
-        }
-
-        try {
-            $couchDbConnection->getDatabaseInfo($couchDbConnection->getDatabase());
-            return;
-        } catch (\Doctrine\CouchDB\HTTP\HTTPException $e) {
-            // This is expected, we create stuff in this case
-        }
-
-        $output->writeln("Create database.");
-        $couchDbConnection->getHttpClient()->request('PUT', '/' . $couchDbConnection->getDatabase());
-
         $userManipulator = $this->getContainer()->get('fos_user.util.user_manipulator');
         foreach ($this->defaultUsers as $user) {
-            $output->writeln(" * Create user: $user");
-            $userManipulator->create($user, 'test', "$user@qafoo.com", true, false);
+            $output->writeln(" * Create user: $user; Password: password");
+            $userManipulator->create($user, 'password', "$user@qafoo.com", true, false);
         }
     }
 }

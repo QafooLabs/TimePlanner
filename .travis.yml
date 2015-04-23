@@ -13,7 +13,3 @@ services:
     - couchdb
 
 script: ant -logger org.apache.tools.ant.NoBannerLogger test
-
-cache:
-    directories:
-        - vendor

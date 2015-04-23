@@ -12,13 +12,13 @@ test-static-pdepend.fail-on-violation = false
 webserver.port=8000
 
 ; Database type may be "mysql", "sqlite" or "couchdb"
-database.type=couchdb
-database.host=127.0.0.1
-database.port=5984
+database.type=sqlite
+database.host=
+database.port=
 database.user=
 database.password=
-database.name=timeplanner
-database.path=
+database.name=
+database.path=%kernel.root_dir%/../timeplanner.db
 
 secret="ChangeThis"
 

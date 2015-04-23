@@ -18,6 +18,7 @@ database.port=5984
 database.user=
 database.password=
 database.name=timeplanner
+database.path=
 
 secret="ChangeThis"
 

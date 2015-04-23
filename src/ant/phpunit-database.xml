@@ -8,7 +8,7 @@
             <arg value="cache:clear" />
         </exec>
 
-        <exec executable="${bindir}/phpunit" failonerror="false" dir="${basedir}">
+        <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
             <env key="CONFIG" file="${basedir}/tests/environment.mysql" />
 
             <arg value="--configuration" />
@@ -16,15 +16,15 @@
         </exec>
     </target>
 
-    <target name="phpunit:sqlite" extensionOf="-test-unit:after~hook" depends="-phpunit:check" if="-phpunit:active">
+    <target name="phpunit:couchdb" extensionOf="-test-unit:after~hook" depends="-phpunit:check" if="-phpunit:active">
         <exec executable="php" failonerror="true" dir="${basedir}">
-            <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+            <env key="CONFIG" file="${basedir}/tests/environment.couchdb" />
 
             <arg value="app/console" />
             <arg value="cache:clear" />
         </exec>
 
-        <exec executable="${bindir}/phpunit" failonerror="false" dir="${basedir}">
+        <exec executable="${bindir}/phpunit" failonerror="${test-unit.fail-on-violation}" dir="${basedir}">
             <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
 
             <arg value="--configuration" />

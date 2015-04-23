@@ -4,7 +4,7 @@
         <parallel>
             <daemons>
                 <exec executable="php" dir="${basedir}">
-                    <env key="CONFIG" value="${basedir}/tests/environment.couchdb" />
+                    <env key="CONFIG" value="${basedir}/tests/environment.sqlite" />
 
                     <arg value="-S" />
                     <arg value="localhost:8888" />
@@ -16,13 +16,15 @@
 
             <sequential>
                 <exec executable="php" failonerror="true" dir="${basedir}">
-                    <env key="CONFIG" file="${basedir}/tests/environment.couchdb" />
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
 
                     <arg value="app/console" />
                     <arg value="cache:clear" />
                 </exec>
 
                 <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
                     <arg value="--group" />
                     <arg value="feature" />
                     <arg value="--configuration" />

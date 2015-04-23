@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Bootstrap Task">
-    <target name="bootstrap" extensionOf="-prepare:after~hook">
+
+    <target name="-bootstrap:checkdb">
+        <condition property="-is-couchdb">
+            <equals arg1="${database.type}" arg2="couchdb" casesensitive="false" />
+        </condition>
+
+        <condition property="-is-orm">
+            <or>
+                <equals arg1="${database.type}" arg2="mysql" casesensitive="false" />
+                <equals arg1="${database.type}" arg2="sqlite" casesensitive="false" />
+            </or>
+        </condition>
+    </target>
+
+    <target name="bootstrap:couchdb" depends="-bootstrap:checkdb" if="-is-couchdb">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="couchdb:database:create" />
+        </exec>
+
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="doctrine:couchdb:update-design-doc" />
+        </exec>
+    </target>
+
+    <target name="bootstrap:orm" depends="-bootstrap:checkdb" if="-is-orm">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="doctrine:database:create" />
+        </exec>
+
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="--quiet" />
+            <arg value="doctrine:schema:create" />
+        </exec>
+    </target>
+
+    <target name="bootstrap" depends="bootstrap:couchdb, bootstrap:orm">
         <exec executable="php" failonerror="true" dir="${basedir}">
             <arg value="app/console" />
             <arg value="timeplanner:bootstrap" />
+        </exec>
+    </target>
+
+    <target name="bootstrap:couchdb:continuous" extensionOf="-prepare:after~hook" depends="-bootstrap:checkdb" if="-is-couchdb">
+        <exec executable="php" failonerror="true" dir="${basedir}">
+            <arg value="app/console" />
+            <arg value="doctrine:couchdb:update-design-doc" />
         </exec>
     </target>
 </project>

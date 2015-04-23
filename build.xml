@@ -21,7 +21,6 @@
     <import file="${basedir}/ant/modules/pdepend.xml" />
     <import file="${basedir}/ant/modules/phpcpd.xml" />
     <import file="${basedir}/ant/modules/phpmd.xml" />
-    <import file="${basedir}/ant/modules/doctrine-couchdb.xml" />
     <import file="${basedir}/ant/modules/symfony2.xml" />
 
     <!--

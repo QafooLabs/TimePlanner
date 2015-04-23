@@ -36,7 +36,7 @@ and every time you use the project again:
     ant serve
 
 Then open the URL echo'ed on the command line, and you should be fine. All
-required project initializations should already be included. The prerequisites
+required project initializations should already be included.
 
 ## Testing
 

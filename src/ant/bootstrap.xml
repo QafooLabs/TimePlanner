@@ -39,7 +39,7 @@
         </exec>
     </target>
 
-    <target name="bootstrap" depends="bootstrap:couchdb, bootstrap:orm">
+    <target name="bootstrap" depends="prepare, bootstrap:couchdb, bootstrap:orm">
         <exec executable="php" failonerror="true" dir="${basedir}">
             <arg value="app/console" />
             <arg value="timeplanner:bootstrap" />

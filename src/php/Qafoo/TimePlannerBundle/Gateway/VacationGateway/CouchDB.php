@@ -141,7 +141,14 @@ class CouchDB extends VacationGateway
             $result->toArray()
         );
 
-        return $this->documentRepository->findMany($vacationIds);
+        $vacations = $this->documentRepository->findMany($vacationIds);
+        usort(
+            $vacations,
+            function ($a, $b) {
+                return ($a->start < $b->start) ? -1 : ($a->start > $b->start ? 1: 0);
+            }
+        );
+        return $vacations;
     }
 
     /**

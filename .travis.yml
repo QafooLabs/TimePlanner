@@ -12,4 +12,6 @@ matrix:
 services:
     - couchdb
 
+install: ant -logger org.apache.tools.ant.NoBannerLogger prepare
+
 script: ant -logger org.apache.tools.ant.NoBannerLogger test

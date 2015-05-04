@@ -98,4 +98,22 @@ class Job extends DataObject
 
         $this->personDays = $this->personDays ?: new Job\PersonDays(0, 0);
     }
+
+    /**
+     * Is overdue
+     *
+     * @return bool
+     */
+    public function isOverdue()
+    {
+        if ($this->invoiceId) {
+            return false;
+        }
+
+        if (!$this->calculatedRevenue) {
+            return false;
+        }
+
+        return $this->month->modify("first day of next month") < new \DateTime("now");
+    }
 }

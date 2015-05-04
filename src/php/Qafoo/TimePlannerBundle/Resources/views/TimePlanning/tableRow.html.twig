@@ -25,7 +25,7 @@
         </form>
     </td>
 {% endfor %}
-    <td class="{% if (not job.invoiceId) and (job.expectedRevenue) and ((year ~ "-" ~ (month + 1) ~ "-01")|date() < "now"|date()) %}danger{% endif %}">
+    <td class="{% if job.overdue %}danger{% endif %}">
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign_invoice", {job: job.jobId}) }}">
             <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm"

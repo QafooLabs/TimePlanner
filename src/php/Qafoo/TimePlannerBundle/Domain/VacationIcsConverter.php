@@ -33,7 +33,7 @@ class VacationIcsConverter
             $start = $event->add('DTSTART', $vacation->start->modify('today'));
             $start['VALUE'] = 'DATE';
 
-            $end = $event->add('DTEND', $vacation->start->modify('tomorrow'));
+            $end = $event->add('DTEND', $vacation->end->modify('tomorrow'));
             $end['VALUE'] = 'DATE';
         }
 

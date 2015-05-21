@@ -2,8 +2,9 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
+use Kore\DataObject\DataObject;
+
 use QafooLabs\MVC\TokenContext;
-use Qafoo\UserBundle\Domain\User;
 
 class MetaData extends DataObject
 {
@@ -30,6 +31,7 @@ class MetaData extends DataObject
     /**
      * Create from token context
      *
+     * @index FactoryMethod
      * @param TokenContext $context
      * @return void
      */

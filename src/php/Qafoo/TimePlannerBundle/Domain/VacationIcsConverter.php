@@ -2,10 +2,22 @@
 
 namespace Qafoo\TimePlannerBundle\Domain;
 
-use Sabre\VObject\Component;
+use Sabre\VObject\Component\VCalendar;
 
 class VacationIcsConverter
 {
+    /**
+     * Calendar handler
+     *
+     * @var VCalendar
+     */
+    private $calendar;
+
+    public function __construct(VCalendar $calendar)
+    {
+        $this->calendar = $calendar;
+    }
+
     /**
      * Get ics calendar
      *
@@ -16,11 +28,10 @@ class VacationIcsConverter
      */
     public function convert(array $vacations)
     {
-        $calendar = new Component\VCalendar();
         foreach ($vacations as $vacation) {
             $vacation->user->getUsername();
 
-            $event = $calendar->add('VEVENT');
+            $event = $this->calendar->add('VEVENT');
             $event->add(
                 'SUMMARY',
                 sprintf(
@@ -37,6 +48,6 @@ class VacationIcsConverter
             $end['VALUE'] = 'DATE';
         }
 
-        return $calendar->serialize();
+        return $this->calendar->serialize();
     }
 }

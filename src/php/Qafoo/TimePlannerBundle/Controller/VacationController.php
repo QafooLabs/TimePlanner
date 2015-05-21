@@ -56,7 +56,7 @@ class VacationController extends Controller
     public function exportAction()
     {
         $vacationService = $this->get('qafoo.time_planner.domain.vacation_service');
-        $icsConverter = new VacationIcsConverter();
+        $icsConverter = $this->get('qafoo.time_planner.domain.vacation_ics_converter');
 
         return new Response(
             $icsConverter->convert($vacationService->getVacations()),

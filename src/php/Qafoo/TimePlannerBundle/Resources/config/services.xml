@@ -36,6 +36,12 @@
             <argument type="service" id="qafoo.time_planner.domain.job_service" />
         </service>
 
+        <service id="qafoo.time_planner.domain.vacation_ics_converter" class="Qafoo\TimePlannerBundle\Domain\VacationIcsConverter">
+            <argument type="service">
+                <service class="Sabre\VObject\Component\VCalendar" />
+            </argument>
+        </service>
+
         <service id="qafoo.time_planner.domain.job_service" class="Qafoo\TimePlannerBundle\Domain\JobService">
             <argument type="service" id="qafoo.time_planner.gateway.job" />
             <argument type="service" id="qafoo.time_planner.domain.public_holiday_service" />

@@ -2,9 +2,6 @@
 
 namespace Qafoo\TimePlannerBundle\Gateway;
 
-use Doctrine\ODM\CouchDB\DocumentRepository;
-use Doctrine\CouchDB\CouchDBClient;
-
 use Qafoo\TimePlannerBundle\Domain\Vacation;
 use Qafoo\TimePlannerBundle\Domain\DaySet;
 use Qafoo\TimePlannerBundle\Domain\Day;

@@ -20,6 +20,22 @@ abstract class VacationGateway
     abstract public function get($vacationId);
 
     /**
+     * Store
+     *
+     * @param Vacation $vacation
+     * @return Vacation
+     */
+    abstract public function store(Vacation $vacation);
+
+    /**
+     * Remove
+     *
+     * @param Vacation $vacation
+     * @return void
+     */
+    abstract public function remove(Vacation $vacation);
+
+    /**
      * Get vacation days
      *
      * Unfiltered, without any processing of weekends or public holidays.
@@ -30,13 +46,6 @@ abstract class VacationGateway
      * @return DaySet
      */
     abstract public function getVacationDays($user, $year, $month = null);
-
-    /**
-     * Get years
-     *
-     * @return int[]
-     */
-    abstract public function getYears();
 
     /**
      * Get vacation days per user
@@ -56,18 +65,9 @@ abstract class VacationGateway
     abstract public function getVacations($year = null);
 
     /**
-     * Store
+     * Get years
      *
-     * @param Vacation $vacation
-     * @return Vacation
+     * @return int[]
      */
-    abstract public function store(Vacation $vacation);
-
-    /**
-     * Remove
-     *
-     * @param Vacation $vacation
-     * @return void
-     */
-    abstract public function remove(Vacation $vacation);
+    abstract public function getYears();
 }

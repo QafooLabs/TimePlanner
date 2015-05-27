@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use QafooLabs\MVC\TokenContext;
 use QafooLabs\MVC\RedirectRouteResponse;
 
-use Qafoo\TimePlannerBundle\Domain\PublicHolidayService;
 use Qafoo\TimePlannerBundle\Domain\PublicHoliday;
 use Qafoo\TimePlannerBundle\Controller\PublicHoliday\Overview;
 use Qafoo\TimePlannerBundle\Controller\PublicHoliday\Edit;

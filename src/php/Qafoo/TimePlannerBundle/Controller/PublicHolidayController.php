@@ -17,7 +17,9 @@ class PublicHolidayController extends Controller
     public function indexAction($year = null)
     {
         $year = $year ?: date("Y");
-        $publicHolidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
+        $publicHolidayService = $this->get(
+            'qafoo.time_planner.domain.public_holiday_service'
+        );
 
         return new Overview(
             array(
@@ -51,9 +53,13 @@ class PublicHolidayController extends Controller
         $publicHoliday->name = $request->get('name');
         $publicHoliday->date = new \DateTime($request->get('start'));
 
-        $publicHolidayService = $this->get('qafoo.time_planner.domain.public_holiday_service');
+        $publicHolidayService = $this->get(
+            'qafoo.time_planner.domain.public_holiday_service'
+        );
         $publicHolidayService->store($publicHoliday);
 
-        return new RedirectRouteResponse('qafoo.time_planner.public_holiday.overview');
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.public_holiday.overview'
+        );
     }
 }

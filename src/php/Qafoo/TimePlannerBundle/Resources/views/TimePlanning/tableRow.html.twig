@@ -16,7 +16,7 @@
     <td class="number {% if assignedDays < job.personDays.minimum %}danger{% endif %}"">{{assignedDays}} / {{job.personDays.minimum}}</td>
     <td class="number {% if assignedDays < job.personDays.maximum %}warning{% endif %}">{{assignedDays}} / {{job.personDays.maximum}}</td>
 {% for user in view.users %}
-    <td {% if user.login == view.user.login %}class="active"{% endif %}>
+    <td class="number {% if user.login == view.user.login %}active{% endif %}">
         <form class="form-inline" method="POST" action="{{ path("qafoo.time_planner.time_planning.assign", {job: job.jobId}) }}">
             <input type="hidden" name="revision" value="{{job.revision}}">
             <input type="text" class="form-control assignment number input-sm {% if not job.assignees[user.login].days %}text-muted{% endif %}"

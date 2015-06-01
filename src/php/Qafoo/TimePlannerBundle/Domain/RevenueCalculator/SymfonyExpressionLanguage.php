@@ -62,7 +62,7 @@ class SymfonyExpressionLanguage extends RevenueCalculator
                             function (Job\Assignment $assignment) {
                                 return $assignment->days;
                             },
-                            $job->assignees ?: array()
+                            is_object($job->assignees) ? $job->assignees->toArray() : $job->assignees
                         )
                     )
                 )

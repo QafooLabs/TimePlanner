@@ -59,7 +59,7 @@ class TimePlanningController extends Controller
             $jobService = $this->get('qafoo.time_planner.domain.job_service');
             $jobService->remove($job);
             $request->getSession()->getFlashBag()->add('success', 'Job removed');
-        } catch (\LogicException $e) {
+        } catch (\Exception $e) {
             $request->getSession()->getFlashBag()->add('error', $e->getMessage());
         }
 
@@ -125,7 +125,7 @@ class TimePlanningController extends Controller
         try {
             $importFile = $request->files->get('import');
             if (!in_array($importFile->getMimeType(), array('text/plain', 'text/csv'))) {
-                throw new \OutOfBoundsException(
+                throw new \Exception(
                     'Invalid mime type – expected text/csv, got ' . $importFile->getMimeType()
                 );
             }
@@ -165,7 +165,7 @@ class TimePlanningController extends Controller
             $jobService = $this->get('qafoo.time_planner.domain.job_service');
             $jobService->store($job);
             $request->getSession()->getFlashBag()->add('success', 'Job updated');
-        } catch (\LogicException $e) {
+        } catch (\Exception $e) {
             $request->getSession()->getFlashBag()->add('error', $e->getMessage());
         }
 

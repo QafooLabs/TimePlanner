@@ -117,6 +117,41 @@ class TimePlanningController extends Controller
         return $this->storeAndRedirect($request, $job);
     }
 
+    public function importAction(Request $request)
+    {
+        $year = $request->get('year', date("Y"));
+        $month = $request->get('month', date("n"));
+
+        try {
+            $importFile = $request->files->get('import');
+            if (!in_array($importFile->getMimeType(), array('text/plain', 'text/csv'))) {
+                throw new \OutOfBoundsException(
+                    'Invalid mime type – expected text/csv, got ' . $importFile->getMimeType()
+                );
+            }
+
+            $importFile = $importFile->move(
+                $this->container->getParameter('kernel.cache_dir'),
+                md5(microtime()) . '.' . $importFile->getExtension()
+            );
+
+            $jobImporter = $this->get('qafoo.time_planner.domain.job_csv_importer');
+            $jobs = $jobImporter->import("$year-$month", $importFile->getPathname());
+
+            $request->getSession()->getFlashBag()->add('success', 'Imported ' . count($jobs) . ' jobs.');
+        } catch (\Exception $e) {
+            $request->getSession()->getFlashBag()->add('error', $e->getMessage());
+        }
+
+        return new RedirectRouteResponse(
+            'qafoo.time_planner.time_planning.overview',
+            array(
+                'year' => $year,
+                'month' => $month,
+            )
+        );
+    }
+
     /**
      * storeAndRedirect
      *

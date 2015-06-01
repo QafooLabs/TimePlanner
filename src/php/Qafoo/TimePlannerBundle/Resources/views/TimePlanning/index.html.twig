@@ -153,6 +153,21 @@
                 </div>
             </div>
         </form>
+        <h3>Import Jobs</h3>
+        <form method="POST" action="{{path("qafoo.time_planner.time_planning.import")}}" enctype="multipart/form-data">
+            <div class="row">
+                <div class="form-group col-md-11">
+                    <input type="file" class="form-control" required name="import" placeholder="{{"CSV file"|trans()}}">
+                </div>
+                <div class="form-group col-md-1 text-right">
+                    <input type="hidden" name="year" value="{{view.year}}">
+                    <input type="hidden" name="month" value="{{view.month}}">
+                    <button class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-upload" aria-label="Import"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}

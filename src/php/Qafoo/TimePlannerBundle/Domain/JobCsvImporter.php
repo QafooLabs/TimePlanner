@@ -46,7 +46,7 @@ class JobCsvImporter
             $job->project = $row[1];
             $job->personDays->minimum = $row[3];
             $job->personDays->maximum = $row[4];
-            $job->expectedRevenue = (int) preg_replace('(\D+)', '', $row[2]) / 100;
+            $job->expectedRevenue = $row[2];
             $job->invoiceId = $row[12];
             $job->comment = $row[13];
 

@@ -57,6 +57,14 @@ class SymfonyExpressionLanguage extends RevenueCalculator
                 $job->expectedRevenue,
                 array(
                     'days' => $job->personDays->minimum,
+                    'booked' => array_sum(
+                        array_map(
+                            function (Job\Assignment $assignment) {
+                                return $assignment->days;
+                            },
+                            $job->assignees
+                        )
+                    )
                 )
             );
         } catch (SyntaxError $e) {

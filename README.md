@@ -24,6 +24,8 @@ following command to initialize them inside the checkout:
 
 The prerequisites for this projects are:
 
+* Ant >= 1.8
+
 * PHP >= 5.5
 
 * A database: MySQL, SQLite or CouchDB

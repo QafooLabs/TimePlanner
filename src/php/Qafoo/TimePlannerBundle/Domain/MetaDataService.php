@@ -38,7 +38,8 @@ class MetaDataService
     {
         $objects = $this->metaDataGateway->getLastEdits($type, $count);
         foreach ($objects as $object) {
-            if ($object->metaData instanceof MetaData) {
+            if ($object->metaData instanceof MetaData &&
+                $object->metaData->author) {
                 $object->metaData->author = $this->userService->getUserByLogin($object->metaData->author);
             }
         }

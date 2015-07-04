@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "hash": "14e15225dfb0f8c5699667204bca671a",
     "packages": [
         {
             "name": "doctrine/annotations",
-            "version": "v1.2.3",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/annotations.git",
-                "reference": "eeda578cbe24a170331a1cfdf78be723412df7a4"
+                "reference": "f4a91702ca3cd2e568c3736aa031ed00c3752af4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/annotations/zipball/eeda578cbe24a170331a1cfdf78be723412df7a4",
-                "reference": "eeda578cbe24a170331a1cfdf78be723412df7a4",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/f4a91702ca3cd2e568c3736aa031ed00c3752af4",
+                "reference": "f4a91702ca3cd2e568c3736aa031ed00c3752af4",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "docblock",
                 "parser"
             ],
-            "time": "2014-12-20 20:49:38"
+            "time": "2015-06-17 12:21:22"
         },
         {
             "name": "doctrine/cache",
@@ -295,7 +295,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/couchdb-client/zipball/9f92d8e5a2d400fd98542e8a70ecf85be1df4fe2",
+                "url": "https://api.github.com/repos/doctrine/couchdb-client/zipball/492d61d9a5ac8a6fe2456043f9a75ae9dafe0e2f",
                 "reference": "9f92d8e5a2d400fd98542e8a70ecf85be1df4fe2",
                 "shasum": ""
             },
@@ -346,7 +346,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/couchdb-odm/zipball/cb5d924fb9f40f674b8b314e1deddc5ce5104719",
+                "url": "https://api.github.com/repos/doctrine/couchdb-odm/zipball/6441c083110ab87fec84f78a48c9da4385953fcd",
                 "reference": "cb5d924fb9f40f674b8b314e1deddc5ce5104719",
                 "shasum": ""
             },

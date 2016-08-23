@@ -24,6 +24,8 @@
         "pdepend/pdepend": "@stable",
         "phpmd/phpmd": "@stable",
         "phpunit/phpunit": "@stable",
+        "phpunit/php-code-coverage": "@stable",
+        "phpunit/phpcov": "*",
         "sebastian/phpcpd": "@stable",
         "squizlabs/php_codesniffer": "@stable",
         "behat/mink": "@dev",

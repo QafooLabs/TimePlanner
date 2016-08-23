@@ -111,7 +111,7 @@ class UserGatewayTest extends IntegrationTest
     public function testFailRefreshInvalidUser()
     {
         $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
-        $user = $this->getMock('\\FOS\\UserBundle\\Model\\UserInterface');
+        $user = $this->getMockBuilder('\\FOS\\UserBundle\\Model\\UserInterface')->getMock();
         $userGateway->refreshUser($user);
     }
 

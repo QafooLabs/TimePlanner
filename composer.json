@@ -5,7 +5,7 @@
     "require": {
         "php": ">=5.5",
         "qafoolabs/no-framework-bundle": "^2.2",
-        "symfony/symfony": "^2.6",
+        "symfony/symfony": "^2.8",
         "symfony/monolog-bundle": "@stable",
         "kore/data-object": "^1.1",
         "friendsofsymfony/user-bundle": "~1.3",

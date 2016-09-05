@@ -18,6 +18,7 @@ use Qafoo\UserBundle\Domain\User\Authentication;
  * @index Adapter
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class FOSUser extends User implements UserInterface
 {

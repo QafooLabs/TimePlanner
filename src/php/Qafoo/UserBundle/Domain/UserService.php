@@ -16,6 +16,7 @@ use Qafoo\UserBundle\Gateway\UserGateway;
  * internal UserManager, which does not find users by login or email.
  *
  * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class UserService implements UserManagerInterface
 {

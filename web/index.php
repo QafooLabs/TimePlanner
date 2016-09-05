@@ -29,7 +29,6 @@ if ($calculateCoverage) {
     $coverage->start('Behat Test');
 }
 
-
 try {
     if (AppKernel::getDebug()) {
         fwrite(

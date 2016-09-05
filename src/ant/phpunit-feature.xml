@@ -36,4 +36,52 @@
             </sequential>
         </parallel>
     </target>
+
+    <target name="phpunit:feature:coverage" extensionOf="-test-static:main~hook">
+        <parallel>
+            <daemons>
+                <exec executable="php" dir="${basedir}">
+                    <env key="CONFIG" value="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="-S" />
+                    <arg value="localhost:8888" />
+                    <arg value="-t" />
+                    <arg value="web/" />
+                    <arg value="web/index.php" />
+                </exec>
+            </daemons>
+
+            <sequential>
+                <touch file="${basedir}/tests/.generate-functional-coverage" />
+
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="app/console" />
+                    <arg value="cache:clear" />
+                </exec>
+
+                <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="--tap" />
+                    <arg value="--group" />
+                    <arg value="feature" />
+                    <arg value="--configuration" />
+                    <arg value="${basedir}/phpunit.xml" />
+                    <arg value="--log-junit" />
+                    <arg value="${logdir}/feature.xml" />
+                </exec>
+
+                <delete file="${basedir}/tests/.generate-functional-coverage" />
+
+                <exec executable="${bindir}/phpcov" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <arg value="merge" />
+                    <arg value="--html" />
+                    <arg value="${logdir}/functional-report" />
+                    <arg value="${basedir}/build/functional-coverage" />
+                </exec>
+            </sequential>
+        </parallel>
+    </target>
 </project>

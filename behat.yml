@@ -1,0 +1,10 @@
+default:
+    extensions:
+        Behat\MinkExtension:
+            base_url: 'http://localhost:8888/'
+            browser_name: firefox
+            sessions:
+                default:
+                    goutte: ~
+                javascript:
+                    sahi: ~

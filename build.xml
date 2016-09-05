@@ -33,4 +33,5 @@
     <import file="${basedir}/src/ant/phpunit-feature.xml" />
     <import file="${basedir}/src/ant/phpunit-database.xml" />
     <import file="${basedir}/src/ant/bootstrap-compile.xml" />
+    <import file="${basedir}/src/ant/behat.xml" />
 </project>

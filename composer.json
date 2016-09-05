@@ -30,7 +30,9 @@
         "squizlabs/php_codesniffer": "@stable",
         "behat/mink": "@dev",
         "behat/mink-goutte-driver": "@dev",
-        "behat/mink-sahi-driver": "@dev"
+        "behat/mink-sahi-driver": "@dev",
+        "behat/behat": "^3.1",
+        "behat/mink-extension": "^2.2"
     },
     "autoload": {
         "psr-0": {

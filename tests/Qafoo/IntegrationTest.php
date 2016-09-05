@@ -13,7 +13,7 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
     private static $databaseFailure = false;
 
-    protected static function getContainer()
+    public static function getContainer()
     {
         if (!self::$container) {
             $kernel = new \AppKernel('test', true);

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <!--
+         Test-Feature: Run Behat tests, if behat.yml is available in the project root.
+    -->
+    <property name="behat.config" location="behat.yml" />
+
+    <target name="-behat:check">
+        <available file="${basedir}/behat.yml" property="-behat:active"/>
+    </target>
+
+    <target name="behat" extensionOf="-test-feature:main~hook" depends="-behat:check" if="-behat:active">
+        <php-tool-installed executable="behat" package="behat/behat" />
+
+        <parallel>
+            <daemons>
+                <exec executable="php" dir="${basedir}">
+                    <env key="CONFIG" value="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="-S" />
+                    <arg value="localhost:8888" />
+                    <arg value="-t" />
+                    <arg value="web/" />
+                    <arg value="web/index.php" />
+                </exec>
+            </daemons>
+
+            <sequential>
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="app/console" />
+                    <arg value="cache:clear" />
+                </exec>
+
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="app/console" />
+                    <arg value="doctrine:database:create" />
+                </exec>
+
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="app/console" />
+                    <arg value="--quiet" />
+                    <arg value="doctrine:schema:create" />
+                </exec>
+
+                <exec executable="${bindir}/behat" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="--verbose" />
+                    <arg value="--config" />
+                    <arg value="${behat.config}" />
+                </exec>
+            </sequential>
+        </parallel>
+    </target>
+</project>

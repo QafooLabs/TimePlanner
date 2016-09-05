@@ -25,7 +25,6 @@
                 <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
                     <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
 
-                    <arg value="--tap" />
                     <arg value="--group" />
                     <arg value="feature" />
                     <arg value="--configuration" />

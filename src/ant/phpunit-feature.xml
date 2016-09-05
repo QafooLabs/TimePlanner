@@ -25,12 +25,14 @@
                 <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
                     <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
 
+                    <arg value="--tap" />
                     <arg value="--group" />
                     <arg value="feature" />
                     <arg value="--configuration" />
                     <arg value="${basedir}/phpunit.xml" />
                     <arg value="--log-junit" />
                     <arg value="${logdir}/feature.xml" />
+                    <arg value="--stop-on-failure" />
                 </exec>
             </sequential>
         </parallel>

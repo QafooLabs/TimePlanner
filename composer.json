@@ -2,6 +2,11 @@
     "name": "qafoolabs/time-planner",
     "type": "project",
     "license": "MIT",
+    "config": {
+        "platform": {
+            "php": "5.5.9"
+        }
+    },
     "require": {
         "php": ">=5.5",
         "qafoolabs/no-framework-bundle": "^2.2",

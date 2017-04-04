@@ -2,8 +2,12 @@
 
 namespace Qafoo;
 
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;;
+
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Tools\SchemaTool;
+
+use Qafoo\UserBundle\Domain\FOSUser;
 
 require __DIR__ . '/../../app/AppKernel.php';
 
@@ -109,5 +113,20 @@ abstract class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $entityManager = self::getContainer()->get('doctrine.orm.entity_manager');
         $entityManager->clear();
+    }
+
+    protected function getUser($login = 'kore')
+    {
+        $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
+
+        try {
+            return $userGateway->loadUserByUsername($login);
+        } catch (UsernameNotFoundException $e) {
+            $user = new FOSUser();
+            $user->login = $login;
+            $userGateway->store($user);
+
+            return $user;
+        }
     }
 }

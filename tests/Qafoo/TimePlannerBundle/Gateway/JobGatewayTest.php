@@ -179,15 +179,4 @@ class JobGatewayTest extends IntegrationTest
             $jobGateway->getJobs(1982, 4)
         );
     }
-
-    protected function getUser()
-    {
-        $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
-
-        $user = new FOSUser();
-        $user->login = 'kore';
-        $userGateway->store($user);
-
-        return $user;
-    }
 }

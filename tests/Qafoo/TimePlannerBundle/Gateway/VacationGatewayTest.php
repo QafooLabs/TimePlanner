@@ -207,15 +207,4 @@ class VacationGatewayTest extends IntegrationTest
         $compareProperties = array('vacationId', 'start', 'end', 'comment');
         return array_intersect_key((array) $vacation, array_flip($compareProperties));
     }
-
-    protected function getUser()
-    {
-        $userGateway = $this->getContainer()->get('qafoo.user.gateway.user');
-
-        $user = new FOSUser();
-        $user->login = 'kore';
-        $userGateway->store($user);
-
-        return $user;
-    }
 }

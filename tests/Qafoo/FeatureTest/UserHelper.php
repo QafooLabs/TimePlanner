@@ -43,7 +43,7 @@ trait UserHelper
      * @param string $login
      * @return User
      */
-    protected function getUser($login)
+    protected function getUser($login = 'kore')
     {
         $documentManager = $this->getContainer()->get('doctrine_couchdb.odm.document_manager');
         $documentManager->clear();

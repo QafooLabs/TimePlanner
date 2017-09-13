@@ -37,6 +37,43 @@
         </parallel>
     </target>
 
+    <target name="phpunit:feature:debug">
+        <parallel>
+            <daemons>
+                <exec executable="php" dir="${basedir}">
+                    <env key="CONFIG" value="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="-S" />
+                    <arg value="localhost:8888" />
+                    <arg value="-t" />
+                    <arg value="web/" />
+                    <arg value="web/index.php" />
+                </exec>
+            </daemons>
+
+            <sequential>
+                <exec executable="php" failonerror="true" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="app/console" />
+                    <arg value="cache:clear" />
+                </exec>
+
+                <exec executable="${bindir}/phpunit" failonerror="${test-feature.fail-on-violation}" dir="${basedir}">
+                    <env key="CONFIG" file="${basedir}/tests/environment.sqlite" />
+
+                    <arg value="--debug" />
+                    <arg value="--verbose" />
+                    <arg value="--stop-on-failure" />
+                    <arg value="--group" />
+                    <arg value="feature" />
+                    <arg value="--configuration" />
+                    <arg value="${basedir}/phpunit.xml" />
+                </exec>
+            </sequential>
+        </parallel>
+    </target>
+
     <target name="phpunit:feature:coverage" extensionOf="-test-static:main~hook">
         <parallel>
             <daemons>

@@ -39,6 +39,11 @@ class JobGatewayTest extends IntegrationTest
 
         $job = $jobGateway->store($job);
 
+        // @Hack Remove milliseconds from datetime field since MySQL / SQlite
+        // do not store this information and there is no DateTime API to remove
+        // them. Causes differences in assertions in following tests:
+        $job->metaData->changed = new \DateTime($job->metaData->changed->format('r'));
+
         $this->assertNotNull($job->jobId);
         $this->assertNotNull($job->revision);
 
